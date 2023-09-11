@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donapp: Producto</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="estilos/style.css">
+</head>
+<body>
+
+	<nav th:replace="~{fragments/navbar}" />
+	
+	<section style="background-color:white; height:10vh"></section>
+	
+    <div class="container miTarjetaProducto mt-4">
+        <div class="card">
+            <img style="width:100%" src="img/producto.jpg" class="card-img-top" alt="Producto">
+            <div class="card-body">
+                <h5 class="card-title"><b>Nombre del Producto</b></h5>
+                <p class="card-text"><b>Descripción:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget fringilla libero.</p>
+                <p class="card-text"><b>Estado:</b> Buen estado</p>
+                <p class="card-text"><b>Urgencia:</b> Media</p>
+                <p class="card-text"><b>Forma de Entrega:</b> A domicilio</p>
+                <p class="card-text"><b>Detalle de la Entrega:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget fringilla libero. Nulla eget fringilla libero.</p>
+                <a href="#" class="btn custom-button">Solicitar</a>
+            </div>
+        </div>
+    </div>
+    
+    <hr>
+	
+    <nav th:replace="~{fragments/footer}" />
+
+</body>
+</html>

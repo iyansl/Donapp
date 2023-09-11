@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donapp: Usuario</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="estilos/style.css">
+</head>
+<body>
+
+	<nav th:replace="~{fragments/navbar}" />
+	
+	<section style="background-color:#C0D2EE; height:10vh"></section>
+	
+    <div class="container miTarjetaProducto mt-4">
+        <div class="card">
+            <img style="width:100%" src="img/usuario.png" class="card-img-top" alt="Usuario">
+            <div class="card-body">
+                <h5 class="card-title"><b>Nombre de usuario</b></h5>
+                <p class="card-text"><b>Biografía:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget fringilla libero.</p>
+                <a href="#" class="btn custom-button">Hablar</a>
+                <a href="#" class="btn custom-button">Denunciar</a>
+            </div>
+        </div>
+    </div>
+    
+    <hr>
+    
+    <div class="container mt-4">
+    <h2>Productos del usuario</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre del Producto 1</h5>
+                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
+                        <p class="card-text">Urgencia: Alta</p>
+                        <a href="/producto" class="btn custom-button">Ver Más</a>
+                        <a href="#" class="btn custom-button">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre del Producto 2</h5>
+                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
+                        <p class="card-text">Urgencia: Media</p>
+                        <a href="/producto" class="btn custom-button">Ver Más</a>
+                        <a href="#" class="btn custom-button">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre del Producto 3</h5>
+                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
+                        <p class="card-text">Urgencia: Baja</p>
+                        <a href="/producto" class="btn custom-button">Ver Más</a>
+                        <a href="#" class="btn custom-button">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <hr>
+	
+    <nav th:replace="~{fragments/footer}" />
+
+</body>
+</html>

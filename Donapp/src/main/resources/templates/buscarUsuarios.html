@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donapp: Buscar usuarios</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="estilos/style.css">
+</head>
+<body>
+
+	<nav th:replace="~{fragments/navbar}" />
+	
+	<section style="background-color:#C0D2EE; height:10vh"></section>
+	
+	<div class="container mt-4">
+        <div class="form-group">
+            <label for="busqueda">Introduce el nombre de usuario:</label>
+            <input type="text" class="form-control" id="busqueda" placeholder="Escribe aquí">
+        </div>
+        <button class="mt-2 btn custom-button">Buscar</button>
+     </div>
+     
+    
+    <hr>
+    
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/usuario.png" class="card-img-top" alt="User 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre de usuario</h5>
+                        <a href="/usuario" class="btn custom-button">Perfil</a>
+                        <a href="#" class="btn custom-button">Hablar</a>
+                        <a href="#" class="btn custom-button">Denunciar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/usuario.png" class="card-img-top" alt="User 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre de usuario</h5>
+                        <a href="/usuario" class="btn custom-button">Perfil</a>
+                        <a href="#" class="btn custom-button">Hablar</a>
+                        <a href="#" class="btn custom-button">Denunciar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/usuario.png" class="card-img-top" alt="User 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre de usuario</h5>
+                        <a href="/usuario" class="btn custom-button">Perfil</a>
+                        <a href="#" class="btn custom-button">Hablar</a>
+                        <a href="#" class="btn custom-button">Denunciar</a>
+                    </div>
+                </div>
+            </div>
+           </div>
+          </div>
+    
+    <hr>
+	
+    <nav th:replace="~{fragments/footer}" />
+
+</body>
+</html>

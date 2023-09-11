@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donapp: Mercado</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="estilos/style.css">
+</head>
+<body>
+
+	<nav th:replace="~{fragments/navbar}" />
+	
+	<img class="miImg d-block w-100" src="img/mercado.jpg" alt="Mercado">
+	
+	<div class="mt-4 ml-4 mr-4">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="busqueda">Buscar:</label>
+                    <input type="text" class="form-control" id="busqueda" placeholder="Escribe aquí">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="urgencia">Urgencia:</label>
+                    <select class="form-control" id="urgencia">
+                        <option value="">Todas</option>
+                        <option value="alta">Alta</option>
+                        <option value="media">Media</option>
+                        <option value="baja">Baja</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="tipo">Tipo de objeto:</label>
+                    <select class="form-control" id="tipo">
+                        <option value="">Todos</option>
+                        <option value="ropa">Ropa</option>
+                        <option value="libros">Libros</option>
+                        <option value="electrónicos">Electrónicos</option>
+                        <!-- Agrega más opciones según sea necesario -->
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="recogida">Tipo de recogida:</label>
+                    <select class="form-control" id="recogida">
+                        <option value="">Todos</option>
+                        <option value="punto">En un punto</option>
+                        <option value="domicilio">A domicilio</option>
+                        <option value="correo">Por correo</option>
+                        <!-- Agrega más opciones según sea necesario -->
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-1">
+        <button class="mt-4 btn custom-button">Buscar</button>
+        </div>
+      </div>
+    </div>
+    
+    <hr>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre del Producto 1</h5>
+                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
+                        <p class="card-text">Urgencia: Alta</p>
+                        <a href="/producto" class="btn custom-button">Ver Más</a>
+                        <a href="#" class="btn custom-button">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre del Producto 2</h5>
+                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
+                        <p class="card-text">Urgencia: Media</p>
+                        <a href="/producto" class="btn custom-button">Ver Más</a>
+                        <a href="#" class="btn custom-button">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre del Producto 3</h5>
+                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
+                        <p class="card-text">Urgencia: Baja</p>
+                        <a href="/producto" class="btn custom-button">Ver Más</a>
+                        <a href="#" class="btn custom-button">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre del Producto 1</h5>
+                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
+                        <p class="card-text">Urgencia: Alta</p>
+                        <a href="/producto" class="btn custom-button">Ver Más</a>
+                        <a href="#" class="btn custom-button">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre del Producto 2</h5>
+                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
+                        <p class="card-text">Urgencia: Media</p>
+                        <a href="/producto" class="btn custom-button">Ver Más</a>
+                        <a href="#" class="btn custom-button">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre del Producto 3</h5>
+                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
+                        <p class="card-text">Urgencia: Baja</p>
+                        <a href="/producto" class="btn custom-button">Ver Más</a>
+                        <a href="#" class="btn custom-button">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre del Producto 1</h5>
+                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
+                        <p class="card-text">Urgencia: Alta</p>
+                        <a href="/producto" class="btn custom-button">Ver Más</a>
+                        <a href="#" class="btn custom-button">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre del Producto 2</h5>
+                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
+                        <p class="card-text">Urgencia: Media</p>
+                        <a href="/producto" class="btn custom-button">Ver Más</a>
+                        <a href="#" class="btn custom-button">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre del Producto 3</h5>
+                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
+                        <p class="card-text">Urgencia: Baja</p>
+                        <a href="/producto" class="btn custom-button">Ver Más</a>
+                        <a href="#" class="btn custom-button">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr>
+	
+    <nav th:replace="~{fragments/footer}" />
+
+</body>
+</html>

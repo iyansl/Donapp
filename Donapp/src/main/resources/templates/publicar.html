@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donapp: Publicar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="estilos/style.css">
+</head>
+<body>
+
+	<nav th:replace="~{fragments/navbar}" />
+	
+	<img class="miImg d-block w-100" src="img/publicar.jpg" alt="Mercado">
+	<div class="container mt-4">
+        <h2>¿Qué objeto quieres donar?</h2>
+        <form>
+            <div class="form-group">
+                <label for="imagen">Imagen:</label>
+                <input style="border:none" type="file" class="form-control" id="imagen" name="imagen">
+            </div>
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre">
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="tipo">Tipo de Objeto:</label>
+                    <select class="form-control" id="tipo" name="tipo">
+                        <option value="ropa">Ropa</option>
+                        <option value="libros">Libros</option>
+                        <option value="electrónicos">Electrónicos</option>
+                        <!-- Agrega más opciones según sea necesario -->
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="urgencia">Urgencia:</label>
+                    <select class="form-control" id="urgencia" name="urgencia">
+                        <option value="alta">Alta</option>
+                        <option value="media">Media</option>
+                        <option value="baja">Baja</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                <label for="estado">Estado:</label>
+                <select class="form-control" id="estado" name="estado">
+                    <option value="nuevo">Nuevo</option>
+                    <option value="casi-nuevo">Casi nuevo</option>
+                    <option value="buen-estado">Buen estado</option>
+                    <option value="regular">Regular</option>
+                    <option value="malo">Malo</option>
+                </select>
+            </div>
+            </div>
+            <div class="form-group">
+                    <label for="forma-entrega">Forma de Entrega:</label>
+                    <select class="form-control" id="forma-entrega" name="forma-entrega">
+                        <option value="punto">En un punto</option>
+                        <option value="domicilio">A domicilio</option>
+                        <option value="correo">Por correo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                <label for="descripcionEntrega">Descripción de la forma de entrega:</label>
+                <textarea class="form-control" id="descripcionEntrega" name="descripcionEntrega" rows="3"></textarea>
+            </div>
+            
+            <button type="submit" class="btn custom-button">Publicar</button>
+        </form>
+    </div>
+	
+<hr>
+	
+    <nav th:replace="~{fragments/footer}" />
+
+</body>
+</html>

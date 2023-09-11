@@ -1,0 +1,231 @@
+
+    /* Estilos personalizados para los enlaces en el navbar */
+    .navbar-nav a:hover {
+        color: #333; /* Cambia el color al pasar el mouse a un tono más oscuro */
+    }
+    
+    .navbar a{
+    	font-weight: 600;
+    }
+    
+    .miNavbar{
+    	position: fixed;
+   		z-index: 10000;
+   		width: 100%;
+   		border: solid 1px rgba(0,0,0,.125); 
+    }
+
+    /* Estilos personalizados para el footer */
+    footer {
+        background-color: #333;
+        padding: 20px 0; /* Agrega espacio vertical al footer */
+        color: #fff;
+        text-align: center;
+    }
+
+    /* Estilo de los enlaces en el footer */
+    .footer-links a {
+        color: rgba(0,0,0,.5);
+        text-decoration: none;
+        margin: 0 10px;
+        transition: color 0.3s;
+    }
+
+    /* Estilo de los enlaces en el footer al pasar el mouse */
+    .footer-links a:hover {
+        color: #333;
+    }
+    
+    .copy{
+     color: rgba(0,0,0,.9);
+    }
+    
+    .carousel-inner img {
+            max-height: 60vh; /* Ajusta la altura según tus necesidades */
+            object-fit: cover; /* Evita que las imágenes se deformen */
+     }
+     
+     .miImg{
+       max-height: 60vh; /* Ajusta la altura según tus necesidades */
+            object-fit: cover; /* Evita que las imágenes se deformen */
+     }
+     
+     .miImg2{
+       height: 30vh; /* Ajusta la altura según tus necesidades */
+       object-fit: cover; /* Evita que las imágenes se deformen */
+     }
+     
+     .quienes-somos {
+    background-color: #f8f8f8;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.quienes-somos h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.quienes-somos p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.que-hacemos {
+    background-color: #fff;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.que-hacemos h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.que-hacemos p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.icon {
+    height: 20vh;
+    width: 20vh;
+    margin-top:2vh;
+}
+
+.card {
+    background-color: #f8f8f8; /* Establece el fondo beige para las tarjetas */
+}
+
+.custom-section {
+    background-color: #fff; /* Color de fondo */
+    padding: 40px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.custom-title {
+    color: #333; /* Color del título */
+    font-size: 28px; /* Tamaño de fuente del título */
+}
+
+.custom-subtitle {
+    color: #666; /* Color del subtítulo */
+    font-size: 18px; /* Tamaño de fuente del subtítulo */
+}
+
+.custom-button {
+    background-color: #f8f8f8; /* Color de fondo del botón */
+    color: #333; /* Color del texto del botón */
+    border: solid 1px rgba(0,0,0,.125); 
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    font-size: 16px; /* Tamaño de fuente del botón */
+    transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+}
+
+.custom-button-1{
+    background-color: #f8f8f8; /* Color de fondo del botón */
+    color: #333; /* Color del texto del botón */
+    border: solid 1px rgba(0,0,0,.125); 
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    font-size: 16px; /* Tamaño de fuente del botón */
+    transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+}
+
+.custom-button-1:hover {
+    background-color: #aaa; /* Cambio de color al pasar el mouse */
+    color: #f8f8f8;
+}
+
+.custom-button:hover {
+    background-color: #333; /* Cambio de color al pasar el mouse */
+    color: #f8f8f8;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 10vh;
+    overflow: hidden;
+}
+
+.img-overlay {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Color oscuro de la capa */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-text p {
+    color: white; /* Color del texto */
+}
+
+/* Estilo para dispositivos móviles */
+@media (max-width: 767px) {
+    .font-mobile {
+        font-size: 16px; /* Tamaño de fuente para dispositivos móviles */
+    }
+    
+    .miTarjetaProducto{
+    	width:100%;
+    }
+}
+
+/* Estilo para escritorio */
+@media (min-width: 768px) {
+    .font-mobile {
+        font-size: 24px; /* Tamaño de fuente para escritorio */
+    }
+    
+    .miTarjetaProducto{
+    	width:30%;
+    }
+}
+
+
+
+
+.login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .register-link {
+            text-align: center;
+        }
+        
+        .register-link a{
+        	color: #000;
+        	font-weight: 500;
+        }
+        .register-link a:hover{
+        	color: #444;
+        }
+ 
