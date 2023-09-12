@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donapp: Usuario</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="estilos/style.css?version=51">
+</head>
+<body>
+
+	<nav th:replace="~{fragments/navbar}" />
+	
+	<section style="background-color:#C0D2EE; height:10vh"></section>
+	
+	
+	<div class="container mt-5">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="recibidas-tab" data-toggle="tab" href="#recibidas" role="tab" aria-controls="recibidas" aria-selected="true">Recibidas</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="enviadas-tab" data-toggle="tab" href="#enviadas" role="tab" aria-controls="enviadas" aria-selected="false">Enviadas</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <!-- Pestaña de Solicitudes Recibidas -->
+            <div class="tab-pane fade show active" id="recibidas" role="tabpanel" aria-labelledby="recibidas-tab">
+                <div class="row mt-4">
+                
+                    <!-- Ejemplo de solicitud recibida -->
+                    <div class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
+                        <div class="card">
+                            <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
+                                <div class="col-md-6">
+                                    <img src="img/usuario.png" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
+                                    <h5 class="card-title">Nombre de la Persona</h5>
+                                    <a href="/usuario" class="btn custom-button">Ir a Perfil</a>
+                                </div>
+                                <div class="col-md-6 mt-4 mt-md-0">
+                                    <img src="img/producto.jpg" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
+                                    <h5 class="card-title">Nombre del Objeto</h5>
+                                    <a href="/producto" class="btn custom-button">Ver Detalle</a>
+                                </div>
+                            </div>
+                             <a href="/detalle-del-objeto" class="btn custom-button p-1">Aceptar solicitud</a>
+                             <a href="/detalle-del-objeto" class="btn custom-button p-1">Denegar solicitud</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
+                        <div class="card">
+                            <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
+                                <div class="col-md-6">
+                                    <img src="img/usuario.png" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
+                                    <h5 class="card-title">Nombre de la Persona</h5>
+                                    <a href="/usuario" class="btn custom-button">Ir a Perfil</a>
+                                </div>
+                                <div class="col-md-6 mt-4 mt-md-0">
+                                    <img src="img/producto.jpg" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
+                                    <h5 class="card-title">Nombre del Objeto</h5>
+                                    <a href="/producto" class="btn custom-button">Ver Detalle</a>
+                                </div>
+                            </div>
+                             <a href="/detalle-del-objeto" class="btn custom-button p-1">Aceptar solicitud</a>
+                             <a href="/detalle-del-objeto" class="btn custom-button p-1">Denegar solicitud</a>
+                        </div>
+                    </div>
+                    <!-- Agrega más solicitudes recibidas aquí -->
+                </div>
+            </div>
+
+            <!-- Pestaña de Solicitudes Enviadas -->
+            <div class="tab-pane fade" id="enviadas" role="tabpanel" aria-labelledby="enviadas-tab">
+                <div class="row mt-4">
+                    <!-- Ejemplo de solicitud enviada -->
+                    <div class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
+                        <div class="card">
+                            <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
+                                <div class="col-md-6">
+                                    <img src="img/usuario.png" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
+                                    <h5 class="card-title">Nombre de la Persona</h5>
+                                    <a href="/usuario" class="btn custom-button">Ir a Perfil</a>
+                                </div>
+                                <hr>
+                                <div class="col-md-6 mt-4 mt-md-0">
+                                    <img src="img/producto.jpg" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
+                                    <h5 class="card-title">Nombre del Objeto</h5>
+                                    <a href="/producto" class="btn custom-button">Ver Detalle</a>
+                                </div>
+                            </div>
+                            <p class="mt-2" style="align-self: center;">Estado de la solicitud: Pendiente</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
+                        <div class="card">
+                            <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
+                                <div class="col-md-6">
+                                    <img src="img/usuario.png" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
+                                    <h5 class="card-title">Nombre de la Persona</h5>
+                                    <a href="/usuario" class="btn custom-button">Ir a Perfil</a>
+                                </div>
+                                <hr>
+                                <div class="col-md-6 mt-4 mt-md-0">
+                                    <img src="img/producto.jpg" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
+                                    <h5 class="card-title">Nombre del Objeto</h5>
+                                    <a href="/producto" class="btn custom-button">Ver Detalle</a>
+                                </div>
+                            </div>
+                            <p class="mt-2" style="align-self: center;">Estado de la solicitud: Pendiente</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
+                        <div class="card">
+                            <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
+                                <div class="col-md-6">
+                                    <img src="img/usuario.png" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
+                                    <h5 class="card-title">Nombre de la Persona</h5>
+                                    <a href="/usuario" class="btn custom-button">Ir a Perfil</a>
+                                </div>
+                                <hr>
+                                <div class="col-md-6 mt-4 mt-md-0">
+                                    <img src="img/producto.jpg" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
+                                    <h5 class="card-title">Nombre del Objeto</h5>
+                                    <a href="/producto" class="btn custom-button">Ver Detalle</a>
+                                </div>
+                            </div>
+                            <p class="mt-2" style="align-self: center;">Estado de la solicitud: Pendiente</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
+                        <div class="card">
+                            <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
+                                <div class="col-md-6">
+                                    <img src="img/usuario.png" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
+                                    <h5 class="card-title">Nombre de la Persona</h5>
+                                    <a href="/usuario" class="btn custom-button">Ir a Perfil</a>
+                                </div>
+                                <hr>
+                                <div class="col-md-6 mt-4 mt-md-0">
+                                    <img src="img/producto.jpg" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
+                                    <h5 class="card-title">Nombre del Objeto</h5>
+                                    <a href="/producto" class="btn custom-button">Ver Detalle</a>
+                                </div>
+                            </div>
+                            <p class="mt-2" style="align-self: center;">Estado de la solicitud: Pendiente</p>
+                        </div>
+                    </div>
+                    <!-- Agrega más solicitudes enviadas aquí -->
+                </div>
+            </div>
+        </div>
+    </div>
+	
+      <hr>
+	
+    <nav th:replace="~{fragments/footer}" />
+
+</body>
+</html>

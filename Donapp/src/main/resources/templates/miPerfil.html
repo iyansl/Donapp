@@ -5,13 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donapp: Usuario</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="estilos/style.css">
+    <link rel="stylesheet" type="text/css" href="estilos/style.css?version=51">
 </head>
 <body>
 
 	<nav th:replace="~{fragments/navbar}" />
 	
 	<section style="background-color:#C0D2EE; height:10vh"></section>
+	
+	<nav class="mt-5 navbar perfilNavbar navbar-expand-lg navbar-light">
+	    	<ul class="navbar-nav mx-auto" style="place-content: center;">
+	    		<li class="nav-item mr-md-4">
+                    <a style="text-align: center; width: 15rem; border: solid 1px rgba(0,0,0,.125);" class="p-4 nav-link" href="/publicados">Productos publicados</a>
+                </li>
+                <li class="nav-item ml-md-r m4-md-4 mt-2 mt-md-0">
+                    <a style="text-align: center; width: 15rem; border: solid 1px rgba(0,0,0,.125);" class="p-4 nav-link" href="/adquiridos">Productos adquiridos</a>
+                </li>
+                <li class="nav-item ml-md-4 mt-2 mt-md-0">
+                    <a style="text-align: center; width: 15rem; border: solid 1px rgba(0,0,0,.125);" class="p-4 nav-link" href="/solicitudes">Solicitudes de donación</a>
+                </li>
+	         </ul>
+	     </nav>  
 	
     <div class="container miTarjetaProducto mt-4">
         <div class="card">

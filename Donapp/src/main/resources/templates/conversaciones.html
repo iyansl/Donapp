@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donapp: Conversaciones</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="estilos/style.css">
+    <link rel="stylesheet" type="text/css" href="estilos/style.css?version=51">
 </head>
 <body>
 
@@ -13,13 +13,40 @@
 	
 	<section style="background-color:#C0D2EE; height:10vh"></section>
 	
-    <div class="container mt-4">
-    <h2> Conversaciones </h2>
+    <div class="container mt-5">
+        <h2>Mis Conversaciones</h2>
+        <ul class="list-group mt-4 mb-4">
+            <!-- Ejemplo de conversación 1 -->
+            <li class="list-group-item">
+                <div class="media">
+                    <img src="img/usuario.png" class="mr-3 rounded-circle" alt="Foto de perfil del usuario 1" style="width: 64px; height: 64px;">
+                    <div class="media-body" style="align-self: center;">
+                        <a href="/chat" class="h5-username">Nombre del Usuario</a>
+                        <div class="btn-group float-right" role="group">
+                            <button type="button" class="btn custom-button">X</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
 
+            <!-- Ejemplo de conversación 2 -->
+            <li class="list-group-item">
+                <div class="media">
+                    <img src="img/usuario.png" class="mr-3 rounded-circle" alt="Foto de perfil del usuario 2" style="width: 64px; height: 64px;">
+                    <div class="media-body" style="align-self: center;">
+                        <a href="/chat" class="h5-username">Nombre del Usuario</a>
+                        <div class="btn-group float-right" role="group">
+                            <button type="button" class="btn custom-button">X</button>
+                        </div>
+                    </div>
+                </div> 
+            </li>
+            <!-- Agrega más conversaciones aquí -->
+        </ul>
     </div>
-    
-    <hr>
+
 	
+	<section style="background-color:#FFF; height:10vh"></section>
     <nav th:replace="~{fragments/footer}" />
 
 </body>

@@ -7,7 +7,7 @@
     .navbar a{
     	font-weight: 600;
     }
-    
+
     .miNavbar{
     	position: fixed;
    		z-index: 10000;
@@ -39,14 +39,9 @@
     .copy{
      color: rgba(0,0,0,.9);
     }
-    
-    .carousel-inner img {
-            max-height: 60vh; /* Ajusta la altura según tus necesidades */
-            object-fit: cover; /* Evita que las imágenes se deformen */
-     }
-     
+ 
      .miImg{
-       max-height: 60vh; /* Ajusta la altura según tus necesidades */
+            max-height: 60vh; /* Ajusta la altura según tus necesidades */
             object-fit: cover; /* Evita que las imágenes se deformen */
      }
      
@@ -179,9 +174,47 @@
         font-size: 16px; /* Tamaño de fuente para dispositivos móviles */
     }
     
+    .carousel-inner img {
+            height: 50vh;
+            object-fit: cover; 
+     }
+    
     .miTarjetaProducto{
     	width:100%;
     }
+    
+    .nav-item{
+    	align-self: center;
+    }
+    
+    .nav-link{
+    	align-self: center;
+    }
+    
+    .floating-bubble {
+            position: fixed;
+            bottom: 4%;
+            right: 43%;
+            background-color: #A9DCB7;
+            color: #fff;
+            border-radius: 50%;
+            border: solid 1px rgba(0,0,0,.125); 
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .floating-bubble:hover {
+            background-color: #DBF0E1;
+        }
+        
+        .img-bubble{
+			height: 3rem;
+		}
+		
+		.h5-username{
+			font-size: 100%;
+		}
 }
 
 /* Estilo para escritorio */
@@ -190,9 +223,39 @@
         font-size: 24px; /* Tamaño de fuente para escritorio */
     }
     
+    .carousel-inner img {
+            height: 50vh;
+            object-fit: cover; 
+     }
+    
     .miTarjetaProducto{
     	width:30%;
     }
+    
+    .floating-bubble {
+            position: fixed;
+            bottom: 4%;
+            right: 4%;
+            background-color: #A9DCB7;
+            color: #fff;
+            border-radius: 50%;
+            border: solid 1px rgba(0,0,0,.125); 
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+		.img-bubble{
+			height: 4rem;
+		}	
+			
+        .floating-bubble:hover {
+            background-color: #DBF0E1;
+        }
+        
+        .h5-username{
+			font-size: 130%;
+		}
 }
 
 
@@ -228,4 +291,38 @@
         .register-link a:hover{
         	color: #444;
         }
+        
+        
+        .chat-container {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+            overflow-y: auto; /* Habilitar scroll en el contenedor de mensajes */
+            max-height: 400px; /* Altura máxima del contenedor de mensajes */
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .user-message {
+            background-color: #e2f7cb;
+            margin-right: 10px;
+            text-align: right;
+        }
+
+        .other-message {
+            background-color: #f2f2f2;
+            margin-left: 10px;
+        }
+
+        /* Estilo para el formulario de enviar mensajes */
+        #chat-form {
+            margin-top: 20px;
+        }
+        
  

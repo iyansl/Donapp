@@ -11,4 +11,9 @@ public class ChatController {
 		return "conversaciones";
 	}
 	
+	@GetMapping("/chat")
+	public String chat() {
+		return "chat";
+	}
+	
 }
