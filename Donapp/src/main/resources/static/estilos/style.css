@@ -325,4 +325,20 @@
             margin-top: 20px;
         }
         
+        .mensaje-div{
+        	text-align: -webkit-center;
+		    background-color: #CCE8D4;
+		    padding: 1rem;
+		    margin-left: 25%;
+		    margin-right: 25%;
+        }
+        
+        .error-div{
+        	text-align: -webkit-center;
+		    background-color: #E8D2CC;
+		    padding: 1rem;
+		    margin-left: 25%;
+		    margin-right: 25%;
+        }
+        
  

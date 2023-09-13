@@ -11,11 +11,6 @@ public class UserController {
 		return "iniciarsesion";
 	}
 	
-	@GetMapping("/registrarse")
-	public String registrarse() {
-		return "registrarse";
-	}
-	
 	@GetMapping("/usuario")
 	public String usuario() {
 		return "usuario";
