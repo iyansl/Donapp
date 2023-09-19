@@ -11,7 +11,7 @@
 
 	<nav th:replace="~{fragments/navbar}" />
 	
-	<section style="background-color:#C0D2EE; height:10vh"></section>
+	<section style="background-color:#668bc5; height:10vh"></section>
 	
 	<nav class="mt-5 navbar perfilNavbar navbar-expand-lg navbar-light">
 	    	<ul class="navbar-nav mx-auto" style="place-content: center;">
@@ -27,21 +27,102 @@
 	         </ul>
 	     </nav>  
 	
+	<div class="error-div" th:if=${param.error}>
+    	La imagen es demasiado grande (3MB máximo)
+    </div>
+    <div class="error-div" th:if=${param.error}>
+    	La imagen es demasiado grande (3MB máximo)
+    </div>
+    <div class="error-div" th:if=${param.errorEmailInvalido}>
+    	El formato del email no es válido
+    </div>
+    <div class="error-div" th:if=${param.errorEmailUsado}>
+    	El email introducido ya está en uso
+    </div>
+    <div class="error-div" th:if=${param.descripcionCorta}>
+    	La descripcion debe ser mayor de 5 caracteres
+    </div>
+    <div class="error-div" th:if=${param.descripcionLarga}>
+    	La descripcion debe ser menor de 100 caracteres
+    </div>
     <div class="container miTarjetaProducto mt-4">
         <div class="card">
-            <img style="width:100%" src="img/usuario.png" class="card-img-top" alt="Usuario">
+             <form method="post" th:action="@{/subirFoto}" enctype="multipart/form-data" class="inputFile_perfil ocultar_mostrar d-none">
+			    <label>
+			        <input type="file" name="foto" />
+			    </label>
+			    <button class="custom-button" type="submit" onclick="ocultarBotones()">Cambiar imagen</button>
+			</form>
+            <img th:if="${foto}" style="width:70%; margin-top: 2vh; border-radius: 10vh; align-self: center;" class="card-img-top" th:src="'data:image/jpeg;base64,' + ${foto}" alt="Foto de perfil" />
             <div class="card-body">
-                <h5 class="card-title"><b>Nombre de usuario</b></h5>
-                <p class="card-text"><b>Biografía:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget fringilla libero.</p>
-                <a href="#" class="btn custom-button">Editar</a>
-                <a href="#" class="btn custom-button">Borrar cuenta</a>
+                <h4 class="card-title">Usuario: <b th:text="'@' + ${username}"></b></h5>
+                <h5 class="card-title">Email: <b th:text="${email}"></b></h4>
+                <form method="post" th:action="@{/cambiarEmail}" class="mb-4 ocultar_mostrar d-none">
+				    <label>
+				        <input type="text" name="email" />
+				    </label>
+				    <button class="custom-button" type="submit" onclick="ocultarBotones()">Cambiar email</button>
+				</form>
+                <p class="card-text" th:text="${descripcion}" ></p>
+                <form method="post" th:action="@{/cambiarDescripcion}" class="mb-4 ocultar_mostrar d-none">
+				    <label>
+				        <input type="text" name="descripcion" />
+				    </label>
+				    <button class="custom-button" type="submit" onclick="ocultarBotones()">Cambiar descripcion</button>
+				</form>
+                <a href="#" onclick="mostrarBotones()" class="btn custom-button editar-btn">Editar</a>
+                <a href="#" onclick="ocultarBotones()" class="btn custom-button ocultar_mostrar d-none">Cancelar edición</a>
+                <button type="button" class="btn custom-button" data-toggle="modal" data-target="#confirmModal">Borrar cuenta</button>
             </div>
         </div>
     </div>
+
+	<!-- Modal de confirmación -->
+		<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+		    <div class="modal-dialog" style="margin-top: 5%;" role="document">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h5 class="modal-title" id="confirmModalLabel">¿Seguro que deseas eliminar tu cuenta?</h5>
+		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                    <span aria-hidden="true">&times;</span>
+		                </button>
+		            </div>
+		            <div class="modal-body">
+		                Esta acción no se puede deshacer. ¿Estás seguro de que deseas eliminar tu cuenta?
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+		                <a href="/eliminarCuenta" class="btn btn-danger">Eliminar cuenta</a>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+
     
     <hr>
 	
     <nav th:replace="~{fragments/footer}" />
+    
+    <script>
+    	function mostrarBotones() {
+		    var elementos = document.querySelectorAll(".ocultar_mostrar");
+		    var editar = document.querySelector(".editar-btn");
+		    editar.classList.add("d-none")
+		    for (var i = 0; i < elementos.length; i++) {
+		        elementos[i].classList.remove("d-none");
+		    }
+		}
+		
+		function ocultarBotones() {
+		    var elementos = document.querySelectorAll(".ocultar_mostrar");
+		    var editar = document.querySelector(".editar-btn");
+		    editar.classList.remove("d-none")
+		    for (var i = 0; i < elementos.length; i++) {
+		        elementos[i].classList.add("d-none");
+		    }
+}
+
+    </script>
 
 </body>
 </html>

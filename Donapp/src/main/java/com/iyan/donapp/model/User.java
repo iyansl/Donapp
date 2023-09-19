@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -25,9 +26,16 @@ public class User {
 
 	@Column(name = "username")
 	private String username;
-
+	
+	@Column(name = "descripcion")
+	private String descripcion;
+	
 	@Column(name = "email")
 	private String email;
+	
+	@Lob
+    @Column(name = "foto")
+    private byte[] foto;
 
 	private String password;
 	
@@ -39,13 +47,14 @@ public class User {
 	)
 	private Collection<Rol> roles;
 
-	public User(Long id, String username, String email, String password, Collection<Rol> roles) {
+	public User(Long id, String username, String descripcion, String email, String password, Collection<Rol> roles) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
+		this.descripcion = descripcion;
 	}
 	
 
@@ -101,6 +110,26 @@ public class User {
 
 	public void setRoles(Collection<Rol> roles) {
 		this.roles = roles;
+	}
+
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+
+	public void setFoto(byte[] bytes) {
+		this.foto = bytes;
+	}
+
+
+	public byte[] getFoto() {
+		return foto;
 	}
 
 }

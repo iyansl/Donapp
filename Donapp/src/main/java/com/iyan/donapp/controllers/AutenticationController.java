@@ -1,5 +1,6 @@
 package com.iyan.donapp.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,12 +14,8 @@ import com.iyan.donapp.services.UserService;
 @RequestMapping("/registrarse")
 public class AutenticationController {
 
+	@Autowired
 	private UserService userService;
-	
-	public AutenticationController(UserService us) {
-		super();
-		this.userService = us;
-	}
 	
 	@ModelAttribute("user")
 	public UserRegistroDto nuevoUserRegistroDto() {
@@ -40,5 +37,7 @@ public class AutenticationController {
 	public String mostrarRegistro() {
 		return "/registrarse";
 	}
+
+	
 
 }

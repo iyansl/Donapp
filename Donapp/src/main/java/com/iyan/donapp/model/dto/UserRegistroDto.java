@@ -46,7 +46,7 @@ public class UserRegistroDto {
 		this.email = email;
 		this.password = password;
 	}
-
+	
 	public UserRegistroDto(String username, String email, String password) {
 		super();
 		this.username = username;

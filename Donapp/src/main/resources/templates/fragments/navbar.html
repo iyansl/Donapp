@@ -36,10 +36,12 @@
 </a>
 
 <script>
-if (window.location.href.indexOf("conversaciones") != -1){
-	document.querySelector(".linkFloating").classList.add("d-none");
-} else {
-	document.querySelector(".linkFloating").classList.remove("d-none");
+var floatingBubble = document.querySelector(".linkFloating");
+if (floatingBubble !=null){
+	if (window.location.href.indexOf("conversaciones") != -1){
+		document.querySelector(".linkFloating").classList.add("d-none");
+	} else {
+		document.querySelector(".linkFloating").classList.remove("d-none");
+	}
 }
-	
 </script>

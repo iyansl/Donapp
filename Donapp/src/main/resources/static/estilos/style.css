@@ -341,4 +341,20 @@
 		    margin-right: 25%;
         }
         
+        .inputFile_perfil input[type="file"] {
+        display: none; /* Oculta el campo de entrada de archivos */
+    }
+
+    .inputFile_perfil label {
+        background-color: #668bc5; /* Color de fondo personalizado */
+        color: white; /* Color de texto personalizado */
+        padding: 10px 15px; /* Espaciado interno personalizado */
+        cursor: pointer; /* Cambia el cursor al puntero al pasar sobre él */
+    }
+
+    /* Estilo para ocultar el texto por defecto del campo de entrada de archivos */
+    .inputFile_perfil label::before {
+        content: "Buscar imagen"; /* Texto personalizado para el botón de carga */
+    }
+        
  
