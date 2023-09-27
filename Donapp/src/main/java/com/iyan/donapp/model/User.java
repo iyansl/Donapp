@@ -1,6 +1,7 @@
 package com.iyan.donapp.model;
 
 import java.util.Collection;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -26,26 +28,25 @@ public class User {
 
 	@Column(name = "username")
 	private String username;
-	
+
 	@Column(name = "descripcion")
 	private String descripcion;
-	
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@Lob
-    @Column(name = "foto")
-    private byte[] foto;
+	@Column(name = "foto")
+	private byte[] foto;
 
 	private String password;
-	
-	@ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(
-			name = "usuarios_roles",
-			joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"),
-			inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id")
-	)
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
 	private Collection<Rol> roles;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "usuario")
+	private Set<Producto> productos;
 
 	public User(Long id, String username, String descripcion, String email, String password, Collection<Rol> roles) {
 		super();
@@ -56,7 +57,6 @@ public class User {
 		this.roles = roles;
 		this.descripcion = descripcion;
 	}
-	
 
 	public User(String username, String email, String password, Collection<Rol> roles) {
 		super();
@@ -65,12 +65,10 @@ public class User {
 		this.password = password;
 		this.roles = roles;
 	}
-	
 
 	public User() {
 		super();
 	}
-
 
 	public Long getId() {
 		return id;
@@ -112,24 +110,25 @@ public class User {
 		this.roles = roles;
 	}
 
-
 	public String getDescripcion() {
 		return descripcion;
 	}
-
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
-
 	public void setFoto(byte[] bytes) {
 		this.foto = bytes;
 	}
 
-
 	public byte[] getFoto() {
 		return foto;
 	}
+
+	public Set<Producto> getProductos() {
+		return productos;
+	}
+	
 
 }

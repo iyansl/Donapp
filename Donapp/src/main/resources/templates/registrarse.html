@@ -14,7 +14,7 @@
 	<img class="miImg2 d-block w-100" src="img/login.jpg" alt="Login">
 	
     <div class="container mt-4">
-    <h2> Registrarse </h2>
+    <h2 class="mb-4"> Registrarse </h2>
     <div class="error-div" th:if=${param.error}>
     	El usuario introducido ya existe en el sistema
     </div>
@@ -23,7 +23,7 @@
     </div>
     	<form th:action="@{/registrarse}" method="post" th:object=${user}>
                 <div class="form-group">
-                    <label for="username">Nombre de usuario:</label>
+                    <label for="username">Nombre de usuario: <span style="color: darkred;"> (Es un identificador único. No podrá ser cambiado posteriormente.) </span></label>
                     <input th:field="*{username}" required type="text" class="form-control" id="username" placeholder="Tu nombre de usuario"/>
                 </div>
                 <div class="form-group">

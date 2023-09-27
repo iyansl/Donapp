@@ -65,114 +65,24 @@
     <hr>
     <div class="container mt-4">
         <div class="row">
-            <div class="col-md-4 mb-4">
+        
+        	<div class="col-md-4 mb-4" th:if="${productos.empty}">
+        	  No hay productos que mostrar
+        	</div>
+        
+            <div class="col-md-4 mb-4" th:each="producto : ${productos}">
                 <div class="card">
-                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 1">
+                    <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto 1">
                     <div class="card-body">
-                        <h5 class="card-title">Nombre del Producto 1</h5>
-                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
-                        <p class="card-text">Urgencia: Alta</p>
+                        <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
+                        <p class="card-text">Publicado por: <a href="/usuario"><span th:text="${producto.usuario.username}"> </span></a></p>
+                        <p class="card-text">Urgencia: <span th:text="${producto.urgencia}"> </span></p>
                         <a href="/producto" class="btn custom-button">Ver Más</a>
                         <a href="#" class="btn custom-button">Solicitar</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre del Producto 2</h5>
-                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
-                        <p class="card-text">Urgencia: Media</p>
-                        <a href="/producto" class="btn custom-button">Ver Más</a>
-                        <a href="#" class="btn custom-button">Solicitar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre del Producto 3</h5>
-                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
-                        <p class="card-text">Urgencia: Baja</p>
-                        <a href="/producto" class="btn custom-button">Ver Más</a>
-                        <a href="#" class="btn custom-button">Solicitar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre del Producto 1</h5>
-                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
-                        <p class="card-text">Urgencia: Alta</p>
-                        <a href="/producto" class="btn custom-button">Ver Más</a>
-                        <a href="#" class="btn custom-button">Solicitar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre del Producto 2</h5>
-                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
-                        <p class="card-text">Urgencia: Media</p>
-                        <a href="/producto" class="btn custom-button">Ver Más</a>
-                        <a href="#" class="btn custom-button">Solicitar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre del Producto 3</h5>
-                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
-                        <p class="card-text">Urgencia: Baja</p>
-                        <a href="/producto" class="btn custom-button">Ver Más</a>
-                        <a href="#" class="btn custom-button">Solicitar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre del Producto 1</h5>
-                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
-                        <p class="card-text">Urgencia: Alta</p>
-                        <a href="/producto" class="btn custom-button">Ver Más</a>
-                        <a href="#" class="btn custom-button">Solicitar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre del Producto 2</h5>
-                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
-                        <p class="card-text">Urgencia: Media</p>
-                        <a href="/producto" class="btn custom-button">Ver Más</a>
-                        <a href="#" class="btn custom-button">Solicitar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre del Producto 3</h5>
-                        <p class="card-text">Publicado por: <a href="/usuario">Usuario 3</a></p>
-                        <p class="card-text">Urgencia: Baja</p>
-                        <a href="/producto" class="btn custom-button">Ver Más</a>
-                        <a href="#" class="btn custom-button">Solicitar</a>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
     
