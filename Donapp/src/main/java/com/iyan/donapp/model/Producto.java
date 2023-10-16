@@ -45,7 +45,7 @@ public class Producto {
 	private String descripcionEntrega;
 	
 	@Lob
-    @Column(name = "foto")
+	@Column(name = "foto", columnDefinition = "MEDIUMBLOB")
     private byte[] foto;
 	
 	private String fotoEncoded;

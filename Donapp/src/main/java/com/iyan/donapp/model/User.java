@@ -36,7 +36,7 @@ public class User {
 	private String email;
 
 	@Lob
-	@Column(name = "foto")
+	@Column(name = "foto", columnDefinition = "MEDIUMBLOB")
 	private byte[] foto;
 
 	private String password;
