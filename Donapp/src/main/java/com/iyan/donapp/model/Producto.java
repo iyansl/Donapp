@@ -62,6 +62,13 @@ public class Producto {
 		this.descripcionEntrega = descripcionEntrega;
 	}
 	
+	public Producto(String titulo, String subtitulo, String tipo) {
+		super();
+		this.titulo = titulo;
+		this.subtitulo = subtitulo;
+		this.tipo = tipo;
+	}
+	
 
 	public Producto() {
 		super();

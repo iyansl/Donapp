@@ -1,29 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donapp: Producto</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="estilos/style.css?version=51">
-</head>
+<head th:replace="~{fragments/header}" />
 <body>
 
 	<nav th:replace="~{fragments/navbar}" />
 	
 	<section style="background-color:white; height:10vh"></section>
 	
+	<nav th:replace="~{fragments/atras}" />
+	
     <div class="container miTarjetaProducto mt-4">
         <div class="card">
-            <img style="width:100%" src="img/producto.jpg" class="card-img-top" alt="Producto">
+        	<div class="mensaje-div" th:if=${param.exito}>
+		    	Exito al editar el producto.
+		    </div>
+		    <div class="error-div" th:if=${param.error}>
+		    	La imagen es demasiado grande (3MB máximo)
+		    </div>
+		    <div class="error-div" th:if=${param.errorUser}>
+		    	Usuario inválido.
+		    </div>
+		    <form method="post" th:action="@{'/subirFotoProducto/' + ${producto.id}}" enctype="multipart/form-data" class="edit-form d-none">
+			    <label>
+			        <input type="file" name="foto" />
+			    </label>
+			    <button class="custom-button" type="submit" onclick="ocultarBotones()">Cambiar imagen</button>
+			</form>
+            <img style="width:100%" th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded} " class="card-img-top" alt="Producto">
             <div class="card-body">
-                <h5 class="card-title"><b>Nombre del Producto</b></h5>
-                <p class="card-text"><b>Descripción:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget fringilla libero.</p>
-                <p class="card-text"><b>Estado:</b> Buen estado</p>
-                <p class="card-text"><b>Urgencia:</b> Media</p>
-                <p class="card-text"><b>Forma de Entrega:</b> A domicilio</p>
-                <p class="card-text"><b>Detalle de la Entrega:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget fringilla libero. Nulla eget fringilla libero.</p>
-                <a href="#" class="btn custom-button">Solicitar</a>
+            	<form method="post" th:action="@{'/editarProducto/' + ${producto.id}}" class="edit-form d-none">
+	            	 <div class="form-group">
+				     	<label for="titulo"><b>Titulo:</b> <span th:text="${producto.titulo} "> </span> </label> <input type="text" name="titulo" />
+				     </div>
+				     <div class="form-group">
+				     	<label for="tipo"><b>Tipo:</b> <span th:text="${producto.tipo}"> </span> </label> <select class="form-control" id="tipo" name="tipo">
+                        <option value="Ropa">Ropa</option>
+                        <option value="Libros">Libros</option>
+                        <option value="Electrónicos">Electrónicos</option>
+                        <!-- Agrega más opciones según sea necesario -->
+                    </select>
+				     </div>	
+				     <div class="form-group">
+				    	 <label for="subtitulo"><b>Subtitulo:</b> <span th:text="${producto.subtitulo} "> </span> </label> <input type="text" name="subtitulo" />
+				     </div>
+				     <div class="form-group">
+				     	<label for="estado"><b>Estado:</b> <span th:text="${producto.estado} "> </span> </label> <select class="form-control" id="estado" name="estado">
+                    <option value="Nuevo">Nuevo</option>
+                    <option value="Casi nuevo">Casi nuevo</option>
+                    <option value="Buen estado">Buen estado</option>
+                    <option value="Regular">Regular</option>
+                    <option value="Malo">Malo</option>
+                </select>
+				     </div>
+				     <div class="form-group">
+				     	<label for="urgencia"><b>Urgencia:</b> <span th:text="${producto.urgencia} "> </span> </label> <select class="form-control" id="urgencia" name="urgencia">
+                        <option value="Alta">Alta</option>
+                        <option value="Media">Media</option>
+                        <option value="Baja">Baja</option>
+                    </select>
+				     </div>
+				     <div class="form-group">
+				     	<label for="formaEntrega"><b>Forma entrega:</b> <span th:text="${producto.formaEntrega} "> </span> </label> <select class="form-control" id="formaEntrega" name="formaEntrega">
+                        <option value="En un punto">En un punto</option>
+                        <option value="A domicilio">A domicilio</option>
+                        <option value="Por correo">Por correo</option>
+                    </select>
+				     </div>
+				     <div class="form-group">
+				     	<label for="descripcionEntrega"><b>Detalle entrega:</b> <span th:text="${producto.descripcionEntrega} "> </span> </label> <input type="text" name="descripcionEntrega" />
+				     </div>
+				     <button class="custom-button" type="submit" onclick="ocultarFormulario()">Actualizar</button>
+				</form>
+                <h5 class="card-title no-edit"><b th:text="${producto.titulo}"></b></h5>
+                <p class="card-text no-edit"><b>Tipo:</b> <span th:text="${producto.tipo}"> </span></p>
+                <p class="card-text no-edit"><b>Descripción:</b> <span th:text="${producto.subtitulo}"> </span></p>
+                <p class="card-text no-edit"><b>Estado:</b> <span th:text="${producto.estado}"> </span></p>
+                <p class="card-text no-edit"><b>Urgencia:</b> <span th:text="${producto.urgencia}"> </span></p>
+                <p class="card-text no-edit"><b>Forma de Entrega:</b> <span th:text="${producto.formaEntrega}"> </span></p>
+                <p class="card-text no-edit"><b>Detalle de la Entrega:</b> <span th:text="${producto.descripcionEntrega}"> </span></p>
+                <a th:if="${solicitar}" class="btn custom-button">Solicitar</a>
+                <a th:if="${editar}" onclick="mostrarFormulario()" class="btn custom-button btn-editar">Editar</a>
+                <a th:if="${editar}" onclick="ocultarFormulario()" class="btn custom-button btn-cancelar d-none">Cancelar edición</a>
             </div>
         </div>
     </div>
@@ -34,3 +91,43 @@
 
 </body>
 </html>
+
+<script>
+
+	function mostrarFormulario() {
+	    var btnEditar = document.querySelector(".btn-editar");
+	    btnEditar.classList.add("d-none");
+	    
+	    var btnCancelar = document.querySelector(".btn-cancelar");
+	    btnCancelar.classList.remove("d-none");
+	
+	    var cardTextElements = document.querySelectorAll(".no-edit");
+	    cardTextElements.forEach(function (element) {
+	        element.classList.add("d-none");
+	    });
+	
+	    var editForm = document.querySelectorAll(".edit-form");
+	    editForm.forEach(function (element) {
+	    	element.classList.remove("d-none");
+	    });
+	}
+	
+	function ocultarFormulario() {
+	    var btnCancelar = document.querySelector(".btn-cancelar");
+	    btnCancelar.classList.add("d-none");
+	    
+	    var btnEditar = document.querySelector(".btn-editar");
+	    btnEditar.classList.remove("d-none");
+	
+	    var cardTextElements = document.querySelectorAll(".card-text.no-edit");
+	    cardTextElements.forEach(function (element) {
+	        element.classList.remove("d-none");
+	    });
+	
+	    var editForm = document.querySelectorAll(".edit-form");
+	    editForm.forEach(function (element) {
+	    	element.classList.add("d-none");
+	    });
+	}
+
+</script>

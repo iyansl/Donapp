@@ -33,6 +33,16 @@ public class ProductoDto {
 		this.estado = estado;
 	}
 	
+	public ProductoDto(String titulo, String subtitulo, String urgencia, String tipo, String formaEntrega, String descripcionEntrega, String estado) {
+		this.titulo = titulo;
+		this.subtitulo = subtitulo;
+		this.tipo = tipo;
+		this.urgencia = urgencia;
+		this.formaEntrega = formaEntrega;
+		this.descripcionEntrega = descripcionEntrega;
+		this.estado = estado;
+	}
+	
 	public ProductoDto() {
 
 	}

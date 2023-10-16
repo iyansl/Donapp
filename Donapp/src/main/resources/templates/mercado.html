@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donapp: Mercado</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="estilos/style.css?version=51">
-</head>
+<head th:replace="~{fragments/header}" />
 <body>
 
 	<nav th:replace="~{fragments/navbar}" />
 	
 	<img class="miImg d-block w-100" src="img/mercado.jpg" alt="Mercado">
 	
+	<nav th:replace="~{fragments/atras}" />
+
 	<div class="mt-4 ml-4 mr-4">
         <div class="row">
             <div class="col-md-5">
@@ -77,7 +73,7 @@
                         <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
                         <p class="card-text">Publicado por: <a href="/usuario"><span th:text="${producto.usuario.username}"> </span></a></p>
                         <p class="card-text">Urgencia: <span th:text="${producto.urgencia}"> </span></p>
-                        <a href="/producto" class="btn custom-button">Ver Más</a>
+                        <a th:href="${'/producto/'+producto.id}" class="btn custom-button">Ver Más</a>
                         <a href="#" class="btn custom-button">Solicitar</a>
                     </div>
                 </div>

@@ -1,10 +1,14 @@
 package com.iyan.donapp.services;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.iyan.donapp.model.Producto;
 import com.iyan.donapp.model.User;
@@ -21,15 +25,18 @@ public class ProductoService {
 		this.productoRepository = productoRepository;
 	}
 
-	public Producto saveProducto(ProductoDto dto, User user) {
+	public Producto saveProducto(ProductoDto dto, User user1) {
 		byte[] bytes = null;
 		try {
-			bytes = dto.getFoto().getBytes();
+			if (dto.getFoto() != null)
+				bytes = dto.getFoto().getBytes();
+			else 
+				bytes = obtenerDatosImagenPorDefecto();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		Producto producto = new Producto(bytes, dto.getTitulo(), dto.getSubtitulo(), dto.getUrgencia(), dto.getTipo(), dto.getFormaEntrega(), dto.getDescripcionEntrega(), dto.getEstado());
-		producto.setUsuario(user);
+		producto.setUsuario(user1);
 		return productoRepository.save(producto);
 	}
 
@@ -47,6 +54,93 @@ public class ProductoService {
 			p.setFotoEncoded(Base64.getEncoder().encodeToString(p.getFoto()));
 		}
 		return productos;
+	}
+
+	public Object getAllProductosExceptActiveUser(Long id) {
+		List<Producto> productos = productoRepository.findAllExceptActiveUser(id);
+		for (Producto p: productos) {
+			p.setFotoEncoded(Base64.getEncoder().encodeToString(p.getFoto()));
+		}
+		return productos;
+	}
+	
+	private byte[] obtenerDatosImagenPorDefecto() {
+	    try {
+	        InputStream inputStream = getClass().getResourceAsStream("/static/img/producto.jpg");
+	        if (inputStream != null) {
+	            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+	            byte[] buffer = new byte[1024];
+	            int length;
+	            while ((length = inputStream.read(buffer)) != -1) {
+	                outputStream.write(buffer, 0, length);
+	            }
+	            return outputStream.toByteArray();
+	        } else {
+	            System.out.println("Imagen por defecto no encontrada");
+	            return null;
+	        }
+	    } catch (IOException e) {
+	        System.out.println("Error al cargar imagen por defecto");
+	        return null;
+	    }
+	}
+
+	public Producto getProductoById(Long id) {
+		Optional<Producto> p = productoRepository.findById(id);
+		p.get().setFotoEncoded(Base64.getEncoder().encodeToString(p.get().getFoto()));
+		return p.get();
+	}
+
+	public Object updateProducto(ProductoDto dto, Long id, User obtained) {
+		Optional<Producto> productoOptional = productoRepository.findById(id);
+		if (productoOptional.isPresent()) {
+		    Producto producto = productoOptional.get();
+		    
+		    if (producto.getUsuario().getId() == obtained.getId()) {
+			    if (dto.getTitulo() != null && !dto.getTitulo().isEmpty()) {
+			        producto.setTitulo(dto.getTitulo());
+			    }
+			    if (dto.getSubtitulo() != null && !dto.getSubtitulo().isEmpty()) {
+			        producto.setSubtitulo(dto.getSubtitulo());
+			    }
+			    if (dto.getEstado() != null && !dto.getEstado().isEmpty()) {
+			        producto.setEstado(dto.getEstado());
+			    }
+			    if (dto.getDescripcionEntrega() != null && !dto.getDescripcionEntrega().isEmpty()) {
+			        producto.setDescripcionEntrega(dto.getDescripcionEntrega());
+			    }
+			    if (dto.getFormaEntrega() != null && !dto.getFormaEntrega().isEmpty()) {
+			        producto.setFormaEntrega(dto.getFormaEntrega());
+			    }
+			    if (dto.getTipo() != null && !dto.getTipo().isEmpty()) {
+			        producto.setTipo(dto.getTipo());
+			    }
+			    if (dto.getUrgencia() != null && !dto.getUrgencia().isEmpty()) {
+			        producto.setUrgencia(dto.getUrgencia());
+			    }
+			    productoRepository.save(producto);
+			    return producto;
+		    } else {
+		    	return null;
+		    }
+		}
+		return null;
+	}
+
+	public Object cambiarFoto(MultipartFile foto, Long id, User obtained) {
+		Optional<Producto> p = productoRepository.findById(id);
+		if (p.get().getUsuario().getId() == obtained.getId()) {
+			byte[] fotoBytes;
+			try {
+				fotoBytes = foto.getBytes();
+				p.get().setFoto(fotoBytes);
+				productoRepository.save(p.get());
+				return p.get();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 }

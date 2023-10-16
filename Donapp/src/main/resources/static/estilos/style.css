@@ -168,6 +168,17 @@
     color: white; /* Color del texto */
 }
 
+.div-atras {
+            position: fixed;
+            top:10%;
+            z-index:1000;
+        }
+        
+        .btn-atras{
+        	height:3rem;
+        	width:3rem;
+        }
+
 /* Estilo para dispositivos móviles */
 @media (max-width: 767px) {
     .font-mobile {

@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donapp: Usuario</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="estilos/style.css?version=51">
-</head>
+<head th:replace="~{fragments/header}" />
 <body>
 
 	<nav th:replace="~{fragments/navbar}" />
 	
-	<section style="background-color:#668bc5; height:10vh"></section>
+	<section style="background-color:#668bc5; height:20vh"></section>
+	
+	<nav th:replace="~{fragments/atras}" />
 	
 	<nav class="mt-5 navbar perfilNavbar navbar-expand-lg navbar-light">
 	    	<ul class="navbar-nav mx-auto" style="place-content: center;">
@@ -70,8 +66,8 @@
 				    </label>
 				    <button class="custom-button" type="submit" onclick="ocultarBotones()">Cambiar descripcion</button>
 				</form>
-                <a href="#" onclick="mostrarBotones()" class="btn custom-button editar-btn">Editar</a>
-                <a href="#" onclick="ocultarBotones()" class="btn custom-button ocultar_mostrar d-none">Cancelar edición</a>
+                <a onclick="mostrarBotones()" class="btn custom-button editar-btn">Editar</a>
+                <a onclick="ocultarBotones()" class="btn custom-button ocultar_mostrar d-none">Cancelar edición</a>
                 <button type="button" class="btn custom-button" data-toggle="modal" data-target="#confirmModal">Borrar cuenta</button>
             </div>
         </div>
