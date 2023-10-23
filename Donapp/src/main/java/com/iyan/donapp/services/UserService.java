@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -50,22 +51,24 @@ public class UserService {
 	            }
 	            return outputStream.toByteArray();
 	        } else {
-	            System.out.println("Imagen por defecto no encontrada");
 	            return null;
 	        }
 	    } catch (IOException e) {
-	        System.out.println("Error al cargar imagen por defecto");
 	        return null;
 	    }
 	}
 
 
 	public User getUserByEmail(String email) {
-		return userRepository.findByEmail(email);
+		User u = userRepository.findByEmail(email);
+		u.setFotoEncoded(Base64.getEncoder().encodeToString(u.getFoto()));
+		return u;
 	}
 
 	public User getUserByUsername(String username) {
-		return userRepository.finfByUsername(username);
+		User u = userRepository.findByUsername(username);
+		u.setFotoEncoded(Base64.getEncoder().encodeToString(u.getFoto()));
+		return u;
 	}
 
 	@Transactional
@@ -75,6 +78,7 @@ public class UserService {
 		try {
 			fotoBytes = foto.getBytes();
 			user.setFoto(fotoBytes);
+			user.setFotoEncoded(Base64.getEncoder().encodeToString(fotoBytes));
 			userRepository.save(user);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -9,5 +9,5 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	public User findByEmail(String email);
 
 	@Query("SELECT u FROM User u WHERE(LOWER(u.username) LIKE LOWER(?1))")
-	public User finfByUsername(String username);
+	public User findByUsername(String username);
 }

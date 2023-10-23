@@ -1,5 +1,6 @@
 package com.iyan.donapp.model;
 
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
@@ -40,6 +42,9 @@ public class User {
 	private byte[] foto;
 
 	private String password;
+	
+	@Transient
+	private String fotoEncoded;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
@@ -47,6 +52,12 @@ public class User {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "usuario")
 	private Set<Producto> productos;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "receptor")
+	private Set<Solicitud> solicitudesRecibidas;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "solicitante")
+	private Set<Solicitud> solicitudesEnviadas;
 
 	public User(Long id, String username, String descripcion, String email, String password, Collection<Rol> roles) {
 		super();
@@ -128,6 +139,38 @@ public class User {
 
 	public Set<Producto> getProductos() {
 		return productos;
+	}
+
+	public Set<Solicitud> getSolicitudesRecibidas() {
+		return solicitudesRecibidas;
+	}
+
+	public void setSolicitudesRecibidas(Set<Solicitud> solicitudesRecibidas) {
+		this.solicitudesRecibidas = solicitudesRecibidas;
+	}
+
+	public Set<Solicitud> getSolicitudesEnviadas() {
+		return solicitudesEnviadas;
+	}
+
+	public void setSolicitudesEnviadas(Set<Solicitud> solicitudesEnviadas) {
+		this.solicitudesEnviadas = solicitudesEnviadas;
+	}
+
+	public void setProductos(Set<Producto> productos) {
+		this.productos = productos;
+	}
+
+	public String getFotoEncoded() {
+		return fotoEncoded;
+	}
+
+	public void setFotoEncoded(String fotoEncoded) {
+		this.fotoEncoded = fotoEncoded;
+	}
+	
+	public void updateFotoEncoded() {
+		this.fotoEncoded = Base64.getEncoder().encodeToString(this.getFoto());
 	}
 	
 

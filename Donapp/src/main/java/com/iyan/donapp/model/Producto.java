@@ -1,5 +1,7 @@
 package com.iyan.donapp.model;
 
+import java.util.Base64;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
@@ -48,6 +51,7 @@ public class Producto {
 	@Column(name = "foto", columnDefinition = "MEDIUMBLOB")
     private byte[] foto;
 	
+	@Transient
 	private String fotoEncoded;
 	
 	public Producto(byte[] foto, String titulo, String subtitulo, String urgencia, String tipo, String formaEntrega, String descripcionEntrega, String estado) {
@@ -173,6 +177,9 @@ public class Producto {
 		return fotoEncoded;
 	}
 	
+	public void updateFotoEncoded() {
+		this.fotoEncoded = Base64.getEncoder().encodeToString(this.getFoto());
+	}
 	
 	
 }

@@ -3,7 +3,6 @@ package com.iyan.donapp.services;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +42,7 @@ public class ProductoService {
 	public List<Producto> getAllProductos() {
 		List<Producto> productos = productoRepository.findAll();
 		for (Producto p: productos) {
-			p.setFotoEncoded(Base64.getEncoder().encodeToString(p.getFoto()));
+			p.updateFotoEncoded();
 		}
 		return productos;
 	}
@@ -51,7 +50,7 @@ public class ProductoService {
 	public Object findAllByUserId(Long id) {
 		List<Producto> productos = productoRepository.findAllByUserId(id);
 		for (Producto p: productos) {
-			p.setFotoEncoded(Base64.getEncoder().encodeToString(p.getFoto()));
+			p.updateFotoEncoded();
 		}
 		return productos;
 	}
@@ -59,7 +58,7 @@ public class ProductoService {
 	public Object getAllProductosExceptActiveUser(Long id) {
 		List<Producto> productos = productoRepository.findAllExceptActiveUser(id);
 		for (Producto p: productos) {
-			p.setFotoEncoded(Base64.getEncoder().encodeToString(p.getFoto()));
+			p.updateFotoEncoded();
 		}
 		return productos;
 	}
@@ -87,7 +86,7 @@ public class ProductoService {
 
 	public Producto getProductoById(Long id) {
 		Optional<Producto> p = productoRepository.findById(id);
-		p.get().setFotoEncoded(Base64.getEncoder().encodeToString(p.get().getFoto()));
+		p.get().updateFotoEncoded();
 		return p.get();
 	}
 
@@ -134,6 +133,7 @@ public class ProductoService {
 			try {
 				fotoBytes = foto.getBytes();
 				p.get().setFoto(fotoBytes);
+				p.get().updateFotoEncoded();
 				productoRepository.save(p.get());
 				return p.get();
 			} catch (IOException e) {

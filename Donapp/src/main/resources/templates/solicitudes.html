@@ -12,140 +12,68 @@
 	<div class="container mt-5">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="recibidas-tab" data-toggle="tab" href="#recibidas" role="tab" aria-controls="recibidas" aria-selected="true">Recibidas</a>
+                <a class="nav-link active" id="enviadas-tab" data-toggle="tab" href="#enviadas" role="tab" aria-controls="enviadas" aria-selected="false">Enviadas</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="enviadas-tab" data-toggle="tab" href="#enviadas" role="tab" aria-controls="enviadas" aria-selected="false">Enviadas</a>
+                <a class="nav-link" id="recibidas-tab" data-toggle="tab" href="#recibidas" role="tab" aria-controls="recibidas" aria-selected="true">Recibidas</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-            <!-- Pestaña de Solicitudes Recibidas -->
-            <div class="tab-pane fade show active" id="recibidas" role="tabpanel" aria-labelledby="recibidas-tab">
-                <div class="row mt-4">
-                
-                    <!-- Ejemplo de solicitud recibida -->
-                    <div class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
-                        <div class="card">
-                            <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
-                                <div class="col-md-6">
-                                    <img src="img/usuario.png" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
-                                    <h5 class="card-title">Nombre de la Persona</h5>
-                                    <a href="/usuario" class="btn custom-button">Ir a Perfil</a>
-                                </div>
-                                <div class="col-md-6 mt-4 mt-md-0">
-                                    <img src="img/producto.jpg" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
-                                    <h5 class="card-title">Nombre del Objeto</h5>
-                                    <a href="/producto" class="btn custom-button">Ver Detalle</a>
-                                </div>
-                            </div>
-                             <a href="/detalle-del-objeto" class="btn custom-button p-1">Aceptar solicitud</a>
-                             <a href="/detalle-del-objeto" class="btn custom-button p-1">Denegar solicitud</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
-                        <div class="card">
-                            <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
-                                <div class="col-md-6">
-                                    <img src="img/usuario.png" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
-                                    <h5 class="card-title">Nombre de la Persona</h5>
-                                    <a href="/usuario" class="btn custom-button">Ir a Perfil</a>
-                                </div>
-                                <div class="col-md-6 mt-4 mt-md-0">
-                                    <img src="img/producto.jpg" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
-                                    <h5 class="card-title">Nombre del Objeto</h5>
-                                    <a href="/producto" class="btn custom-button">Ver Detalle</a>
-                                </div>
-                            </div>
-                             <a href="/detalle-del-objeto" class="btn custom-button p-1">Aceptar solicitud</a>
-                             <a href="/detalle-del-objeto" class="btn custom-button p-1">Denegar solicitud</a>
-                        </div>
-                    </div>
-                    <!-- Agrega más solicitudes recibidas aquí -->
-                </div>
-            </div>
-
+        
             <!-- Pestaña de Solicitudes Enviadas -->
-            <div class="tab-pane fade" id="enviadas" role="tabpanel" aria-labelledby="enviadas-tab">
+            
+            <div class="tab-pane fade show active" id="enviadas" role="tabpanel" aria-labelledby="enviadas-tab">
+	            <div class="mensaje-div" th:if=${param.exitoSolicitud}>
+			    	Solicitud enviada al dueño del producto
+			    </div>
                 <div class="row mt-4">
-                    <!-- Ejemplo de solicitud enviada -->
-                    <div class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
+                    <div th:each="enviada : ${enviadas}" class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
                         <div class="card">
                             <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
                                 <div class="col-md-6">
-                                    <img src="img/usuario.png" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
-                                    <h5 class="card-title">Nombre de la Persona</h5>
-                                    <a href="/usuario" class="btn custom-button">Ir a Perfil</a>
+                                    <img th:src="'data:image/jpeg;base64,' + ${enviada.receptor.fotoEncoded}" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
+                                    <h5 th:text="${enviada.receptor.username}" class="card-title">Nombre de la Persona</h5>
+                                    <a th:href="${'/usuario/'+ enviada.receptor.id}" class="btn custom-button">Ir a Perfil</a>
                                 </div>
                                 <hr>
                                 <div class="col-md-6 mt-4 mt-md-0">
-                                    <img src="img/producto.jpg" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
-                                    <h5 class="card-title">Nombre del Objeto</h5>
-                                    <a href="/producto" class="btn custom-button">Ver Detalle</a>
+                                    <img th:src="'data:image/jpeg;base64,' + ${enviada.producto.fotoEncoded}" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
+                                    <h5 th:text="${enviada.producto.titulo}" class="card-title">Nombre del Objeto</h5>
+                                    <a th:href="${'/producto/'+ enviada.producto.id}" class="btn custom-button">Ver Detalle</a>
                                 </div>
                             </div>
-                            <p class="mt-2" style="align-self: center;">Estado de la solicitud: Pendiente</p>
+                            <p th:text="${'Estado de la solicitud: ' + enviada.estado}" class="mt-2" style="align-self: center;">Estado de la solicitud: Pendiente</p>
                         </div>
                     </div>
-                    
-                    <div class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
-                        <div class="card">
-                            <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
-                                <div class="col-md-6">
-                                    <img src="img/usuario.png" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
-                                    <h5 class="card-title">Nombre de la Persona</h5>
-                                    <a href="/usuario" class="btn custom-button">Ir a Perfil</a>
-                                </div>
-                                <hr>
-                                <div class="col-md-6 mt-4 mt-md-0">
-                                    <img src="img/producto.jpg" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
-                                    <h5 class="card-title">Nombre del Objeto</h5>
-                                    <a href="/producto" class="btn custom-button">Ver Detalle</a>
-                                </div>
-                            </div>
-                            <p class="mt-2" style="align-self: center;">Estado de la solicitud: Pendiente</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
-                        <div class="card">
-                            <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
-                                <div class="col-md-6">
-                                    <img src="img/usuario.png" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
-                                    <h5 class="card-title">Nombre de la Persona</h5>
-                                    <a href="/usuario" class="btn custom-button">Ir a Perfil</a>
-                                </div>
-                                <hr>
-                                <div class="col-md-6 mt-4 mt-md-0">
-                                    <img src="img/producto.jpg" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
-                                    <h5 class="card-title">Nombre del Objeto</h5>
-                                    <a href="/producto" class="btn custom-button">Ver Detalle</a>
-                                </div>
-                            </div>
-                            <p class="mt-2" style="align-self: center;">Estado de la solicitud: Pendiente</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
-                        <div class="card">
-                            <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
-                                <div class="col-md-6">
-                                    <img src="img/usuario.png" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
-                                    <h5 class="card-title">Nombre de la Persona</h5>
-                                    <a href="/usuario" class="btn custom-button">Ir a Perfil</a>
-                                </div>
-                                <hr>
-                                <div class="col-md-6 mt-4 mt-md-0">
-                                    <img src="img/producto.jpg" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
-                                    <h5 class="card-title">Nombre del Objeto</h5>
-                                    <a href="/producto" class="btn custom-button">Ver Detalle</a>
-                                </div>
-                            </div>
-                            <p class="mt-2" style="align-self: center;">Estado de la solicitud: Pendiente</p>
-                        </div>
-                    </div>
-                    <!-- Agrega más solicitudes enviadas aquí -->
                 </div>
             </div>
+                
+            <!-- Pestaña de Solicitudes Recibidas -->
+            
+            <div class="tab-pane fade" id="recibidas" role="tabpanel" aria-labelledby="recibidas-tab">
+                <div class="row mt-4">
+                    <div th:each="recibida : ${recibidas}" class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
+                        <div class="card">
+                            <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
+                                <div class="col-md-6">
+                                    <img th:src="'data:image/jpeg;base64,' + ${recibida.solicitante.fotoEncoded}" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
+                                    <h5 th:text="${recibida.solicitante.username}" class="card-title">Nombre de la Persona</h5>
+                                    <a th:href="${'/usuario/'+ recibida.solicitante.id}" class="btn custom-button">Ir a Perfil</a>
+                                </div>
+                                <div class="col-md-6 mt-4 mt-md-0">
+                                    <img th:src="'data:image/jpeg;base64,' + ${recibida.producto.fotoEncoded}" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
+                                    <h5 th:text="${recibida.producto.titulo}" class="card-title">Nombre del Objeto</h5>
+                                    <a th:href="${'/producto/'+ recibida.producto.id}" class="btn custom-button">Ver Detalle</a>
+                                </div>
+                            </div>
+                             <a href="/detalle-del-objeto" class="btn custom-button p-1">Aceptar solicitud</a>
+                             <a href="/detalle-del-objeto" class="btn custom-button p-1">Denegar solicitud</a>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            
+               
         </div>
     </div>
 	

@@ -61,7 +61,7 @@
     <hr>
     <div class="container mt-4">
         <div class="row">
-        
+            
         	<div class="col-md-4 mb-4" th:if="${productos.empty}">
         	  No hay productos que mostrar
         	</div>
@@ -74,7 +74,7 @@
                         <p class="card-text">Publicado por: <a href="/usuario"><span th:text="${producto.usuario.username}"> </span></a></p>
                         <p class="card-text">Urgencia: <span th:text="${producto.urgencia}"> </span></p>
                         <a th:href="${'/producto/'+producto.id}" class="btn custom-button">Ver Más</a>
-                        <a href="#" class="btn custom-button">Solicitar</a>
+                        <a th:href="${'/solicitar/'+producto.id}" class="btn custom-button">Solicitar</a>
                     </div>
                 </div>
             </div>
