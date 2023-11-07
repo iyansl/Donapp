@@ -53,6 +53,9 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "usuario")
 	private Set<Producto> productos;
 	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "usuario")
+	private Set<Producto> productosObtenidos;
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "receptor")
 	private Set<Solicitud> solicitudesRecibidas;
 	
@@ -171,6 +174,16 @@ public class User {
 	
 	public void updateFotoEncoded() {
 		this.fotoEncoded = Base64.getEncoder().encodeToString(this.getFoto());
+		this.getProductos().forEach(p -> p.updateFotoEncoded());
+		this.getProductosObtenidos().forEach(p -> p.updateFotoEncoded());
+	}
+
+	public Set<Producto> getProductosObtenidos() {
+		return productosObtenidos;
+	}
+
+	public void setProductosObtenidos(Set<Producto> productosObtenidos) {
+		this.productosObtenidos = productosObtenidos;
 	}
 	
 

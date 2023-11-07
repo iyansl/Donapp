@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.iyan.donapp.model.Solicitud;
+import com.iyan.donapp.model.User;
 import com.iyan.donapp.model.dto.SolicitudDto;
 import com.iyan.donapp.repositories.SolicitudRepository;
 
@@ -37,6 +38,21 @@ public class SolicitudService {
 			s.updateFotosEncoded();
 		}
 		return lista;
+	}
+
+	public Solicitud getSolicitudById(Long id) {
+		return solicitudRepository.findById(id).get();
+	}
+
+	public void updateEstadoSolicitud(Solicitud solicitud, String estado) {
+		solicitud.setEstado(estado);
+		solicitudRepository.save(solicitud);
+	}
+
+	public void aceptarSolicitud(Solicitud solicitud, User user) {
+		solicitud.setEstado("Aceptada");
+		solicitud.getProducto().setInteresado(user);
+		solicitudRepository.save(solicitud);
 	}
 
 }

@@ -26,8 +26,11 @@
 	            <div class="mensaje-div" th:if=${param.exitoSolicitud}>
 			    	Solicitud enviada al dueño del producto
 			    </div>
+			    <div class="mensaje-div" th:if=${param.exitoAceptarSolicitud}>
+			    	Has aceptado la solicitud con éxito
+			    </div>
                 <div class="row mt-4">
-                    <div th:each="enviada : ${enviadas}" class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
+                    <div th:each="enviada : ${enviadas}" th:if="${enviada.estado == 'Pendiente'}" class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
                         <div class="card">
                             <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
                                 <div class="col-md-6">
@@ -52,7 +55,7 @@
             
             <div class="tab-pane fade" id="recibidas" role="tabpanel" aria-labelledby="recibidas-tab">
                 <div class="row mt-4">
-                    <div th:each="recibida : ${recibidas}" class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
+                    <div th:each="recibida : ${recibidas}" th:if="${recibida.estado == 'Pendiente'}" class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">
                         <div class="card">
                             <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
                                 <div class="col-md-6">
@@ -66,8 +69,8 @@
                                     <a th:href="${'/producto/'+ recibida.producto.id}" class="btn custom-button">Ver Detalle</a>
                                 </div>
                             </div>
-                             <a href="/detalle-del-objeto" class="btn custom-button p-1">Aceptar solicitud</a>
-                             <a href="/detalle-del-objeto" class="btn custom-button p-1">Denegar solicitud</a>
+                             <a th:href="${'/aceptarSolicitud/'+ recibida.id}" class="btn custom-button p-1">Aceptar solicitud</a>
+                             <a th:href="${'/cancelarSolicitud/'+ recibida.id}" class="btn custom-button p-1">Denegar solicitud</a>
                         </div>
                     </div>
                 </div>

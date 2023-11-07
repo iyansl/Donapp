@@ -12,38 +12,16 @@
     <div class="container mt-4">
     <h2> Mis adquisiciones </h2>
         <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 1">
+            <div class="col-md-4 mb-4" th:each="producto : ${adquiridos}">
+            	<div class="card">
+                    <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto 1">
                     <div class="card-body">
-                        <h5 class="card-title">Nombre del Producto 1</h5>
-                        <p class="card-text">Publicado por: Usuario 1</p>
-                        <p class="card-text">Urgencia: Alta</p>
-                        <a href="/producto" class="btn btn-primary">Ver Más</a>
+                        <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
+                        <p class="card-text">Publicado por: <a th:href="${'/usuario/'+ producto.usuario.id}"><span th:text="${producto.usuario.username}"> </span></a></p>
+                        <a th:href="${'/producto/'+producto.id}" class="btn custom-button">Ver Más</a>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre del Producto 2</h5>
-                        <p class="card-text">Publicado por: Usuario 2</p>
-                        <p class="card-text">Urgencia: Media</p>
-                        <a href="/producto" class="btn btn-primary">Ver Más</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="img/producto.jpg" class="card-img-top" alt="Producto 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre del Producto 3</h5>
-                        <p class="card-text">Publicado por: Usuario 3</p>
-                        <p class="card-text">Urgencia: Baja</p>
-                        <a href="/producto" class="btn btn-primary">Ver Más</a>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>

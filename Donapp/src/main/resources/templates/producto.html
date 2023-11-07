@@ -78,7 +78,8 @@
                 <p class="card-text no-edit"><b>Urgencia:</b> <span th:text="${producto.urgencia}"> </span></p>
                 <p class="card-text no-edit"><b>Forma de Entrega:</b> <span th:text="${producto.formaEntrega}"> </span></p>
                 <p class="card-text no-edit"><b>Detalle de la Entrega:</b> <span th:text="${producto.descripcionEntrega}"> </span></p>
-                <a th:if="${solicitar}" class="btn custom-button">Solicitar</a>
+                <p class="card-text">Publicado por: <a th:href="${'/usuario/'+ producto.usuario.id}"><span th:text="${producto.usuario.username}"> </span></a></p>
+                <a th:if="${solicitar}" th:href="${'/solicitar/'+producto.id}" class="btn custom-button">Solicitar</a>
                 <a th:if="${editar}" onclick="mostrarFormulario()" class="btn custom-button btn-editar">Editar</a>
                 <a th:if="${editar}" onclick="ocultarFormulario()" class="btn custom-button btn-cancelar d-none">Cancelar edición</a>
             </div>

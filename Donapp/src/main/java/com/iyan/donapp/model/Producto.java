@@ -25,6 +25,10 @@ public class Producto {
 	@ManyToOne
     @JoinColumn(name = "user_id")
     private User usuario;
+	
+	@ManyToOne
+    @JoinColumn(name = "interesado_id")
+    private User interesado;
 
 	@Column(name = "titulo")
 	private String titulo;
@@ -179,6 +183,14 @@ public class Producto {
 	
 	public void updateFotoEncoded() {
 		this.fotoEncoded = Base64.getEncoder().encodeToString(this.getFoto());
+	}
+
+	public User getInteresado() {
+		return interesado;
+	}
+
+	public void setInteresado(User interesado) {
+		this.interesado = interesado;
 	}
 	
 	

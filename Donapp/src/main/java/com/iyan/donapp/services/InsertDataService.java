@@ -24,8 +24,13 @@ public class InsertDataService {
 		UserRegistroDto user2 = new UserRegistroDto("prueba", "prueba@email.com", "prueba@email.com");
 		usersService.saveUser(user2);
 		
+		UserRegistroDto user3 = new UserRegistroDto("user", "user@gmail.com", "user@gmail.com");
+		usersService.saveUser(user3);
+		
 		ProductoDto p = new ProductoDto("Producto1", "DescripcionProducto", "Alta", "Ropa", "A domicilio", "Entrega", "Nuevo");
 		productoService.saveProducto(p, usersService.getUserByEmail(user1.getEmail()));
-
+		
+		ProductoDto p1 = new ProductoDto("Producto2", "DescripcionProducto2", "Alta", "Ropa", "A domicilio", "Entrega", "Nuevo");
+		productoService.saveProducto(p1, usersService.getUserByEmail(user2.getEmail()));
 	}
 }

@@ -9,11 +9,13 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iyan.donapp.model.User;
+import com.iyan.donapp.services.ProductoService;
 import com.iyan.donapp.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,14 +26,21 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ProductoService productosService;
 
 	@GetMapping("/iniciarsesion")
 	public String iniciarsesion() {
 		return "iniciarsesion";
 	}
 
-	@GetMapping("/usuario")
-	public String usuario() {
+	@GetMapping("/usuario/{id}")
+	public String usuario(@PathVariable Long id, Model model) {
+		User u = userService.getUserById(id);
+		model.addAttribute("usuario", u);
+		model.addAttribute("productos", productosService.findAllByUserId(id));
+		model.addAttribute("foto", Base64.getEncoder().encodeToString(u.getFoto()));
 		return "usuario";
 	}
 
@@ -48,7 +57,11 @@ public class UserController {
 	}
 
 	@GetMapping("/buscarUsuarios")
-	public String buscarUsuarios() {
+	public String buscarUsuarios(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User obtained = userService.getUserByUsername(email);
+		model.addAttribute("usuarios", userService.getAllUsersExceptActive(obtained.getUsername()));
 		return "buscarUsuarios";
 	}
 

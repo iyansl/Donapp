@@ -11,56 +11,60 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "solicitud")
 public class Solicitud {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "solicitante_id")
+	@JoinColumn(name = "solicitante_id")
 	private User solicitante;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "receptor_id")
+	@JoinColumn(name = "receptor_id")
 	private User receptor;
-	
+
 	private String estado;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "producto_id")
+	@JoinColumn(name = "producto_id")
 	private Producto producto;
-	
+
 	public Solicitud() {
-		
+
 	}
-	
-    public Solicitud(User solicitante, User receptor, Producto producto) {
+
+	public Solicitud(User solicitante, User receptor, Producto producto) {
 		this.solicitante = solicitante;
 		this.receptor = receptor;
 		this.producto = producto;
 		this.estado = "Pendiente";
 	}
-	
+
 	public User getSolicitante() {
 		return solicitante;
 	}
+
 	public void setSolicitante(User solicitante) {
 		this.solicitante = solicitante;
 	}
+
 	public User getReceptor() {
 		return receptor;
 	}
+
 	public void setRropietario(User receptor) {
 		this.receptor = receptor;
 	}
+
 	public Producto getProducto() {
 		return producto;
 	}
+
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
-	
-	
+
 	public void updateFotosEncoded() {
 		this.solicitante.updateFotoEncoded();
 		this.receptor.updateFotoEncoded();

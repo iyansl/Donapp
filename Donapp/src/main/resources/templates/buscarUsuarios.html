@@ -22,41 +22,19 @@
     
     <div class="container mt-4">
         <div class="row">
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4" th:each="usuario : ${usuarios}">
                 <div class="card">
-                    <img src="img/usuario.png" class="card-img-top" alt="User 1">
+                    <img src="img/usuario.png" th:src="'data:image/jpeg;base64,' + ${usuario.fotoEncoded}" class="card-img-top" alt="User 1">
                     <div class="card-body">
-                        <h5 class="card-title">Nombre de usuario</h5>
-                        <a href="/usuario" class="btn custom-button">Perfil</a>
+                        <h5 class="card-title" th:text="${usuario.username}"></h5>
+                        <a th:href="${'/usuario/'+ usuario.id}" class="btn custom-button">Perfil</a>
                         <a href="/chat" class="btn custom-button">Hablar</a>
                         <a href="#" class="btn custom-button">Denunciar</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="img/usuario.png" class="card-img-top" alt="User 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre de usuario</h5>
-                        <a href="/usuario" class="btn custom-button">Perfil</a>
-                        <a href="/chat" class="btn custom-button">Hablar</a>
-                        <a href="#" class="btn custom-button">Denunciar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="img/usuario.png" class="card-img-top" alt="User 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre de usuario</h5>
-                        <a href="/usuario" class="btn custom-button">Perfil</a>
-                        <a href="/chat" class="btn custom-button">Hablar</a>
-                        <a href="#" class="btn custom-button">Denunciar</a>
-                    </div>
-                </div>
-            </div>
-           </div>
-          </div>
+         </div>
+    </div>
     
     <hr>
 	

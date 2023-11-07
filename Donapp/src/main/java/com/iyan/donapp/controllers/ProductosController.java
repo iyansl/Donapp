@@ -21,10 +21,10 @@ import com.iyan.donapp.services.UserService;
 
 @Controller
 public class ProductosController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private ProductoService productoService;
 
@@ -36,12 +36,12 @@ public class ProductosController {
 		model.addAttribute("productos", productoService.getAllProductosExceptActiveUser(obtained.getId()));
 		return "mercado";
 	}
-	
+
 	@GetMapping("/publicar")
 	public String publicar() {
 		return "publicar";
 	}
-	
+
 	@PostMapping("/publicar")
 	public String publicar(@ModelAttribute("producto") ProductoDto dto) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -50,7 +50,7 @@ public class ProductosController {
 		productoService.saveProducto(dto, obtained);
 		return "redirect:/publicar?exito";
 	}
-	
+
 	@GetMapping("/publicados")
 	public String publicados(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -59,36 +59,49 @@ public class ProductosController {
 		model.addAttribute("productos", productoService.findAllByUserId(obtained.getId()));
 		return "publicados";
 	}
-	
+
 	@GetMapping("/adquiridos")
-	public String adquiridos() {
+	public String adquiridos(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User obtained = userService.getUserByUsername(email);
+		model.addAttribute("adquiridos", productoService.findAllObtainedByUserId(obtained.getId()));
 		return "adquiridos";
 	}
 	
+	@GetMapping("/donados")
+	public String donados(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User obtained = userService.getUserByUsername(email);
+		model.addAttribute("donados", productoService.findAllDonatedByUserId(obtained.getId()));
+		return "donados";
+	}
+
 	@RequestMapping("/producto/{id}")
 	public String producto(@PathVariable Long id, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		User obtained = userService.getUserByUsername(email);
-		Producto producto = productoService.getProductoById(id); 
-        model.addAttribute("producto", producto);
-        if (producto.getUsuario() == obtained)
-        	model.addAttribute("editar", true);
-        else
-        	model.addAttribute("solicitar", true);
+		Producto producto = productoService.getProductoById(id);
+		model.addAttribute("producto", producto);
+		if (producto.getUsuario() == obtained)
+			model.addAttribute("editar", true);
+		else
+			model.addAttribute("solicitar", true);
 		return "producto";
 	}
-	
+
 	@PostMapping("/editarProducto/{id}")
 	public String editarProducto(@PathVariable Long id, @ModelAttribute("producto") ProductoDto dto) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		User obtained = userService.getUserByUsername(email);
 		if (productoService.updateProducto(dto, id, obtained) == null)
-			return "redirect:/producto/"+id+"?errorUser";	
-		return "redirect:/producto/"+id+"?exito";
+			return "redirect:/producto/" + id + "?errorUser";
+		return "redirect:/producto/" + id + "?exito";
 	}
-	
+
 	@PostMapping("/subirFotoProducto/{id}")
 	public String subirFoto(@PathVariable Long id, @RequestParam("foto") MultipartFile foto) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -96,13 +109,13 @@ public class ProductosController {
 		User obtained = userService.getUserByUsername(email);
 		if (foto.getSize() != 0) {
 			if (foto.getSize() > 3000000)
-				return "redirect:/producto/"+id+"?error";
+				return "redirect:/producto/" + id + "?error";
 			else {
 				if (productoService.cambiarFoto(foto, id, obtained) == null)
-					return "redirect:/producto/"+id+"?errorUser";	
+					return "redirect:/producto/" + id + "?errorUser";
 			}
 		}
-		return "redirect:/producto/"+id+"?exito";
+		return "redirect:/producto/" + id + "?exito";
 	}
-	
+
 }

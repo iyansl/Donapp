@@ -14,4 +14,10 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
 
 	@Query("SELECT p FROM Producto p WHERE(p.usuario.id NOT LIKE ?1)")
 	List<Producto> findAllExceptActiveUser(Long id);
+
+	@Query("SELECT p FROM Producto p WHERE(p.interesado.id LIKE ?1)")
+	List<Producto> findAllProductsObtainedByUser(Long id);
+
+	@Query("SELECT p FROM Producto p WHERE p.interesado IS NOT NULL AND p.usuario.id = ?1")
+	List<Producto> findAllProductsDonatedByUser(Long id);
 }

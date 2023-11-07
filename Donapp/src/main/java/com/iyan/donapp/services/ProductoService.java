@@ -47,7 +47,7 @@ public class ProductoService {
 		return productos;
 	}
 
-	public Object findAllByUserId(Long id) {
+	public List<Producto> findAllByUserId(Long id) {
 		List<Producto> productos = productoRepository.findAllByUserId(id);
 		for (Producto p: productos) {
 			p.updateFotoEncoded();
@@ -55,7 +55,7 @@ public class ProductoService {
 		return productos;
 	}
 
-	public Object getAllProductosExceptActiveUser(Long id) {
+	public List<Producto> getAllProductosExceptActiveUser(Long id) {
 		List<Producto> productos = productoRepository.findAllExceptActiveUser(id);
 		for (Producto p: productos) {
 			p.updateFotoEncoded();
@@ -75,11 +75,9 @@ public class ProductoService {
 	            }
 	            return outputStream.toByteArray();
 	        } else {
-	            System.out.println("Imagen por defecto no encontrada");
 	            return null;
 	        }
 	    } catch (IOException e) {
-	        System.out.println("Error al cargar imagen por defecto");
 	        return null;
 	    }
 	}
@@ -90,7 +88,7 @@ public class ProductoService {
 		return p.get();
 	}
 
-	public Object updateProducto(ProductoDto dto, Long id, User obtained) {
+	public Producto updateProducto(ProductoDto dto, Long id, User obtained) {
 		Optional<Producto> productoOptional = productoRepository.findById(id);
 		if (productoOptional.isPresent()) {
 		    Producto producto = productoOptional.get();
@@ -126,7 +124,7 @@ public class ProductoService {
 		return null;
 	}
 
-	public Object cambiarFoto(MultipartFile foto, Long id, User obtained) {
+	public Producto cambiarFoto(MultipartFile foto, Long id, User obtained) {
 		Optional<Producto> p = productoRepository.findById(id);
 		if (p.get().getUsuario().getId() == obtained.getId()) {
 			byte[] fotoBytes;
@@ -141,6 +139,22 @@ public class ProductoService {
 			}
 		}
 		return null;
+	}
+
+	public List<Producto> findAllObtainedByUserId(Long id) {
+		List<Producto> productos = productoRepository.findAllProductsObtainedByUser(id);
+		for (Producto p: productos) {
+			p.updateFotoEncoded();
+		}
+		return productos;
+	}
+
+	public List<Producto> findAllDonatedByUserId(Long id) {
+		List<Producto> productos = productoRepository.findAllProductsDonatedByUser(id);
+		for (Producto p: productos) {
+			p.updateFotoEncoded();
+		}
+		return productos;
 	}
 
 }

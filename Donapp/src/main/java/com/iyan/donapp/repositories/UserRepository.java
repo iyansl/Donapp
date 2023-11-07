@@ -1,5 +1,7 @@
 package com.iyan.donapp.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -10,4 +12,7 @@ public interface UserRepository extends JpaRepository<User, Long>{
 
 	@Query("SELECT u FROM User u WHERE(LOWER(u.username) LIKE LOWER(?1))")
 	public User findByUsername(String username);
+
+	@Query("SELECT u FROM User u WHERE(LOWER(u.username) NOT LIKE LOWER(?1))")
+	public List<User> findAllExceptActive(String username);
 }

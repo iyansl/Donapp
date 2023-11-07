@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,53 +22,57 @@ import jakarta.transaction.Transactional;
 @Service
 public class UserService {
 
-	private UserRepository userRepository;	
-	
+	private UserRepository userRepository;
+
 	@Autowired
 	private BCryptPasswordEncoder passEncoder;
-	
+
 	public UserService(UserRepository userRepository) {
 		super();
 		this.userRepository = userRepository;
 	}
 
 	public User saveUser(UserRegistroDto dto) {
-		User user = new User(dto.getUsername(), dto.getEmail(), passEncoder.encode(dto.getPassword()), Arrays.asList(new Rol("ROL_USER")));
+		User user = new User(dto.getUsername(), dto.getEmail(), passEncoder.encode(dto.getPassword()),
+				Arrays.asList(new Rol("ROL_USER")));
 		user.setDescripcion("¡Acabo de unirme a Donapp!");
 		byte[] img = obtenerDatosImagenPorDefecto();
 		user.setFoto(img);
 		return userRepository.save(user);
 	}
-	
-	private byte[] obtenerDatosImagenPorDefecto() {
-	    try {
-	        InputStream inputStream = getClass().getResourceAsStream("/static/img/usuario.png");
-	        if (inputStream != null) {
-	            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-	            byte[] buffer = new byte[1024];
-	            int length;
-	            while ((length = inputStream.read(buffer)) != -1) {
-	                outputStream.write(buffer, 0, length);
-	            }
-	            return outputStream.toByteArray();
-	        } else {
-	            return null;
-	        }
-	    } catch (IOException e) {
-	        return null;
-	    }
-	}
 
+	private byte[] obtenerDatosImagenPorDefecto() {
+		try {
+			InputStream inputStream = getClass().getResourceAsStream("/static/img/usuario.png");
+			if (inputStream != null) {
+				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+				byte[] buffer = new byte[1024];
+				int length;
+				while ((length = inputStream.read(buffer)) != -1) {
+					outputStream.write(buffer, 0, length);
+				}
+				return outputStream.toByteArray();
+			} else {
+				return null;
+			}
+		} catch (IOException e) {
+			return null;
+		}
+	}
 
 	public User getUserByEmail(String email) {
 		User u = userRepository.findByEmail(email);
-		u.setFotoEncoded(Base64.getEncoder().encodeToString(u.getFoto()));
+		if (u != null)
+			u.setFotoEncoded(Base64.getEncoder().encodeToString(u.getFoto()));
 		return u;
 	}
 
 	public User getUserByUsername(String username) {
 		User u = userRepository.findByUsername(username);
-		u.setFotoEncoded(Base64.getEncoder().encodeToString(u.getFoto()));
+		if (u != null) {
+			u.setFotoEncoded(Base64.getEncoder().encodeToString(u.getFoto()));
+			u.updateFotoEncoded();
+		}
 		return u;
 	}
 
@@ -94,17 +99,30 @@ public class UserService {
 			userRepository.save(user);
 		}
 	}
-	
+
 	@Transactional
 	public void cambiarDescripcion(String desc, String username) {
 		User user = getUserByUsername(username);
 		user.setDescripcion(desc);
-		userRepository.save(user);	
+		userRepository.save(user);
 	}
 
 	public void eliminarCuenta(String username) {
 		User user = getUserByUsername(username);
 		userRepository.delete(user);
 	}
-	
+
+	public User getUserById(Long id) {
+		User u = userRepository.findById(id).get();
+		u.setFotoEncoded(Base64.getEncoder().encodeToString(u.getFoto()));
+		return u;
+	}
+
+	public List<User> getAllUsersExceptActive(String username) {
+		List<User> users = userRepository.findAllExceptActive(username);
+		for (User u: users)
+			u.setFotoEncoded(Base64.getEncoder().encodeToString(u.getFoto()));
+		return users;
+	}
+
 }
