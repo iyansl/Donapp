@@ -10,13 +10,14 @@
 	<nav th:replace="~{fragments/atras}" />
 	
 	<div class="container mt-4">
-        <div class="form-group">
-            <label for="busqueda">Introduce el nombre de usuario:</label>
-            <input type="text" class="form-control" id="busqueda" placeholder="Escribe aquí">
-        </div>
-        <button class="mt-2 btn custom-button">Buscar</button>
-     </div>
-     
+	    <form th:action="@{/productos}" method="post">
+	        <div class="form-group">
+	            <label for="busqueda">Introduce el nombre de usuario:</label>
+	            <input type="text" class="form-control" id="busqueda" name="nombre" placeholder="Escribe aquí">
+	        </div>
+	        <button type="submit" class="mt-2 btn custom-button">Buscar</button>
+	    </form>
+	</div>
     
     <hr>
     
@@ -28,7 +29,7 @@
                     <div class="card-body">
                         <h5 class="card-title" th:text="${usuario.username}"></h5>
                         <a th:href="${'/usuario/'+ usuario.id}" class="btn custom-button">Perfil</a>
-                        <a href="/chat" class="btn custom-button">Hablar</a>
+                        <a th:href="${'/hablar/'+ usuario.id}" class="btn custom-button">Hablar</a>
                         <a href="#" class="btn custom-button">Denunciar</a>
                     </div>
                 </div>

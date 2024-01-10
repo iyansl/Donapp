@@ -1,29 +1,55 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/header}" />
+
+<style>
+    .user-message {
+        background-color: #eff6ff;
+        color: #333;
+        border: 1px solid #e7e7e7;
+        border-radius: 5px;
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+
+    .other-message {
+        background-color: #f9fff6;
+        color: #333;
+        border: 1px solid #e3e3e3;
+        border-radius: 5px;
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+
+</style>
+
+
 <body>
 
-	<nav th:replace="~{fragments/navbar}" />
-	
-	<section style="background-color:#668bc5; height:20vh"></section>
-	
-	<nav th:replace="~{fragments/atras}" />
-	
+    <nav th:replace="~{fragments/navbar}" />
+
+    <section style="background-color:#668bc5; height:20vh"></section>
+
+    <nav th:replace="~{fragments/atras}" />
+
     <div class="container mt-5">
         <div class="chat-container">
-            <div class="message user-message">
-                Hola, me interesa el abrigo
-            </div>
-            <div class="message other-message">
-                Hola, ¡genial!
-            </div>
-            <!-- Agrega más mensajes aquí -->
+            <!-- Mostrar mensajes -->
+            <div th:each="mensaje : ${mensajes}" class="message"
+			     th:class="${mensaje.usuario.id == activeUser? 'user-message' : 'other-message'}">
+			    <span>
+			        <b th:text="${mensaje.usuario.username}"></b>: 
+			        <span th:text="${mensaje.contenido}"></span>
+			    </span>
+			</div>
+
         </div>
 
         <!-- Formulario para enviar mensajes -->
-        <form id="chat-form">
+        <form th:action="@{/enviarMensaje}" method="post" style="margin-top: 2rem;">
             <div class="form-group">
-                <input type="text" id="message-input" class="form-control" placeholder="Escribe tu mensaje...">
+                <input type="hidden" name="conversacionId" th:value="${conversacion.id}" />
+                <input type="text" id="message-input" name="contenido" class="form-control" placeholder="Escribe tu mensaje...">
             </div>
             <div class="form-group text-right">
                 <button type="submit" class="btn custom-button">Enviar</button>
@@ -31,8 +57,7 @@
         </form>
     </div>
 
-	
-	<section style="background-color:#FFF; height:6vh"></section>
+    <section style="background-color:#FFF; height:6vh"></section>
     <nav th:replace="~{fragments/footer}" />
 
 </body>

@@ -1,48 +1,48 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/header}" />
 <body>
 
-	<nav th:replace="~{fragments/navbar}" />
-	
-	<section style="background-color:#668bc5; height:20vh"></section>
-	
-	<nav th:replace="~{fragments/atras}" />
-	
+    <nav th:replace="~{fragments/navbar}" />
+
+    <section style="background-color:#668bc5; height:20vh"></section>
+
+    <nav th:replace="~{fragments/atras}" />
+
     <div class="container mt-5">
         <h2>Mis Conversaciones</h2>
         <ul class="list-group mt-4 mb-4">
-            <!-- Ejemplo de conversación 1 -->
-            <li class="list-group-item">
+            <!-- Iterar sobre las conversaciones -->
+            <li th:each="conversacion : ${conversacionesIniciadas}" class="list-group-item">
                 <div class="media">
-                    <img src="img/usuario.png" class="mr-3 rounded-circle" alt="Foto de perfil del usuario 1" style="width: 64px; height: 64px;">
+                    <!-- Puedes agregar la lógica para obtener la imagen del usuario desde tu modelo -->
+                    <img src="img/usuario.png" class="mr-3 rounded-circle" alt="Foto de perfil del usuario" style="width: 64px; height: 64px;">
                     <div class="media-body" style="align-self: center;">
-                        <a href="/chat" class="h5-username">Nombre del Usuario</a>
+                        <a th:href="${'/chat/'+ conversacion.id}" class="h5-username" th:text="${conversacion.usuario2.username}"></a>
                         <div class="btn-group float-right" role="group">
-                            <button type="button" class="btn custom-button">X</button>
+                            <!-- Agrega la lógica para eliminar la conversación si es necesario -->
+                            <a th:href="${'/borrar/'+ conversacion.id}" type="button" class="btn custom-button">X</a>
                         </div>
                     </div>
                 </div>
             </li>
-
-            <!-- Ejemplo de conversación 2 -->
-            <li class="list-group-item">
+            <li th:each="conversacion1 : ${conversacionesSeguidas}" class="list-group-item">
                 <div class="media">
-                    <img src="img/usuario.png" class="mr-3 rounded-circle" alt="Foto de perfil del usuario 2" style="width: 64px; height: 64px;">
+                    <!-- Puedes agregar la lógica para obtener la imagen del usuario desde tu modelo -->
+                    <img src="img/usuario.png" class="mr-3 rounded-circle" alt="Foto de perfil del usuario" style="width: 64px; height: 64px;">
                     <div class="media-body" style="align-self: center;">
-                        <a href="/chat" class="h5-username">Nombre del Usuario</a>
+                        <a th:href="${'/chat/'+ conversacion1.id}" class="h5-username" th:text="${conversacion1.usuario1.username}"></a>
                         <div class="btn-group float-right" role="group">
-                            <button type="button" class="btn custom-button">X</button>
+                            <!-- Agrega la lógica para eliminar la conversación si es necesario -->
+                            <a th:href="${'/borrar/'+ conversacion1.id}" type="button" class="btn custom-button">X</a>
                         </div>
                     </div>
-                </div> 
+                </div>
             </li>
-            <!-- Agrega más conversaciones aquí -->
         </ul>
     </div>
 
-	
-	<section style="background-color:#FFF; height:10vh"></section>
+    <section style="background-color:#FFF; height:10vh"></section>
     <nav th:replace="~{fragments/footer}" />
 
 </body>

@@ -42,7 +42,7 @@ public class User {
 	private byte[] foto;
 
 	private String password;
-	
+
 	@Transient
 	private String fotoEncoded;
 
@@ -52,15 +52,18 @@ public class User {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "usuario")
 	private Set<Producto> productos;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "usuario")
 	private Set<Producto> productosObtenidos;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "receptor")
 	private Set<Solicitud> solicitudesRecibidas;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "solicitante")
 	private Set<Solicitud> solicitudesEnviadas;
+
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private Set<Mensaje> mensajesEnviados;
 
 	public User(Long id, String username, String descripcion, String email, String password, Collection<Rol> roles) {
 		super();
@@ -171,7 +174,7 @@ public class User {
 	public void setFotoEncoded(String fotoEncoded) {
 		this.fotoEncoded = fotoEncoded;
 	}
-	
+
 	public void updateFotoEncoded() {
 		this.fotoEncoded = Base64.getEncoder().encodeToString(this.getFoto());
 		this.getProductos().forEach(p -> p.updateFotoEncoded());
@@ -186,5 +189,12 @@ public class User {
 		this.productosObtenidos = productosObtenidos;
 	}
 	
+	public Set<Mensaje> getMensajesEnviados() {
+		return mensajesEnviados;
+	}
+
+	public void setMensajesEnviados(Set<Mensaje> mensajesEnviados) {
+		this.mensajesEnviados = mensajesEnviados;
+	}
 
 }
