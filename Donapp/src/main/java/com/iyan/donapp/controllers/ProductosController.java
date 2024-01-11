@@ -1,5 +1,7 @@
 package com.iyan.donapp.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,11 +31,21 @@ public class ProductosController {
 	private ProductoService productoService;
 
 	@GetMapping("/mercado")
-	public String mercado(Model model) {
+	public String mercado(@RequestParam(name = "busqueda", required = false, defaultValue = "") String busqueda,
+			@RequestParam(name = "urgencia", required = false, defaultValue = "Todos") String urgencia,
+			@RequestParam(name = "tipo", required = false, defaultValue = "Todos") String tipo,
+			@RequestParam(name = "recogida", required = false, defaultValue = "Todos") String recogida, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		User obtained = userService.getUserByUsername(email);
-		model.addAttribute("productos", productoService.getAllProductosExceptActiveUser(obtained.getId()));
+		List<Producto> productos;
+		if (busqueda.isEmpty() && "Todas".equals(urgencia) && "Todos".equals(tipo) && "Todos".equals(recogida)) {
+			productos = productoService.getAllProductosExceptActiveUser(obtained.getId());
+		} else {
+			productos = productoService.buscarProductosConFiltros(busqueda, urgencia, tipo, recogida, obtained.getId());
+		}
+
+		model.addAttribute("productos", productos);
 		return "mercado";
 	}
 
@@ -68,7 +80,7 @@ public class ProductosController {
 		model.addAttribute("adquiridos", productoService.findAllObtainedByUserId(obtained.getId()));
 		return "adquiridos";
 	}
-	
+
 	@GetMapping("/donados")
 	public String donados(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

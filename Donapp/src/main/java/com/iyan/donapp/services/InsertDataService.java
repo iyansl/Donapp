@@ -37,7 +37,7 @@ public class InsertDataService {
 				"Nuevo");
 		productoService.saveProducto(p, usersService.getUserByEmail(user1.getEmail()));
 
-		ProductoDto p1 = new ProductoDto("Producto2", "DescripcionProducto2", "Alta", "Ropa", "A domicilio", "Entrega",
+		ProductoDto p1 = new ProductoDto("Producto2", "DescripcionProducto2", "Alta", "Ropa", "En un punto", "Entrega",
 				"Nuevo");
 		productoService.saveProducto(p1, usersService.getUserByEmail(user2.getEmail()));
 

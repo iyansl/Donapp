@@ -15,4 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	@Query("SELECT u FROM User u WHERE(LOWER(u.username) NOT LIKE LOWER(?1))")
 	public List<User> findAllExceptActive(String username);
+
+	@Query("SELECT u FROM User u WHERE LOWER(u.username) LIKE LOWER(concat('%', ?1, '%')) AND u.id <> ?2")
+	public List<User> findByUsernameContainingIgnoreCaseAndIdNot(String username, Long id);
 }

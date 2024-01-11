@@ -3,71 +3,71 @@
 <head th:replace="~{fragments/header}" />
 <body>
 
-	<nav th:replace="~{fragments/navbar}" />
-	
-	<img class="miImg d-block w-100" src="img/mercado.jpg" alt="Mercado">
-	
-	<nav th:replace="~{fragments/atras}" />
+    <nav th:replace="~{fragments/navbar}" />
+    
+    <img class="miImg d-block w-100" src="img/mercado.jpg" alt="Mercado">
+    
+    <nav th:replace="~{fragments/atras}" />
 
-	<div class="mt-4 ml-4 mr-4">
+    <div class="mt-4 ml-4 mr-4">
+      <form action="/mercado" method="get">
         <div class="row">
             <div class="col-md-5">
                 <div class="form-group">
                     <label for="busqueda">Buscar:</label>
-                    <input type="text" class="form-control" id="busqueda" placeholder="Escribe aquí">
+                    <input type="text" class="form-control" id="busqueda" name="busqueda" placeholder="Escribe aquí">
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="urgencia">Urgencia:</label>
-                    <select class="form-control" id="urgencia">
+                    <select class="form-control" id="urgencia" name="urgencia">
                         <option value="">Todas</option>
-                        <option value="alta">Alta</option>
-                        <option value="media">Media</option>
-                        <option value="baja">Baja</option>
+                        <option value="Alta">Alta</option>
+                        <option value="Media">Media</option>
+                        <option value="Baja">Baja</option>
                     </select>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="tipo">Tipo de objeto:</label>
-                    <select class="form-control" id="tipo">
+                    <select class="form-control" id="tipo" name="tipo">
                         <option value="">Todos</option>
-                        <option value="ropa">Ropa</option>
-                        <option value="libros">Libros</option>
-                        <option value="electrónicos">Electrónicos</option>
-                        <!-- Agrega más opciones según sea necesario -->
+                        <option value="Ropa">Ropa</option>
+                        <option value="Libros">Libros</option>
+                        <option value="Electrónicos">Electrónicos</option>
                     </select>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="recogida">Tipo de recogida:</label>
-                    <select class="form-control" id="recogida">
+                    <select class="form-control" id="recogida" name="recogida">
                         <option value="">Todos</option>
                         <option value="punto">En un punto</option>
                         <option value="domicilio">A domicilio</option>
                         <option value="correo">Por correo</option>
-                        <!-- Agrega más opciones según sea necesario -->
                     </select>
                 </div>
             </div>
             <div class="col-md-1">
-        <button class="mt-4 btn custom-button">Buscar</button>
+                <button class="mt-4 btn custom-button" type="submit">Buscar</button>
+            </div>
         </div>
-      </div>
+      </form>
     </div>
     
     <hr>
-    <div class="error-div" th:if=${param.solicitudYaEnviada}>
-    		Ya has enviado una solicitud a ese producto.
+    <div class="error-div" th:if="${param.solicitudYaEnviada}">
+            Ya has enviado una solicitud a ese producto.
         </div>
     <div class="container mt-4">
         <div class="row">
             
-        	<div class="col-md-4 mb-4" th:if="${productos.empty}">
-        	  No hay productos que mostrar
-        	</div>
+            <div class="col-md-4 mb-4" th:if="${productos.empty}">
+              No hay productos que mostrar
+            </div>
         
             <div class="col-md-4 mb-4" th:each="producto : ${productos}" th:if="${producto.interesado == null}">
                 <div class="card">
@@ -86,7 +86,7 @@
     </div>
     
     <hr>
-	
+    
     <nav th:replace="~{fragments/footer}" />
 
 </body>

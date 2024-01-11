@@ -10,13 +10,13 @@
 	<nav th:replace="~{fragments/atras}" />
 	
 	<div class="container mt-4">
-	    <form th:action="@{/productos}" method="post">
-	        <div class="form-group">
-	            <label for="busqueda">Introduce el nombre de usuario:</label>
-	            <input type="text" class="form-control" id="busqueda" name="nombre" placeholder="Escribe aquí">
-	        </div>
-	        <button type="submit" class="mt-2 btn custom-button">Buscar</button>
-	    </form>
+	    <form th:action="@{/buscarUsuarios}" method="get">
+		    <div class="form-group">
+		        <label for="busqueda">Introduce el nombre de usuario:</label>
+		        <input type="text" class="form-control" id="busqueda" name="nombre" placeholder="Escribe aquí">
+		    </div>
+		    <button type="submit" class="mt-2 btn custom-button">Buscar</button>
+		</form>
 	</div>
     
     <hr>

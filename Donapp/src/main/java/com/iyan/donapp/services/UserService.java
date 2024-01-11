@@ -125,4 +125,11 @@ public class UserService {
 		return users;
 	}
 
+	public List<User> findByUsernameContainingIgnoreCaseAndIdNot(String username, Long id) {
+		List<User> users = userRepository.findByUsernameContainingIgnoreCaseAndIdNot(username, id);
+        for (User u: users)
+			u.setFotoEncoded(Base64.getEncoder().encodeToString(u.getFoto()));
+        return users;
+    }
+
 }

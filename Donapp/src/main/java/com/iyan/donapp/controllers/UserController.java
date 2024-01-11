@@ -1,6 +1,7 @@
 package com.iyan.donapp.controllers;
 
 import java.util.Base64;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -56,13 +57,22 @@ public class UserController {
 		return "miPerfil";
 	}
 
+
 	@GetMapping("/buscarUsuarios")
-	public String buscarUsuarios(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String email = auth.getName();
-		User obtained = userService.getUserByUsername(email);
-		model.addAttribute("usuarios", userService.getAllUsersExceptActive(obtained.getUsername()));
-		return "buscarUsuarios";
+	public String buscarUsuarios(@RequestParam(name = "nombre", required = false) String nombre, Model model) {
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String email = auth.getName();
+	    User obtained = userService.getUserByUsername(email);
+
+	    List<User> usuarios;
+	    if (nombre != null && !nombre.isEmpty()) {
+	        usuarios = userService.findByUsernameContainingIgnoreCaseAndIdNot(nombre, obtained.getId());
+	    } else {
+	        usuarios = userService.getAllUsersExceptActive(obtained.getUsername());
+	    }
+
+	    model.addAttribute("usuarios", usuarios);
+	    return "buscarUsuarios";
 	}
 
 	@PostMapping("/subirFoto")
