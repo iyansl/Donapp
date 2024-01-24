@@ -49,7 +49,7 @@ public class Conversacion {
 	@Column(name = "visibilidad_usuario2")
 	private boolean visibilidadUsuario2;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "conversacion")
+	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "conversacion")
 	private List<Mensaje> mensajes;
 
 	public Long getId() {

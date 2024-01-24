@@ -3,23 +3,27 @@
 <head th:replace="~{fragments/header}" />
 <body>
 
-	<nav th:replace="~{fragments/navbar}" />
-	
-	<section style="background-color:#668bc5; height:20vh"></section>
-	
-	<nav th:replace="~{fragments/atras}" />
-	
-	<div class="container mt-4">
-	    <form th:action="@{/buscarUsuarios}" method="get">
-		    <div class="form-group">
-		        <label for="busqueda">Introduce el nombre de usuario:</label>
-		        <input type="text" class="form-control" id="busqueda" name="nombre" placeholder="Escribe aquí">
-		    </div>
-		    <button type="submit" class="mt-2 btn custom-button">Buscar</button>
-		</form>
-	</div>
+    <nav th:replace="~{fragments/navbar}" />
+    
+    <section style="background-color:#668bc5; height:20vh"></section>
+    
+    <nav th:replace="~{fragments/atras}" />
+    
+    <div class="container mt-4">
+        <form th:action="@{/buscarUsuarios}" method="get">
+            <div class="form-group">
+                <label for="busqueda">Introduce el nombre de usuario:</label>
+                <input type="text" class="form-control" id="busqueda" name="nombre" placeholder="Escribe aquí">
+            </div>
+            <button type="submit" class="mt-2 btn custom-button">Buscar</button>
+        </form>
+    </div>
     
     <hr>
+    
+    <div class="mensaje-div" th:if=${param.usuarioEliminadoExito}>
+    	Se ha eliminado al usuario correctamente.
+    </div>
     
     <div class="container mt-4">
         <div class="row">
@@ -30,7 +34,8 @@
                         <h5 class="card-title" th:text="${usuario.username}"></h5>
                         <a th:href="${'/usuario/'+ usuario.id}" class="btn custom-button">Perfil</a>
                         <a th:href="${'/hablar/'+ usuario.id}" class="btn custom-button">Hablar</a>
-                        <a href="#" class="btn custom-button">Denunciar</a>
+                        <a sec:authorize="!hasRole('ADMIN')" href="#" class="btn custom-button">Denunciar</a>
+                        <a sec:authorize="hasRole('ADMIN')" class="btn btn-danger" th:onclick="'confirmarEliminar(' + ${usuario.id} + ')'">Eliminar</a>
                     </div>
                 </div>
             </div>
@@ -38,8 +43,18 @@
     </div>
     
     <hr>
-	
+    
     <nav th:replace="~{fragments/footer}" />
+
+    <script th:inline="javascript">
+	    function confirmarEliminar(userId) {
+	        var confirmacion = confirm('¿Estás seguro de que quieres eliminar este usuario?');
+	        if (confirmacion) {
+	            window.location.href = '/eliminarUsuario/' + userId;
+	        }
+	    }
+	</script>
+
 
 </body>
 </html>

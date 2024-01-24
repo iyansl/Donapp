@@ -24,6 +24,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
                         <a th:href="${'/producto/'+producto.id}" class="btn custom-button">Ver Más</a>
+                        <a th:href="${'/eliminarProducto/'+producto.id}" class="btn btn-danger">Eliminar producto</a>
                     </div>
                 </div>
                 

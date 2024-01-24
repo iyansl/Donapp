@@ -1,11 +1,16 @@
 package com.iyan.donapp.model.dto;
 
+import java.util.Collection;
+
+import com.iyan.donapp.model.Rol;
+
 public class UserRegistroDto {
 
 	private Long id;
 	private String username;
 	private String email;
 	private String password;
+	private Collection<Rol> roles;
 
 	public Long getId() {
 		return id;
@@ -53,6 +58,14 @@ public class UserRegistroDto {
 		this.email = email;
 		this.password = password;
 	}
+	
+	public UserRegistroDto(String username, String email, String password, Collection<Rol> roles) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.setRoles(roles);
+	}
 
 	public UserRegistroDto(String email) {
 		super();
@@ -61,6 +74,14 @@ public class UserRegistroDto {
 
 	public UserRegistroDto() {
 
+	}
+
+	public Collection<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Collection<Rol> roles) {
+		this.roles = roles;
 	}
 
 }

@@ -9,19 +9,28 @@
             <li class="nav-item">
                 <a class="nav-link mt-2 mt-md-0" href="/">Inicio</a>
             </li>
-            <li sec:authorize="isAuthenticated()" class="nav-item">
+            <li sec:authorize="hasRole('USER')" class="nav-item">
                 <a class="nav-link mt-2 mt-md-0" href="/mercado">Mercado</a>
             </li>
-            <li sec:authorize="isAuthenticated()" class="nav-item">
+            <li sec:authorize="hasRole('USER')" class="nav-item">
                 <a class="nav-link mt-2 mt-md-0" href="/publicar">Publicar</a>
             </li>
-            <li sec:authorize="isAuthenticated()" class="nav-item">
+            <li sec:authorize="hasRole('USER')" class="nav-item">
                 <a class="nav-link mt-2 mt-md-0" href="/buscarUsuarios">Usuarios</a>
             </li>
+            <li sec:authorize="hasRole('ADMIN')" class="nav-item">
+            	<a class="nav-link mt-2 mt-md-0" href="/buscarUsuarios">Administrar Usuarios</a>
+       		</li>
+       		<li sec:authorize="hasRole('ADMIN')" class="nav-item">
+            	<a class="nav-link mt-2 mt-md-0" href="/mercado">Administrar Productos</a>
+       		</li>
+       		<li sec:authorize="hasRole('ADMIN')" class="nav-item">
+            	<a class="nav-link mt-2 mt-md-0" href="/conversaciones">Mensajes</a>
+       		</li>
         </ul>
         <hr>
         <div class="navbar-nav ml-auto">
-            <a sec:authorize="isAuthenticated()" href="/miPerfil" class="nav-link mt-1 mt-md-0">Perfil</a>
+            <a sec:authorize="hasRole('USER')" href="/miPerfil" class="nav-link mt-1 mt-md-0">Perfil</a>
             <a sec:authorize="!isAuthenticated()" href="/iniciarsesion" class="nav-link mr-0 mr-md-2">Iniciar sesión</a>
             <a sec:authorize="!isAuthenticated()" href="/registrarse" class="nav-link mt-1 mt-md-0">Registrarse</a>
             <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="nav-link mt-1 mt-md-0">Desconectarse</a>
@@ -29,7 +38,7 @@
     </div>
 </nav>
 
-<a sec:authorize="isAuthenticated()" class="linkFloating" href="/conversaciones" style="z-index:4000000; position: relative;">
+<a sec:authorize="hasRole('USER')" class="linkFloating" href="/conversaciones" style="z-index:4000000; position: relative;">
         <div class="floating-bubble">
 			<img class="img-bubble" src="img/iconChat.png">
         </div>

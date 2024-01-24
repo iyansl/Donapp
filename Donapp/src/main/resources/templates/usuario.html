@@ -15,8 +15,9 @@
             <div class="card-body">
                 <h5 class="card-title"><b th:text="${usuario.username}"></b></h5>
                 <p class="card-text"><b>Biografía:</b> <span th:text="${usuario.descripcion}"> </span> </p>
-                <a href="/chat" class="btn custom-button">Hablar</a>
-                <a href="#" class="btn custom-button">Denunciar</a>
+                <a th:href="${'/hablar/'+ usuario.id}" class="btn custom-button">Hablar</a>
+                <a sec:authorize="!hasRole('ADMIN')" href="#" class="btn custom-button">Denunciar</a>
+                <a sec:authorize="hasRole('ADMIN')" class="btn btn-danger">Eliminar usuario</a>
             </div>
         </div>
     </div>
@@ -33,7 +34,8 @@
                         <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
                         <p class="card-text">Urgencia: <span th:text="${producto.urgencia}"> </span></p>
                         <a th:href="${'/producto/'+producto.id}" class="btn custom-button">Ver Más</a>
-                        <a th:href="${'/solicitar/'+producto.id}" class="btn custom-button">Solicitar</a>
+                        <a sec:authorize="!hasRole('ADMIN')" th:href="${'/solicitar/'+producto.id}" class="btn custom-button">Solicitar</a>
+                        <a sec:authorize="hasRole('ADMIN')" th:href="${'/eliminarProducto/'+producto.id}" class="btn btn-danger">Eliminar producto</a>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,6 @@ package com.iyan.donapp.services;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.iyan.donapp.model.Rol;
 import com.iyan.donapp.model.User;
 import com.iyan.donapp.model.dto.UserRegistroDto;
 import com.iyan.donapp.repositories.UserRepository;
@@ -33,8 +31,7 @@ public class UserService {
 	}
 
 	public User saveUser(UserRegistroDto dto) {
-		User user = new User(dto.getUsername(), dto.getEmail(), passEncoder.encode(dto.getPassword()),
-				Arrays.asList(new Rol("ROL_USER")));
+		User user = new User(dto.getUsername(), dto.getEmail(), passEncoder.encode(dto.getPassword()), dto.getRoles());
 		user.setDescripcion("¡Acabo de unirme a Donapp!");
 		byte[] img = obtenerDatosImagenPorDefecto();
 		user.setFoto(img);
@@ -109,6 +106,12 @@ public class UserService {
 
 	public void eliminarCuenta(String username) {
 		User user = getUserByUsername(username);
+		user.getRoles().clear();
+		userRepository.delete(user);
+	}
+	
+	public void eliminarCuentaPorId(Long id) {
+		User user = getUserById(id);
 		userRepository.delete(user);
 	}
 

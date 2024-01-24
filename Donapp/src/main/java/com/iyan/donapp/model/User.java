@@ -50,20 +50,26 @@ public class User {
 	@JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
 	private Collection<Rol> roles;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "usuario")
+	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "usuario")
 	private Set<Producto> productos;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "usuario")
+	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "usuario")
 	private Set<Producto> productosObtenidos;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "receptor")
+	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "receptor")
 	private Set<Solicitud> solicitudesRecibidas;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "solicitante")
+	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "solicitante")
 	private Set<Solicitud> solicitudesEnviadas;
 
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private Set<Mensaje> mensajesEnviados;
+	
+	@OneToMany(mappedBy = "usuario1", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Conversacion> conversaciones1;
+	
+	@OneToMany(mappedBy = "usuario2", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Conversacion> conversaciones2;
 
 	public User(Long id, String username, String descripcion, String email, String password, Collection<Rol> roles) {
 		super();
@@ -196,5 +202,23 @@ public class User {
 	public void setMensajesEnviados(Set<Mensaje> mensajesEnviados) {
 		this.mensajesEnviados = mensajesEnviados;
 	}
+
+	public Set<Conversacion> getConversaciones1() {
+		return conversaciones1;
+	}
+
+	public void setConversaciones1(Set<Conversacion> conversaciones1) {
+		this.conversaciones1 = conversaciones1;
+	}
+
+	public Set<Conversacion> getConversaciones2() {
+		return conversaciones2;
+	}
+
+	public void setConversaciones2(Set<Conversacion> conversaciones2) {
+		this.conversaciones2 = conversaciones2;
+	}
+
+	
 
 }

@@ -20,11 +20,11 @@ public class Mensaje {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "conversacion_id")
+	@JoinColumn(name = "conversacion_id", nullable = false)
 	private Conversacion conversacion;
 
 	@ManyToOne
-	@JoinColumn(name = "usuario_id")
+	@JoinColumn(name = "usuario_id", nullable = false)
 	private User usuario;
 
 	@Column(name = "contenido")

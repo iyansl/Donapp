@@ -1,10 +1,13 @@
 package com.iyan.donapp.services;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.iyan.donapp.model.Conversacion;
 import com.iyan.donapp.model.Mensaje;
+import com.iyan.donapp.model.Rol;
 import com.iyan.donapp.model.dto.ProductoDto;
 import com.iyan.donapp.model.dto.UserRegistroDto;
 
@@ -24,14 +27,18 @@ public class InsertDataService {
 
 	@PostConstruct
 	public void init() {
-		UserRegistroDto user1 = new UserRegistroDto("iyansl", "iyan@email.com", "iyan@email.com");
+
+		UserRegistroDto user1 = new UserRegistroDto("iyansl", "iyan@email.com", "iyan@email.com", Arrays.asList(new Rol("ROLE_USER")));
 		usersService.saveUser(user1);
 
-		UserRegistroDto user2 = new UserRegistroDto("prueba", "prueba@email.com", "prueba@email.com");
+		UserRegistroDto user2 = new UserRegistroDto("prueba", "prueba@email.com", "prueba@email.com", Arrays.asList(new Rol("ROLE_USER")));
 		usersService.saveUser(user2);
 
-		UserRegistroDto user3 = new UserRegistroDto("user", "user@gmail.com", "user@gmail.com");
+		UserRegistroDto user3 = new UserRegistroDto("user", "user@gmail.com", "user@gmail.com", Arrays.asList(new Rol("ROLE_USER")));
 		usersService.saveUser(user3);
+		
+		UserRegistroDto admin = new UserRegistroDto("admin", "admin@email.com", "admin@email.com", Arrays.asList(new Rol("ROLE_ADMIN")));
+		usersService.saveUser(admin);
 
 		ProductoDto p = new ProductoDto("Producto1", "DescripcionProducto", "Alta", "Ropa", "A domicilio", "Entrega",
 				"Nuevo");
@@ -44,6 +51,7 @@ public class InsertDataService {
 		Conversacion c1 = new Conversacion(usersService.getUserByEmail(user1.getEmail()),
 				usersService.getUserByEmail(user2.getEmail()));
 		conversacionesService.save(c1);
+		
 		Mensaje m1 = new Mensaje(c1, usersService.getUserByEmail(user1.getEmail()), "Hola");
 		c1.getMensajes().add(m1);
 		mensajesService.save(m1);

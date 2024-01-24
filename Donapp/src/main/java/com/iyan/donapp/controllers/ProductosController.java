@@ -113,6 +113,12 @@ public class ProductosController {
 			return "redirect:/producto/" + id + "?errorUser";
 		return "redirect:/producto/" + id + "?exito";
 	}
+	
+	@GetMapping("/eliminarProducto/{id}")
+	public String eliminarProducto(@PathVariable Long id) {
+	    productoService.deleteProductoById(id);
+	    return "redirect:/mercado?exitoEliminandoProducto";
+	}
 
 	@PostMapping("/subirFotoProducto/{id}")
 	public String subirFoto(@PathVariable Long id, @RequestParam("foto") MultipartFile foto) {

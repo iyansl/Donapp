@@ -59,17 +59,20 @@
     </div>
     
     <hr>
-    <div class="error-div" th:if="${param.solicitudYaEnviada}">
+    <div sec:authorize="!hasRole('ADMIN')" class="error-div" th:if="${param.solicitudYaEnviada}">
             Ya has enviado una solicitud a ese producto.
+        </div>
+        <div class="mensaje-div" th:if="${param.exitoEliminandoProducto}">
+            Producto eliminado con éxito
         </div>
     <div class="container mt-4">
         <div class="row">
             
-            <div class="col-md-4 mb-4" th:if="${productos.empty}">
+            <div sec:authorize="!hasRole('ADMIN')" class="col-md-4 mb-4" th:if="${productos.empty}">
               No hay productos que mostrar
             </div>
         
-            <div class="col-md-4 mb-4" th:each="producto : ${productos}" th:if="${producto.interesado == null}">
+            <div sec:authorize="!hasRole('ADMIN')" class="col-md-4 mb-4" th:each="producto : ${productos}" th:if="${producto.interesado == null}">
                 <div class="card">
                     <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto 1">
                     <div class="card-body">
@@ -78,6 +81,19 @@
                         <p class="card-text">Urgencia: <span th:text="${producto.urgencia}"> </span></p>
                         <a th:href="${'/producto/'+producto.id}" class="btn custom-button">Ver Más</a>
                         <a th:href="${'/solicitar/'+producto.id}" class="btn custom-button">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div sec:authorize="hasRole('ADMIN')" class="col-md-4 mb-4" th:each="producto : ${productos}" th:if="${producto.interesado == null}">
+                <div class="card">
+                    <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto 1">
+                    <div class="card-body">
+                        <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
+                        <p class="card-text">Publicado por: <a th:href="${'/usuario/'+ producto.usuario.id}"><span th:text="${producto.usuario.username}"> </span></a></p>
+                        <p class="card-text">Urgencia: <span th:text="${producto.urgencia}"> </span></p>
+                        <a th:href="${'/producto/'+producto.id}" class="btn custom-button">Ver Más</a>
+                        <a th:href="${'/eliminarProducto/'+producto.id}" class="btn btn-danger">Eliminar producto</a>
                     </div>
                 </div>
             </div>

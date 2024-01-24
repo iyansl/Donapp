@@ -181,4 +181,8 @@ public class ProductoService {
 		return productosFiltrados;
 	}
 
+	public void deleteProductoById(Long id) {
+		productoRepository.deleteById(id);
+	}
+
 }

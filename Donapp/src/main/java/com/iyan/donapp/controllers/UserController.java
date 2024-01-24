@@ -118,7 +118,13 @@ public class UserController {
 	        String username = auth.getName();
 	        userService.eliminarCuenta(username);
 	        new SecurityContextLogoutHandler().logout(request, response, auth);
-	        return "redirect:/confirmacionEliminacion";
+	        return "redirect:/#";
+	    }
+	 
+	 @GetMapping("/eliminarUsuario/{id}")
+	    public String eliminarCuenta(Model model, @PathVariable Long id) {
+	        userService.eliminarCuentaPorId(id);
+	        return "redirect:/buscarUsuarios?usuarioEliminadoExito";
 	    }
 
 }

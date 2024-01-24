@@ -25,8 +25,9 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(
-				(requests) -> requests.requestMatchers("/", "/iniciarsesion", "/registrarse", "/ayuda", "/conocenos", "/estilos/**", "/img/**")
-						.permitAll().anyRequest().authenticated())
+				(requests) -> requests.requestMatchers("/", "/iniciarsesion", "/registrarse", "/ayuda", "/conocenos", "/estilos/**", "/img/**").permitAll()
+				.requestMatchers("/adminUsers").hasRole("ADMIN")
+				.anyRequest().authenticated())
 				.formLogin((form) -> form.loginPage("/iniciarsesion").defaultSuccessUrl("/").permitAll())
 				.logout((logout) -> logout.logoutSuccessUrl("/iniciarsesion?logout").invalidateHttpSession(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout")));
 
