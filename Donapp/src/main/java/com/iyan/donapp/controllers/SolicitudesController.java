@@ -15,6 +15,7 @@ import com.iyan.donapp.model.Producto;
 import com.iyan.donapp.model.Solicitud;
 import com.iyan.donapp.model.User;
 import com.iyan.donapp.model.dto.SolicitudDto;
+import com.iyan.donapp.services.EmailService;
 import com.iyan.donapp.services.ProductoService;
 import com.iyan.donapp.services.SolicitudService;
 import com.iyan.donapp.services.UserService;
@@ -30,6 +31,9 @@ public class SolicitudesController {
 
 	@Autowired
 	private SolicitudService solicitudService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@RequestMapping("/solicitar/{id}")
 	public String producto(@PathVariable Long id) {
@@ -45,6 +49,8 @@ public class SolicitudesController {
 		}
 		SolicitudDto dto = new SolicitudDto(obtained, producto.getUsuario(), producto);
 		solicitudService.saveSolicitud(dto);
+		emailService.sendMail(producto.getUsuario().getEmail(), "Donapp - Solicitud recibida", "Acabas de recibir una solicitud de producto, ¡no te la pierdas!");
+		
 		return "redirect:/solicitudes?exitoSolicitud";
 	}
 
@@ -53,9 +59,21 @@ public class SolicitudesController {
 		Solicitud solicitud = solicitudService.getSolicitudById(id);
 		if ("Pendiente".equals(solicitud.getEstado())) {
 			solicitudService.aceptarSolicitud(solicitud, solicitud.getSolicitante());
+			emailService.sendMail(solicitud.getSolicitante().getEmail(), "Donapp - Solicitud aceptada", "¡Han aceptado tu solicitud de un producto!");
 		}
 		
 		return "redirect:/solicitudes?exitoAceptarSolicitud";
+	}
+	
+	@RequestMapping("/cancelarSolicitud/{id}")
+	public String cancelarSolicitud(@PathVariable Long id) {
+		Solicitud solicitud = solicitudService.getSolicitudById(id);
+		if ("Pendiente".equals(solicitud.getEstado())) {
+			solicitudService.cancelarSolicitud(solicitud, solicitud.getSolicitante());
+			emailService.sendMail(solicitud.getSolicitante().getEmail(), "Donapp - Solicitud cancelada", "Han cancelado tu solicitud de un producto");
+		}
+		
+		return "redirect:/solicitudes?exitoDenegarSolicitud";
 	}
 
 	@GetMapping("/solicitudes")

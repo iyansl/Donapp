@@ -10,12 +10,12 @@ public class HomeController {
 	public String inicio() {
 		return "inicio";
 	}
-	
+
 	@GetMapping("/ayuda")
 	public String ayuda() {
 		return "ayuda";
 	}
-	
+
 	@GetMapping("/conocenos")
 	public String conocenos() {
 		return "conocenos";

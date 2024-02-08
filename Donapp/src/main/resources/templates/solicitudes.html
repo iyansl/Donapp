@@ -7,8 +7,6 @@
 	
 	<section style="background-color:#668bc5; height:20vh"></section>
 	
-	<nav th:replace="~{fragments/atras}" />
-	
 	<div class="container mt-5">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -28,6 +26,9 @@
 			    </div>
 			    <div class="mensaje-div" th:if=${param.exitoAceptarSolicitud}>
 			    	Has aceptado la solicitud con éxito
+			    </div>
+			    <div class="mensaje-div" th:if=${param.exitoDenegarSolicitud}>
+			    	Has denegado la solicitud con éxito
 			    </div>
                 <div class="row mt-4">
                     <div th:each="enviada : ${enviadas}" th:if="${enviada.estado == 'Pendiente'}" class="col-md-6 mb-3 px-5 py-3 py-md-0 px-md-3">

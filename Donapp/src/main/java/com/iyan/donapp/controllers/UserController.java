@@ -54,9 +54,9 @@ public class UserController {
 		model.addAttribute("email", obtained.getEmail());
 		model.addAttribute("descripcion", obtained.getDescripcion());
 		model.addAttribute("foto", Base64.getEncoder().encodeToString(obtained.getFoto()));
+		model.addAttribute("notificaciones", obtained.getSolicitudesRecibidas().size());
 		return "miPerfil";
 	}
-
 
 	@GetMapping("/buscarUsuarios")
 	public String buscarUsuarios(@RequestParam(name = "nombre", required = false) String nombre, Model model) {

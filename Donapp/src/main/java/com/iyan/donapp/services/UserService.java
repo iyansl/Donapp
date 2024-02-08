@@ -3,6 +3,7 @@ package com.iyan.donapp.services;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.iyan.donapp.model.Rol;
 import com.iyan.donapp.model.User;
 import com.iyan.donapp.model.dto.UserRegistroDto;
 import com.iyan.donapp.repositories.UserRepository;
@@ -33,6 +35,8 @@ public class UserService {
 	public User saveUser(UserRegistroDto dto) {
 		User user = new User(dto.getUsername(), dto.getEmail(), passEncoder.encode(dto.getPassword()), dto.getRoles());
 		user.setDescripcion("¡Acabo de unirme a Donapp!");
+		if (user.getRoles() == null)
+			user.setRoles(Arrays.asList(new Rol("ROLE_USER")));
 		byte[] img = obtenerDatosImagenPorDefecto();
 		user.setFoto(img);
 		return userRepository.save(user);

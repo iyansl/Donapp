@@ -55,4 +55,9 @@ public class SolicitudService {
 		solicitudRepository.save(solicitud);
 	}
 
+	public void cancelarSolicitud(Solicitud solicitud, User solicitante) {
+		solicitud.setEstado("Cancelada");
+		solicitudRepository.save(solicitud);
+	}
+
 }

@@ -28,10 +28,10 @@ public class InsertDataService {
 	@PostConstruct
 	public void init() {
 
-		UserRegistroDto user1 = new UserRegistroDto("iyansl", "iyan@email.com", "iyan@email.com", Arrays.asList(new Rol("ROLE_USER")));
+		UserRegistroDto user1 = new UserRegistroDto("iyansl", "iyancm@gmail.com", "iyancm@gmail.com", Arrays.asList(new Rol("ROLE_USER")));
 		usersService.saveUser(user1);
 
-		UserRegistroDto user2 = new UserRegistroDto("prueba", "prueba@email.com", "prueba@email.com", Arrays.asList(new Rol("ROLE_USER")));
+		UserRegistroDto user2 = new UserRegistroDto("prueba", "iyancppv@gmail.com", "iyancppv@gmail.com", Arrays.asList(new Rol("ROLE_USER")));
 		usersService.saveUser(user2);
 
 		UserRegistroDto user3 = new UserRegistroDto("user", "user@gmail.com", "user@gmail.com", Arrays.asList(new Rol("ROLE_USER")));
@@ -39,6 +39,7 @@ public class InsertDataService {
 		
 		UserRegistroDto admin = new UserRegistroDto("admin", "admin@email.com", "admin@email.com", Arrays.asList(new Rol("ROLE_ADMIN")));
 		usersService.saveUser(admin);
+		
 
 		ProductoDto p = new ProductoDto("Producto1", "DescripcionProducto", "Alta", "Ropa", "A domicilio", "Entrega",
 				"Nuevo");
@@ -48,6 +49,7 @@ public class InsertDataService {
 				"Nuevo");
 		productoService.saveProducto(p1, usersService.getUserByEmail(user2.getEmail()));
 
+		
 		Conversacion c1 = new Conversacion(usersService.getUserByEmail(user1.getEmail()),
 				usersService.getUserByEmail(user2.getEmail()));
 		conversacionesService.save(c1);

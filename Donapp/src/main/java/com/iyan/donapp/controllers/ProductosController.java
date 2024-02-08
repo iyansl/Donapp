@@ -56,6 +56,13 @@ public class ProductosController {
 
 	@PostMapping("/publicar")
 	public String publicar(@ModelAttribute("producto") ProductoDto dto) {
+		System.out.println(dto.getFoto().getOriginalFilename());
+		if(dto.getFoto().getOriginalFilename().isBlank() || dto.getFoto().getOriginalFilename().isEmpty()
+				|| dto.getTitulo().isEmpty() || dto.getTitulo().isBlank() 
+				|| dto.getSubtitulo().isEmpty() || dto.getSubtitulo().isBlank() 
+				|| dto.getDescripcionEntrega().isEmpty()  || dto.getDescripcionEntrega().isBlank() ) {
+			return "redirect:/publicar?faltanDatos";
+		}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		User obtained = userService.getUserByUsername(email);
