@@ -9,12 +9,12 @@
 	
     <div class="container miTarjetaProducto mt-4">
         <div class="card">
-            <img style="width:100%" th:src="'data:image/jpeg;base64,' + ${foto}" class="card-img-top" alt="Usuario">
+            <img style="object-fit: cover; height: 40vh; width:70%; margin-top: 2vh; border-radius: 60vh; align-self: center;" th:src="'data:image/jpeg;base64,' + ${foto}" class="card-img-top" alt="Usuario">
             <div class="card-body">
                 <h5 class="card-title"><b th:text="${usuario.username}"></b></h5>
                 <p class="card-text"><b>Biografía:</b> <span th:text="${usuario.descripcion}"> </span> </p>
                 <a th:href="${'/hablar/'+ usuario.id}" class="btn custom-button">Hablar</a>
-                <a sec:authorize="!hasRole('ADMIN')" href="#" class="btn custom-button">Denunciar</a>
+                <a sec:authorize="!hasRole('ADMIN')" th:href="${'/denunciar/'+ usuario.id}" class="btn custom-button">Denunciar</a>
                 <a sec:authorize="hasRole('ADMIN')" class="btn btn-danger">Eliminar usuario</a>
             </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-md-4 mb-4" th:each="producto : ${productos}">
                 <div class="card">
-                    <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto 1">
+                    <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto 1" style="object-fit: cover; height: 30vh;">
                     <div class="card-body">
                         <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
                         <p class="card-text">Urgencia: <span th:text="${producto.urgencia}"> </span></p>

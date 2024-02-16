@@ -18,7 +18,7 @@
             <div class="col-md-4 mb-4" th:each="producto : ${productos}" th:if="${producto.interesado == null}">
             
             	<div class="card">
-                    <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto 1">
+                    <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto 1" style="object-fit: cover; height: 30vh;">
                     <div class="card-body">
                         <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
                         <a th:href="${'/producto/'+producto.id}" class="btn custom-button">Ver Más</a>

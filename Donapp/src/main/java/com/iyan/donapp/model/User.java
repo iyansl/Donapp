@@ -70,6 +70,12 @@ public class User {
 	
 	@OneToMany(mappedBy = "usuario2", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Conversacion> conversaciones2;
+	
+	@OneToMany(mappedBy = "usuarioDenunciante")
+    private Set<Denuncia> denunciasComoDenunciante;
+
+    @OneToMany(mappedBy = "usuarioDenunciado")
+    private Set<Denuncia> denunciasComoDenunciado;
 
 	public User(Long id, String username, String descripcion, String email, String password, Collection<Rol> roles) {
 		super();
@@ -219,6 +225,20 @@ public class User {
 		this.conversaciones2 = conversaciones2;
 	}
 
-	
+	public Set<Denuncia> getDenunciasComoDenunciante() {
+		return denunciasComoDenunciante;
+	}
+
+	public void setDenunciasComoDenunciante(Set<Denuncia> denunciasComoDenunciante) {
+		this.denunciasComoDenunciante = denunciasComoDenunciante;
+	}
+
+	public Set<Denuncia> getDenunciasComoDenunciado() {
+		return denunciasComoDenunciado;
+	}
+
+	public void setDenunciasComoDenunciado(Set<Denuncia> denunciasComoDenunciado) {
+		this.denunciasComoDenunciado = denunciasComoDenunciado;
+	}
 
 }

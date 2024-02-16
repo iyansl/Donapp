@@ -54,7 +54,7 @@
 			    </label>
 			    <button class="custom-button" type="submit" onclick="ocultarBotones()">Cambiar imagen</button>
 			</form>
-            <img th:if="${foto}" style="width:70%; margin-top: 2vh; border-radius: 10vh; align-self: center;" class="card-img-top" th:src="'data:image/jpeg;base64,' + ${foto}" alt="Foto de perfil" />
+            <img th:if="${foto}" style="object-fit: cover; height: 40vh; width:70%; margin-top: 2vh; border-radius: 60vh; align-self: center;" class="card-img-top" th:src="'data:image/jpeg;base64,' + ${foto}" alt="Foto de perfil" />
             <div class="card-body">
                 <h4 class="card-title">Usuario: <b th:text="'@' + ${username}"></b></h5>
                 <h5 class="card-title">Email: <b th:text="${email}"></b></h4>

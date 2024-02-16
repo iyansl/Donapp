@@ -1,7 +1,9 @@
 package com.iyan.donapp.model;
 
 import java.util.Base64;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
@@ -50,6 +53,9 @@ public class Producto {
 	
 	@Column(name = "descripcionEntrega")
 	private String descripcionEntrega;
+	
+	@OneToMany(mappedBy = "producto", cascade = CascadeType.REMOVE)
+    private List<Solicitud> solicitudes;
 	
 	@Lob
 	@Column(name = "foto", columnDefinition = "MEDIUMBLOB")
@@ -192,6 +198,13 @@ public class Producto {
 	public void setInteresado(User interesado) {
 		this.interesado = interesado;
 	}
-	
+
+	public List<Solicitud> getSolicitudes() {
+		return solicitudes;
+	}
+
+	public void setSolicitudes(List<Solicitud> solicitudes) {
+		this.solicitudes = solicitudes;
+	}
 	
 }

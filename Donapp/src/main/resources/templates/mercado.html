@@ -34,7 +34,13 @@
                         <option value="">Todos</option>
                         <option value="Ropa">Ropa</option>
                         <option value="Libros">Libros</option>
-                        <option value="Electrónicos">Electrónicos</option>
+                        <option value="Artículos de electrónica">Artículos de electrónica</option>
+                        <option value="Muebles">Muebles</option>
+                        <option value="Electrodomésticos">Electrodomésticos</option>
+                        <option value="Arte">Arte</option>
+                        <option value="Accesorios">Accesorios</option>
+                        <option value="Objetos de utilidad">Objetos de utilidad</option>
+                        <option value="Juguetes">Juguetes</option>
                     </select>
                 </div>
             </div>
@@ -72,7 +78,7 @@
         
             <div sec:authorize="!hasRole('ADMIN')" class="col-md-4 mb-4" th:each="producto : ${productos}" th:if="${producto.interesado == null}">
                 <div class="card">
-                    <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto 1">
+                    <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto" style="object-fit: cover; height: 30vh;">
                     <div class="card-body">
                         <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
                         <p class="card-text">Publicado por: <a th:href="${'/usuario/'+ producto.usuario.id}"><span th:text="${producto.usuario.username}"> </span></a></p>
@@ -85,7 +91,7 @@
             
             <div sec:authorize="hasRole('ADMIN')" class="col-md-4 mb-4" th:each="producto : ${productos}" th:if="${producto.interesado == null}">
                 <div class="card">
-                    <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto 1">
+                    <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto" style="object-fit: cover; height: 30vh;">
                     <div class="card-body">
                         <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
                         <p class="card-text">Publicado por: <a th:href="${'/usuario/'+ producto.usuario.id}"><span th:text="${producto.usuario.username}"> </span></a></p>

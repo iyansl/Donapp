@@ -27,6 +27,10 @@ public class ConversacionesService {
 		List<Conversacion> lista = conversacionRepository.findConversacionesByUser1Id(id);
 		List<Conversacion> listaFiltrada = lista.stream().filter(conversacion -> conversacion.isVisibilidadUsuario1())
 				.collect(Collectors.toList());
+		for (Conversacion c: listaFiltrada) {
+			c.getUsuario1().updateFotoEncoded();
+			c.getUsuario2().updateFotoEncoded();
+		}
 		return listaFiltrada;
 	}
 
@@ -34,6 +38,10 @@ public class ConversacionesService {
 		List<Conversacion> lista = conversacionRepository.findConversacionesByUser2Id(id);
 		List<Conversacion> listaFiltrada = lista.stream().filter(conversacion -> conversacion.isVisibilidadUsuario2())
 				.collect(Collectors.toList());
+		for (Conversacion c: listaFiltrada) {
+			c.getUsuario1().updateFotoEncoded();
+			c.getUsuario2().updateFotoEncoded();
+		}
 		return listaFiltrada;
 	}
 

@@ -34,7 +34,14 @@
 				     	<label for="tipo"><b>Tipo:</b> <span th:text="${producto.tipo}"> </span> </label> <select class="form-control" id="tipo" name="tipo">
                         <option value="Ropa">Ropa</option>
                         <option value="Libros">Libros</option>
-                        <option value="Electrónicos">Electrónicos</option>
+                        <option value="Artículos de electrónica">Artículos de electrónica</option>
+                        <option value="Muebles">Muebles</option>
+                        <option value="Electrodomésticos">Electrodomésticos</option>
+                        <option value="Arte">Arte</option>
+                        <option value="Accesorios">Accesorios</option>
+                        <option value="Objetos de utilidad">Objetos de utilidad</option>
+                        <option value="Juguetes">Juguetes</option>
+                        
                         <!-- Agrega más opciones según sea necesario -->
                     </select>
 				     </div>	
@@ -70,13 +77,17 @@
 				     <button class="custom-button" type="submit" onclick="ocultarFormulario()">Actualizar</button>
 				</form>
                 <h5 class="card-title no-edit"><b th:text="${producto.titulo}"></b></h5>
+                <hr>
                 <p class="card-text no-edit"><b>Tipo:</b> <span th:text="${producto.tipo}"> </span></p>
                 <p class="card-text no-edit"><b>Descripción:</b> <span th:text="${producto.subtitulo}"> </span></p>
                 <p class="card-text no-edit"><b>Estado:</b> <span th:text="${producto.estado}"> </span></p>
                 <p class="card-text no-edit"><b>Urgencia:</b> <span th:text="${producto.urgencia}"> </span></p>
+                <hr>
                 <p class="card-text no-edit"><b>Forma de Entrega:</b> <span th:text="${producto.formaEntrega}"> </span></p>
                 <p class="card-text no-edit"><b>Detalle de la Entrega:</b> <span th:text="${producto.descripcionEntrega}"> </span></p>
+                <hr>
                 <p class="card-text">Publicado por: <a th:href="${'/usuario/'+ producto.usuario.id}"><span th:text="${producto.usuario.username}"> </span></a></p>
+                <hr>
                 <a sec:authorize="!hasRole('ADMIN')" th:if="${solicitar}" th:href="${'/solicitar/'+producto.id}" class="btn custom-button">Solicitar</a>
                 <a sec:authorize="!hasRole('ADMIN')" th:if="${editar}" onclick="mostrarFormulario()" class="btn custom-button btn-editar">Editar</a>
                 <a sec:authorize="!hasRole('ADMIN')" th:if="${editar}" onclick="ocultarFormulario()" class="btn custom-button btn-cancelar d-none">Cancelar edición</a>

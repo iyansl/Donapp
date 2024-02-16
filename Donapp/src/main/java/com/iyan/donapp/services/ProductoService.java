@@ -30,7 +30,23 @@ public class ProductoService {
 			if (dto.getFoto() != null)
 				bytes = dto.getFoto().getBytes();
 			else
-				bytes = obtenerDatosImagenPorDefecto();
+				bytes = obtenerDatosImagenPorDefecto("/static/img/producto.jpg");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Producto producto = new Producto(bytes, dto.getTitulo(), dto.getSubtitulo(), dto.getUrgencia(), dto.getTipo(),
+				dto.getFormaEntrega(), dto.getDescripcionEntrega(), dto.getEstado());
+		producto.setUsuario(user1);
+		return productoRepository.save(producto);
+	}
+	
+	public Producto saveProducto(ProductoDto dto, User user1, String ruta) {
+		byte[] bytes = null;
+		try {
+			if (dto.getFoto() != null)
+				bytes = dto.getFoto().getBytes();
+			else
+				bytes = obtenerDatosImagenPorDefecto(ruta);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -64,9 +80,9 @@ public class ProductoService {
 		return productos;
 	}
 
-	private byte[] obtenerDatosImagenPorDefecto() {
+	public byte[] obtenerDatosImagenPorDefecto(String ruta) {
 		try {
-			InputStream inputStream = getClass().getResourceAsStream("/static/img/producto.jpg");
+			InputStream inputStream = getClass().getResourceAsStream(ruta);
 			if (inputStream != null) {
 				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 				byte[] buffer = new byte[1024];

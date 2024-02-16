@@ -37,7 +37,7 @@
 			     th:class="${mensaje.usuario.id == activeUser? 'user-message' : 'other-message'}">
 			    <span>
 			        <b th:text="${mensaje.usuario.username}"></b>: 
-			        <span th:text="${mensaje.contenido}"></span>
+			        <span style="word-wrap: break-word;" th:text="${mensaje.contenido}"></span>
 			    </span>
 			</div>
 

@@ -35,13 +35,13 @@
                         <div class="card">
                             <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
                                 <div class="col-md-6">
-                                    <img th:src="'data:image/jpeg;base64,' + ${enviada.receptor.fotoEncoded}" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
+                                    <img th:src="'data:image/jpeg;base64,' + ${enviada.receptor.fotoEncoded}" style="width: 35%;height: 10vh;object-fit: cover;" class="img-fluid rounded-circle" alt="Foto de la persona">
                                     <h5 th:text="${enviada.receptor.username}" class="card-title">Nombre de la Persona</h5>
                                     <a th:href="${'/usuario/'+ enviada.receptor.id}" class="btn custom-button">Ir a Perfil</a>
                                 </div>
                                 <hr>
                                 <div class="col-md-6 mt-4 mt-md-0">
-                                    <img th:src="'data:image/jpeg;base64,' + ${enviada.producto.fotoEncoded}" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
+                                    <img th:src="'data:image/jpeg;base64,' + ${enviada.producto.fotoEncoded}" style="width: 35%;height: 10vh;object-fit: cover;" class="img-fluid" alt="Imagen del objeto">
                                     <h5 th:text="${enviada.producto.titulo}" class="card-title">Nombre del Objeto</h5>
                                     <a th:href="${'/producto/'+ enviada.producto.id}" class="btn custom-button">Ver Detalle</a>
                                 </div>
@@ -60,12 +60,12 @@
                         <div class="card">
                             <div class="row no-gutters" style="padding:1rem; text-align-last: center;">
                                 <div class="col-md-6">
-                                    <img th:src="'data:image/jpeg;base64,' + ${recibida.solicitante.fotoEncoded}" style="width: 30%;" class="img-fluid rounded-circle" alt="Foto de la persona">
+                                    <img th:src="'data:image/jpeg;base64,' + ${recibida.solicitante.fotoEncoded}" style="width: 35%;height: 10vh;object-fit: cover;" class="img-fluid rounded-circle" alt="Foto de la persona">
                                     <h5 th:text="${recibida.solicitante.username}" class="card-title">Nombre de la Persona</h5>
                                     <a th:href="${'/usuario/'+ recibida.solicitante.id}" class="btn custom-button">Ir a Perfil</a>
                                 </div>
                                 <div class="col-md-6 mt-4 mt-md-0">
-                                    <img th:src="'data:image/jpeg;base64,' + ${recibida.producto.fotoEncoded}" style="width: 30%;" class="img-fluid" alt="Imagen del objeto">
+                                    <img th:src="'data:image/jpeg;base64,' + ${recibida.producto.fotoEncoded}" style="width: 35%;height: 10vh;object-fit: cover;" class="img-fluid" alt="Imagen del objeto">
                                     <h5 th:text="${recibida.producto.titulo}" class="card-title">Nombre del Objeto</h5>
                                     <a th:href="${'/producto/'+ recibida.producto.id}" class="btn custom-button">Ver Detalle</a>
                                 </div>

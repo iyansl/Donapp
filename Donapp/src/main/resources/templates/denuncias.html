@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head th:replace="~{fragments/header}" />
+<body>
+
+    <nav th:replace="~{fragments/navbar}" />
+    
+    <section style="background-color:#668bc5; height:20vh"></section>
+
+	<section>
+		<div class="container mt-4">
+			<div class="error-div" th:if="${param.errorCerrarDenuncia}">
+	            Error al cerrar la denuncia
+	        </div>
+		    <div class="mensaje-div" th:if=${param.denunciaCerrada}>
+		    	Se ha cerrado la denuncia correctamente.
+		    </div>
+	        <h2>Lista de Denuncias</h2>
+	        <ul class="list-group mt-4 mb-4">
+	            <li style="background-color: #819bc71f; margin-bottom:2rem; border:none;" class="list-group-item" th:each="denuncia : ${denuncias}">
+	                <span>Usuario denunciante: <a th:href="${'/usuario/'+ denuncia.usuarioDenunciante.id}" th:text="${denuncia.usuarioDenunciante.username}"></a></span><hr>
+	                <span>Usuario denunciado: <a th:href="${'/usuario/'+ denuncia.usuarioDenunciado.id}" th:text="${denuncia.usuarioDenunciado.username}"></a></span><hr>
+	                <span>Mensaje: <span style="overflow-wrap: break-word;" th:text="${denuncia.contenido}"> </span> </span><hr>
+	                <a th:href="${'/cerrarDenuncia/'+ denuncia.id}" class="btn custom-button">Cerrar Denuncia</a>
+	            </li>
+	        </ul>
+	     </div>
+    </section>
+
+    <hr>
+    
+    <nav th:replace="~{fragments/footer}" />
+
+</body>
+</html>

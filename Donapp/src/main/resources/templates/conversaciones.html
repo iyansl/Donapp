@@ -14,7 +14,7 @@
             <li th:each="conversacion : ${conversacionesIniciadas}" class="list-group-item">
                 <div class="media">
                     <!-- Puedes agregar la lógica para obtener la imagen del usuario desde tu modelo -->
-                    <img src="img/usuario.png" class="mr-3 rounded-circle" alt="Foto de perfil del usuario" style="width: 64px; height: 64px;">
+                    <img src="img/usuario.png" th:src="'data:image/jpeg;base64,' + ${conversacion.usuario2.fotoEncoded}" class="mr-3 rounded-circle" alt="Foto de perfil del usuario" style="width: 64px; height: 64px;">
                     <div class="media-body" style="align-self: center;">
                         <a th:href="${'/chat/'+ conversacion.id}" class="h5-username" th:text="${conversacion.usuario2.username}"></a>
                         <div class="btn-group float-right" role="group">
@@ -27,7 +27,7 @@
             <li th:each="conversacion1 : ${conversacionesSeguidas}" class="list-group-item">
                 <div class="media">
                     <!-- Puedes agregar la lógica para obtener la imagen del usuario desde tu modelo -->
-                    <img src="img/usuario.png" class="mr-3 rounded-circle" alt="Foto de perfil del usuario" style="width: 64px; height: 64px;">
+                    <img src="img/usuario.png" th:src="'data:image/jpeg;base64,' + ${conversacion1.usuario1.fotoEncoded}" class="mr-3 rounded-circle" alt="Foto de perfil del usuario" style="width: 64px; height: 64px;">
                     <div class="media-body" style="align-self: center;">
                         <a th:href="${'/chat/'+ conversacion1.id}" class="h5-username" th:text="${conversacion1.usuario1.username}"></a>
                         <div class="btn-group float-right" role="group">

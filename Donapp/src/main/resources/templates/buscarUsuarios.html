@@ -19,6 +19,12 @@
     
     <hr>
     
+    <div class="mensaje-div" th:if="${param.usuarioDenunciado}">
+            Usuario denunciado correctamente
+        </div>
+        <div class="error-div" th:if="${param.errorDenuncia}">
+            Usuario denunciado correctamente
+        </div>
     <div class="mensaje-div" th:if=${param.usuarioEliminadoExito}>
     	Se ha eliminado al usuario correctamente.
     </div>
@@ -27,12 +33,12 @@
         <div class="row">
             <div class="col-md-4 mb-4" th:each="usuario : ${usuarios}">
                 <div class="card">
-                    <img src="img/usuario.png" th:src="'data:image/jpeg;base64,' + ${usuario.fotoEncoded}" class="card-img-top" alt="User 1">
+                    <img src="img/usuario.png" th:src="'data:image/jpeg;base64,' + ${usuario.fotoEncoded}" class="card-img-top" alt="User 1" style="object-fit: cover; height: 35vh; border-radius: 70vh;">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${usuario.username}"></h5>
                         <a th:href="${'/usuario/'+ usuario.id}" class="btn custom-button">Perfil</a>
                         <a th:href="${'/hablar/'+ usuario.id}" class="btn custom-button">Hablar</a>
-                        <a sec:authorize="!hasRole('ADMIN')" href="#" class="btn custom-button">Denunciar</a>
+                        <button type="button" class="btn custom-button" data-toggle="modal" data-target="#denunciaModal" th:data-usuario-id="${usuario.id}">Denunciar</button>
                         <a sec:authorize="hasRole('ADMIN')" class="btn btn-danger" th:onclick="'confirmarEliminar(' + ${usuario.id} + ')'">Eliminar</a>
                     </div>
                 </div>
@@ -44,6 +50,42 @@
     
     <nav th:replace="~{fragments/footer}" />
 
+    <!-- Modal -->
+    <div class="modal fade" id="denunciaModal" tabindex="-1" role="dialog" aria-labelledby="denunciaModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="denunciaModalLabel">Denunciar Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="denunciaForm" th:action="@{/denunciar}" method="post">
+                    <div class="modal-body">
+                        <input type="hidden" id="usuarioId" name="usuarioId" />
+                        <div class="form-group">
+                            <label for="contenidoDenuncia">Contenido de la Denuncia:</label>
+                            <textarea class="form-control" id="contenidoDenuncia" name="contenidoDenuncia" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Enviar Denuncia</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+	    $('#denunciaModal').on('show.bs.modal', function (event) {
+	        var button = $(event.relatedTarget);
+	        var usuarioId = button.data('usuario-id');
+	        var modal = $(this);
+	        modal.find('#usuarioId').val(usuarioId);
+	    });
+	</script>
+
     <script th:inline="javascript">
 	    function confirmarEliminar(userId) {
 	        var confirmacion = confirm('¿Estás seguro de que quieres eliminar este usuario?');
@@ -52,7 +94,6 @@
 	        }
 	    }
 	</script>
-
 
 </body>
 </html>
