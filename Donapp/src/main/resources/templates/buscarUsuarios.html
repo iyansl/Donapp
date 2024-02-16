@@ -38,7 +38,7 @@
                         <h5 class="card-title" th:text="${usuario.username}"></h5>
                         <a th:href="${'/usuario/'+ usuario.id}" class="btn custom-button">Perfil</a>
                         <a th:href="${'/hablar/'+ usuario.id}" class="btn custom-button">Hablar</a>
-                        <button type="button" class="btn custom-button" data-toggle="modal" data-target="#denunciaModal" th:data-usuario-id="${usuario.id}">Denunciar</button>
+                        <button sec:authorize="!hasRole('ADMIN')" type="button" class="btn custom-button" data-toggle="modal" data-target="#denunciaModal" th:data-usuario-id="${usuario.id}">Denunciar</button>
                         <a sec:authorize="hasRole('ADMIN')" class="btn btn-danger" th:onclick="'confirmarEliminar(' + ${usuario.id} + ')'">Eliminar</a>
                     </div>
                 </div>

@@ -91,7 +91,7 @@
                 <a sec:authorize="!hasRole('ADMIN')" th:if="${solicitar}" th:href="${'/solicitar/'+producto.id}" class="btn custom-button">Solicitar</a>
                 <a sec:authorize="!hasRole('ADMIN')" th:if="${editar}" onclick="mostrarFormulario()" class="btn custom-button btn-editar">Editar</a>
                 <a sec:authorize="!hasRole('ADMIN')" th:if="${editar}" onclick="ocultarFormulario()" class="btn custom-button btn-cancelar d-none">Cancelar edición</a>
-           		<a th:href="${'/eliminarProducto/'+ producto.usuario.id}" class="btn btn-danger">Eliminar producto</a>
+           		<a sec:authorize="hasRole('ADMIN')" th:href="${'/eliminarProducto/'+ producto.usuario.id}" class="btn btn-danger">Eliminar producto</a>
             </div>
         </div>
     </div>
