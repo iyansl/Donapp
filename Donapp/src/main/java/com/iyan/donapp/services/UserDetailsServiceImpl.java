@@ -16,22 +16,23 @@ import com.iyan.donapp.model.User;
 import com.iyan.donapp.repositories.UserRepository;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService{
-	
+public class UserDetailsServiceImpl implements UserDetailsService {
+
 	@Autowired
 	private UserRepository userRepository;
-
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		User user = userRepository.findByEmail(email);
+		if (user == null || !user.isActivado())
+			throw new UsernameNotFoundException("Usuario no encontrado con email: " + email);
 		Collection<? extends GrantedAuthority> grantedAuthorities = this.mapRoles(user.getRoles());
 		UserDetailsImpl u = new UserDetailsImpl(user.getEmail(), user.getPassword(), grantedAuthorities);
 		u.setUsername(user.getUsername());
 		return u;
 	}
-	
-	private Collection<? extends GrantedAuthority> mapRoles(Collection<Rol> roles){
+
+	private Collection<? extends GrantedAuthority> mapRoles(Collection<Rol> roles) {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getNombre())).collect(Collectors.toList());
 	}
 

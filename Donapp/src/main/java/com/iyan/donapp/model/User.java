@@ -1,8 +1,10 @@
 package com.iyan.donapp.model;
 
+import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.Set;
+import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -36,6 +38,15 @@ public class User {
 
 	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "activado")
+	private boolean activado;
+	
+	@Column(name = "token")
+	private String token;
+	
+	@Column(name = "createdDate")
+	private LocalDateTime createdDate;
 
 	@Lob
 	@Column(name = "foto", columnDefinition = "MEDIUMBLOB")
@@ -85,6 +96,7 @@ public class User {
 		this.password = password;
 		this.roles = roles;
 		this.descripcion = descripcion;
+		this.setCreatedDate(LocalDateTime.now());
 	}
 
 	public User(String username, String email, String password, Collection<Rol> roles) {
@@ -93,10 +105,22 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
+		this.setCreatedDate(LocalDateTime.now());
 	}
 
 	public User() {
 		super();
+	}
+
+	public User(String username, String email, String password, Collection<Rol> roles, boolean activado) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+		this.activado = activado;
+		this.token = UUID.randomUUID().toString();
+		this.setCreatedDate(LocalDateTime.now());
 	}
 
 	public Long getId() {
@@ -239,6 +263,30 @@ public class User {
 
 	public void setDenunciasComoDenunciado(Set<Denuncia> denunciasComoDenunciado) {
 		this.denunciasComoDenunciado = denunciasComoDenunciado;
+	}
+
+	public boolean isActivado() {
+		return activado;
+	}
+
+	public void setActivado(boolean activado) {
+		this.activado = activado;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
 	}
 
 }

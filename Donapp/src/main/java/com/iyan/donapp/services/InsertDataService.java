@@ -31,15 +31,15 @@ public class InsertDataService {
 	public void init() {
 
 		UserRegistroDto user1 = new UserRegistroDto("iyansl", "iyancm@gmail.com", "iyancm@gmail.com", Arrays.asList(new Rol("ROLE_USER")));
-		usersService.saveUser(user1, "/static/img/usuarios/user1.jpg");
+		usersService.saveUser(user1, "/static/img/usuarios/user1.jpg", true);
 
 		UserRegistroDto user2 = new UserRegistroDto("prueba", "iyancppv@gmail.com", "iyancppv@gmail.com", Arrays.asList(new Rol("ROLE_USER")));
-		usersService.saveUser(user2, "/static/img/usuarios/user2.jpg");
+		usersService.saveUser(user2, "/static/img/usuarios/user2.jpg", true);
 
 		UserRegistroDto user3 = new UserRegistroDto("user", "user@gmail.com", "user@gmail.com", Arrays.asList(new Rol("ROLE_USER")));
-		usersService.saveUser(user3, "/static/img/usuarios/usuario.png");
+		usersService.saveUser(user3, "/static/img/usuarios/usuario.png", true);
 		UserRegistroDto admin = new UserRegistroDto("admin", "admin@email.com", "admin@email.com", Arrays.asList(new Rol("ROLE_ADMIN")));
-		usersService.saveUser(admin, "/static/img/usuarios/admin.jpg");
+		usersService.saveUser(admin, "/static/img/usuarios/admin.jpg", true);
 		
 
 		ProductoDto p = new ProductoDto("Camiseta negra", "Camiseta nueva sin usar, fue un regalo", "Alta", "Ropa", "A domicilio", "Entrega rápida",

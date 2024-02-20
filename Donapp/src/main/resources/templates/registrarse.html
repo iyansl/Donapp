@@ -15,6 +15,9 @@
     <div class="error-div" th:if=${param.error1}>
     	El email introducido ya existe en el sistema
     </div>
+    <div class="error-div" th:if=${param.errorConfirmacion}>
+    	Ha habido un error en la confirmacion del email
+    </div>
     	<form th:action="@{/registrarse}" method="post" th:object=${user}>
                 <div class="form-group">
                     <label for="username">Nombre de usuario: <span style="color: darkred;"> (Es un identificador único. No podrá ser cambiado posteriormente.) </span></label>

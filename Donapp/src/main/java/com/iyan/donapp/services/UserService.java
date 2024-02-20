@@ -33,6 +33,27 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 
+	public String saveUserToBeVerified(UserRegistroDto dto) {
+		User user = new User(dto.getUsername(), dto.getEmail(), passEncoder.encode(dto.getPassword()), dto.getRoles(), false);
+		user.setDescripcion("¡Acabo de unirme a Donapp!");
+		if (user.getRoles() == null)
+			user.setRoles(Arrays.asList(new Rol("ROLE_USER")));
+		byte[] img = obtenerDatosImagenPorDefecto("/static/img/usuarios/usuario.png");
+		user.setFoto(img);
+		userRepository.save(user);
+		return user.getToken();
+	}
+
+	public User confirmUserByToken(String token) {
+		User user = userRepository.findByToken(token);
+		return user;
+	}
+	
+	public User saveConfirmedUser(User user) {
+		user.setActivado(true);
+		return userRepository.save(user);
+	}
+
 	public User saveUser(UserRegistroDto dto) {
 		User user = new User(dto.getUsername(), dto.getEmail(), passEncoder.encode(dto.getPassword()), dto.getRoles());
 		user.setDescripcion("¡Acabo de unirme a Donapp!");
@@ -42,16 +63,18 @@ public class UserService {
 		user.setFoto(img);
 		return userRepository.save(user);
 	}
-	
-	public User saveUser(UserRegistroDto dto, String ruta) {
+
+	public User saveUser(UserRegistroDto dto, String ruta, boolean activado) {
 		User user = new User(dto.getUsername(), dto.getEmail(), passEncoder.encode(dto.getPassword()), dto.getRoles());
 		user.setDescripcion("¡Acabo de unirme a Donapp!");
 		if (user.getRoles() == null)
 			user.setRoles(Arrays.asList(new Rol("ROLE_USER")));
 		byte[] img = obtenerDatosImagenPorDefecto(ruta);
 		user.setFoto(img);
+		user.setActivado(activado);
 		return userRepository.save(user);
 	}
+	
 
 	private byte[] obtenerDatosImagenPorDefecto(String ruta) {
 		try {
@@ -124,7 +147,7 @@ public class UserService {
 		user.getRoles().clear();
 		userRepository.delete(user);
 	}
-	
+
 	public void eliminarCuentaPorId(Long id) {
 		User user = getUserById(id);
 		userRepository.delete(user);
@@ -137,42 +160,42 @@ public class UserService {
 	}
 
 	public List<User> getAllUsersExceptActive(String username) {
-	    List<User> users = userRepository.findAllExceptActive(username);
-	    List<User> usersNotAdmin = new ArrayList<>();
-	    for (User u : users) {
-	        boolean isAdmin = false;
-	        for (Rol r : u.getRoles()) {
-	            if (r.getNombre().equals("ROLE_ADMIN")) {
-	                isAdmin = true;
-	                break;
-	            }
-	        }
-	        if (!isAdmin) {
-	            u.setFotoEncoded(Base64.getEncoder().encodeToString(u.getFoto()));
-	            usersNotAdmin.add(u);
-	        }
-	    }
-	    return usersNotAdmin;
+		List<User> users = userRepository.findAllExceptActive(username);
+		List<User> usersNotAdmin = new ArrayList<>();
+		for (User u : users) {
+			boolean isAdmin = false;
+			for (Rol r : u.getRoles()) {
+				if (r.getNombre().equals("ROLE_ADMIN")) {
+					isAdmin = true;
+					break;
+				}
+			}
+			if (!isAdmin) {
+				u.setFotoEncoded(Base64.getEncoder().encodeToString(u.getFoto()));
+				usersNotAdmin.add(u);
+			}
+		}
+		return usersNotAdmin;
 	}
 
 	public List<User> findByUsernameContainingIgnoreCaseAndIdNot(String username, Long id) {
-	    List<User> users = userRepository.findByUsernameContainingIgnoreCaseAndIdNot(username, id);
-	    List<User> usersNotAdmin = new ArrayList<>();
+		List<User> users = userRepository.findByUsernameContainingIgnoreCaseAndIdNot(username, id);
+		List<User> usersNotAdmin = new ArrayList<>();
 
-	    for (User u : users) {
-	        boolean isAdmin = false;
-	        for (Rol r : u.getRoles()) {
-	            if (r.getNombre().equals("ROLE_ADMIN")) {
-	                isAdmin = true;
-	                break;
-	            }
-	        }
-	        if (!isAdmin) {
-	            u.setFotoEncoded(Base64.getEncoder().encodeToString(u.getFoto()));
-	            usersNotAdmin.add(u);
-	        }
-	    }
-	    return usersNotAdmin;
+		for (User u : users) {
+			boolean isAdmin = false;
+			for (Rol r : u.getRoles()) {
+				if (r.getNombre().equals("ROLE_ADMIN")) {
+					isAdmin = true;
+					break;
+				}
+			}
+			if (!isAdmin) {
+				u.setFotoEncoded(Base64.getEncoder().encodeToString(u.getFoto()));
+				usersNotAdmin.add(u);
+			}
+		}
+		return usersNotAdmin;
 	}
 
 }

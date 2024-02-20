@@ -18,6 +18,9 @@
     <div class="mensaje-div" th:if=${param.logout}>
     	Se ha cerrado la sesión correctamente.
     </div>
+    <div class="mensaje-div" th:if=${param.confirmacionNecesaria}>
+    	Verifica tu correo electrónico para confirmar tu cuenta (Revisa la carpeta de Spam).
+    </div>
     <form th:action="@{/iniciarsesion}" method="post">
                 <div class="form-group">
                     <label for="username">Email:</label>
