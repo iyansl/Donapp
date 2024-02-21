@@ -38,7 +38,7 @@ public class AutenticationController {
             return "redirect:/registrarse?error";
         } else {
             String token = userService.saveUserToBeVerified(dto);
-            String confirmationLink = "https://donapp-25d4421f1d6f.herokuapp.com//registrarse/" + token;
+            String confirmationLink = "https://donapp-25d4421f1d6f.herokuapp.com/registrarse/" + token;
             String emailBody = "<p>Por favor, haz clic en el siguiente enlace para confirmar tu registro:</p>" +
                                "<p><a href=\"" + confirmationLink + "\" style=\"background-color: #4CAF50; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; border-radius: 5px;\">Confirmar Registro</a></p>";
             emailService.sendMail(dto.getEmail(), "Confirmación de Registro", emailBody);
