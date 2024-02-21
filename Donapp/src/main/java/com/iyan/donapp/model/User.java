@@ -82,10 +82,10 @@ public class User {
 	@OneToMany(mappedBy = "usuario2", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Conversacion> conversaciones2;
 	
-	@OneToMany(mappedBy = "usuarioDenunciante")
+	@OneToMany(mappedBy = "usuarioDenunciante", cascade = CascadeType.REMOVE)
     private Set<Denuncia> denunciasComoDenunciante;
 
-    @OneToMany(mappedBy = "usuarioDenunciado")
+    @OneToMany(mappedBy = "usuarioDenunciado", cascade = CascadeType.REMOVE)
     private Set<Denuncia> denunciasComoDenunciado;
 
 	public User(Long id, String username, String descripcion, String email, String password, Collection<Rol> roles) {

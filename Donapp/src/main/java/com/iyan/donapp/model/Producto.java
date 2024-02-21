@@ -29,7 +29,7 @@ public class Producto {
     @JoinColumn(name = "user_id")
     private User usuario;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, optional = true)
     @JoinColumn(name = "interesado_id")
     private User interesado;
 

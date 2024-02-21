@@ -57,10 +57,10 @@ public class ProductosController {
 	@PostMapping("/publicar")
 	public String publicar(@ModelAttribute("producto") ProductoDto dto) {
 		System.out.println(dto.getFoto().getOriginalFilename());
-		if(dto.getFoto().getOriginalFilename().isBlank() || dto.getFoto().getOriginalFilename().isEmpty()
-				|| dto.getTitulo().isEmpty() || dto.getTitulo().isBlank() 
-				|| dto.getSubtitulo().isEmpty() || dto.getSubtitulo().isBlank() 
-				|| dto.getDescripcionEntrega().isEmpty()  || dto.getDescripcionEntrega().isBlank() ) {
+		if (dto.getFoto().getOriginalFilename().isBlank() || dto.getFoto().getOriginalFilename().isEmpty()
+				|| dto.getTitulo().isEmpty() || dto.getTitulo().isBlank() || dto.getSubtitulo().isEmpty()
+				|| dto.getSubtitulo().isBlank() || dto.getDescripcionEntrega().isEmpty()
+				|| dto.getDescripcionEntrega().isBlank()) {
 			return "redirect:/publicar?faltanDatos";
 		}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -104,10 +104,14 @@ public class ProductosController {
 		User obtained = userService.getUserByUsername(email);
 		Producto producto = productoService.getProductoById(id);
 		model.addAttribute("producto", producto);
-		if (producto.getUsuario() == obtained)
+		if (producto.getUsuario() == obtained) {
 			model.addAttribute("editar", true);
-		else
+		} else if (producto.getInteresado() == obtained) {
+			model.addAttribute("editar", false);
+			model.addAttribute("solicitar", false);
+		} else {
 			model.addAttribute("solicitar", true);
+		}
 		return "producto";
 	}
 
@@ -120,11 +124,11 @@ public class ProductosController {
 			return "redirect:/producto/" + id + "?errorUser";
 		return "redirect:/producto/" + id + "?exito";
 	}
-	
+
 	@GetMapping("/eliminarProducto/{id}")
 	public String eliminarProducto(@PathVariable Long id) {
-	    productoService.deleteProductoById(id);
-	    return "redirect:/mercado?exitoEliminandoProducto";
+		productoService.deleteProductoById(id);
+		return "redirect:/mercado?exitoEliminandoProducto";
 	}
 
 	@PostMapping("/subirFotoProducto/{id}")

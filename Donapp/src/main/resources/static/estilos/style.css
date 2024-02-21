@@ -314,8 +314,8 @@
             padding: 10px;
             max-width: 500px;
             margin: 0 auto;
-            overflow-y: auto; /* Habilitar scroll en el contenedor de mensajes */
-            max-height: 400px; /* Altura máxima del contenedor de mensajes */
+            overflow-y: auto;
+            max-height: 400px;
         }
 
         .message {
@@ -335,7 +335,6 @@
             margin-left: 10px;
         }
 
-        /* Estilo para el formulario de enviar mensajes */
         #chat-form {
             margin-top: 20px;
         }
@@ -344,8 +343,8 @@
         	text-align: -webkit-center;
 		    background-color: #CCE8D4;
 		    padding: 1rem;
-		    margin-left: 25%;
-		    margin-right: 25%;
+		    margin-left: 5%;
+		    margin-right: 5%;
         }
         
         .error-div{
@@ -357,19 +356,18 @@
         }
         
         .inputFile_perfil input[type="file"] {
-        display: none; /* Oculta el campo de entrada de archivos */
+        display: none; 
     }
 
     .inputFile_perfil label {
-        background-color: #668bc5; /* Color de fondo personalizado */
-        color: white; /* Color de texto personalizado */
-        padding: 10px 15px; /* Espaciado interno personalizado */
-        cursor: pointer; /* Cambia el cursor al puntero al pasar sobre él */
+        background-color: #668bc5; 
+        color: white;
+        padding: 10px 15px; 
+        cursor: pointer; 
     }
 
-    /* Estilo para ocultar el texto por defecto del campo de entrada de archivos */
     .inputFile_perfil label::before {
-        content: "Buscar imagen"; /* Texto personalizado para el botón de carga */
+        content: "Buscar imagen"; 
     }
         
  

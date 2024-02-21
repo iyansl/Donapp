@@ -50,14 +50,12 @@ public class SolicitudService {
 	}
 
 	public void aceptarSolicitud(Solicitud solicitud, User user) {
-		solicitud.setEstado("Aceptada");
 		solicitud.getProducto().setInteresado(user);
-		solicitudRepository.save(solicitud);
+		solicitudRepository.delete(solicitud);
 	}
 
 	public void cancelarSolicitud(Solicitud solicitud, User solicitante) {
-		solicitud.setEstado("Cancelada");
-		solicitudRepository.save(solicitud);
+		solicitudRepository.delete(solicitud);
 	}
 
 }
