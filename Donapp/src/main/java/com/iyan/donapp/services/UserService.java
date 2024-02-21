@@ -126,16 +126,6 @@ public class UserService {
 	}
 
 	@Transactional
-	public void cambiarEmail(String email, String username) {
-		User user = getUserByUsername(username);
-		User userExists = getUserByEmail(email);
-		if (userExists == null) {
-			user.setEmail(email);
-			userRepository.save(user);
-		}
-	}
-
-	@Transactional
 	public void cambiarDescripcion(String desc, String username) {
 		User user = getUserByUsername(username);
 		user.setDescripcion(desc);

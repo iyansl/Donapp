@@ -87,18 +87,6 @@ public class UserController {
 		}
 		return "redirect:/miPerfil";
 	}
-	
-	@PostMapping("/cambiarEmail")
-	public String cambiarEmail(String email) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
-		if (!email.contains("@") || !email.contains("."))
-			return "redirect:/miPerfil?errorEmailInvalido";
-		else if (userService.getUserByEmail(email) != null)
-			return "redirect:/miPerfil?errorEmailUsado";
-		userService.cambiarEmail(email, username);
-		return "redirect:/miPerfil";
-	}
 
 	@PostMapping("/cambiarDescripcion")
 	public String cambiarDescripcion(String descripcion) {

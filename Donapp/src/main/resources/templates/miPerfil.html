@@ -58,12 +58,6 @@
             <div class="card-body">
                 <h4 class="card-title">Usuario: <b th:text="'@' + ${username}"></b></h5>
                 <h5 class="card-title">Email: <b th:text="${email}"></b></h4>
-                <form method="post" th:action="@{/cambiarEmail}" class="mb-4 ocultar_mostrar d-none">
-				    <label>
-				        <input type="text" name="email" />
-				    </label>
-				    <button class="custom-button" type="submit" onclick="ocultarBotones()">Cambiar email</button>
-				</form>
                 <p class="card-text" th:text="${descripcion}" ></p>
                 <form method="post" th:action="@{/cambiarDescripcion}" class="mb-4 ocultar_mostrar d-none">
 				    <label>
