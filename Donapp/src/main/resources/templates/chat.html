@@ -32,18 +32,17 @@
 
     <div class="container mt-5">
         <div class="chat-container">
-            <!-- Mostrar mensajes -->
             <div th:each="mensaje : ${mensajes}" class="message"
 			     th:class="${mensaje.usuario.id == activeUser? 'user-message' : 'other-message'}">
 			    <span>
 			        <b th:text="${mensaje.usuario.username}"></b>: 
 			        <span style="word-wrap: break-word;" th:text="${mensaje.contenido}"></span>
+					<span style="color: grey; font-style: italic;" th:text="${mensaje.timestamp}"></span>
 			    </span>
 			</div>
 
         </div>
 
-        <!-- Formulario para enviar mensajes -->
         <form th:action="@{/enviarMensaje}" method="post" style="margin-top: 2rem;">
             <div class="form-group">
                 <input type="hidden" name="conversacionId" th:value="${conversacion.id}" />

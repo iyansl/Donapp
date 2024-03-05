@@ -31,6 +31,9 @@
     
     <div class="container mt-4">
         <div class="row">
+        	<div class="col-md-4 mb-4" th:if="${usuarios.empty}">
+              No hay usuarios que mostrar
+            </div>
             <div class="col-md-4 mb-4" th:each="usuario : ${usuarios}">
                 <div class="card">
                     <img src="img/usuario.png" th:src="'data:image/jpeg;base64,' + ${usuario.fotoEncoded}" class="card-img-top" alt="User 1" style="object-fit: cover; height: 35vh; border-radius: 70vh;">

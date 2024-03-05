@@ -1,6 +1,7 @@
 package com.iyan.donapp.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,7 +32,7 @@ public class Mensaje {
 	private String contenido;
 
 	@Column(name = "timestamp")
-	private LocalDateTime timestamp;
+	private String timestamp;
 
 	public Mensaje() {
 	}
@@ -40,7 +41,10 @@ public class Mensaje {
 		this.contenido = contenido;
 		this.conversacion = conversacion;
 		this.usuario = remitente;
-		this.timestamp = LocalDateTime.now();
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+		String formattedTimestamp = LocalDateTime.now().format(formatter);
+		this.timestamp = formattedTimestamp;
 	}
 
 	public Long getId() {
@@ -67,11 +71,11 @@ public class Mensaje {
 		this.contenido = contenido;
 	}
 
-	public LocalDateTime getTimestamp() {
+	public String getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(LocalDateTime timestamp) {
+	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
 

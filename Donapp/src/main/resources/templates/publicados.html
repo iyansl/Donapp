@@ -22,7 +22,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
                         <a th:href="${'/producto/'+producto.id}" class="btn custom-button">Ver Más</a>
-                        <a th:href="${'/eliminarProducto/'+producto.id}" class="btn btn-danger">Eliminar producto</a>
+                        <a class="btn btn-danger" th:onclick="'confirmarEliminarProducto(' + ${producto.id} + ')'">Eliminar producto</a>
                     </div>
                 </div>
                 
@@ -34,6 +34,15 @@
     <hr>
 	
     <nav th:replace="~{fragments/footer}" />
+    
+    <script th:inline="javascript">
+	    function confirmarEliminarProducto(productoId) {
+	        var confirmacion = confirm('¿Estás seguro de que quieres eliminar este producto?');
+	        if (confirmacion) {
+	            window.location.href = '/eliminarProducto/' + productoId;
+	        }
+	    }
+	</script>
 
 </body>
 </html>

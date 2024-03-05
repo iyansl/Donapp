@@ -25,4 +25,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	@Query("SELECT u FROM User u WHERE u.createdDate < :dateTime AND u.activado = false")
 	public List<User> findByCreatedDateBeforeAndVerifiedFalse(LocalDateTime dateTime);
+
+	public User findByPasswordResetToken(String token);
 }

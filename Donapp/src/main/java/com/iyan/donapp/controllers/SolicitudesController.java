@@ -49,7 +49,7 @@ public class SolicitudesController {
 		}
 		SolicitudDto dto = new SolicitudDto(obtained, producto.getUsuario(), producto);
 		solicitudService.saveSolicitud(dto);
-		emailService.sendMail(producto.getUsuario().getEmail(), "Donapp - Solicitud recibida", "Acabas de recibir una solicitud de producto, ¡no te la pierdas!");
+		emailService.sendMail(producto.getUsuario().getEmail(), "Donapp - Solicitud recibida", "Acabas de recibir una solicitud de producto: " + producto.getTitulo() + ", ¡no te la pierdas!");
 		
 		return "redirect:/solicitudes?exitoSolicitud";
 	}
@@ -59,7 +59,7 @@ public class SolicitudesController {
 		Solicitud solicitud = solicitudService.getSolicitudById(id);
 		if ("Pendiente".equals(solicitud.getEstado())) {
 			solicitudService.aceptarSolicitud(solicitud, solicitud.getSolicitante());
-			emailService.sendMail(solicitud.getSolicitante().getEmail(), "Donapp - Solicitud aceptada", "¡Han aceptado tu solicitud de un producto!");
+			emailService.sendMail(solicitud.getSolicitante().getEmail(), "Donapp - Solicitud aceptada", "¡Han aceptado tu solicitud de un producto (" + solicitud.getProducto().getTitulo() + ")! Ponte en contacto con el usuario que lo haya publicado para organizar la entrega o recogida.");
 		}
 		
 		return "redirect:/solicitudes?exitoAceptarSolicitud";
@@ -70,7 +70,7 @@ public class SolicitudesController {
 		Solicitud solicitud = solicitudService.getSolicitudById(id);
 		if ("Pendiente".equals(solicitud.getEstado())) {
 			solicitudService.cancelarSolicitud(solicitud, solicitud.getSolicitante());
-			emailService.sendMail(solicitud.getSolicitante().getEmail(), "Donapp - Solicitud cancelada", "Han cancelado tu solicitud de un producto");
+			emailService.sendMail(solicitud.getSolicitante().getEmail(), "Donapp - Solicitud cancelada", "Lo siento, han cancelado tu solicitud de un producto (" + solicitud.getProducto().getTitulo() + "). El usuario ha decidido no donártelo.");
 		}
 		
 		return "redirect:/solicitudes?exitoDenegarSolicitud";

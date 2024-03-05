@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head th:replace="~{fragments/header}" />
+<body>
+
+	<nav th:replace="~{fragments/navbar}" />
+	
+	<img class="miImg2 d-block w-100" src="img/login.jpg" alt="Login">
+	
+    <div class="container mt-4">
+    <h2> Recuperar contraseña </h2>
+    <div class="mensaje-div" th:if=${param.exito}>
+    	Verifica tu correo electrónico para modificar tu contraseña (Revisa la carpeta de Spam).
+    </div>
+    <div class="error-div" th:if=${param.error}>
+    	Email incorrecto
+    </div>
+    <div class="error-div" th:if=${param.errorCoincidenciaPass}>
+    	Las contraseñas no coinciden, intente acceder de nuevo desde el correo
+    </div>
+    <div class="error-div" th:if=${param.errorToken}>
+    	Error al generar la recuperación de contraseña, inténtelo de nuevo
+    </div>
+    <div class="error-div" th:if=${param.errorTokenUsado}>
+    	Ya se ha utilizado este correo de recuperación, por favor, utilice uno nuevo
+    </div>
+    <form th:action="@{/recuperarcontrasena}" method="post">
+    	<div class="form-group">
+       		<label for="email">Correo electrónico:</label>
+      	  <input name="email" type="email" class="form-control" id="email" required placeholder="Tu correo electrónico" >
+    	</div>
+    <input type="submit" value="Recuperar contraseña" class="btn custom-button btn-block"></input>
+	</form>
+
+            <p class="mt-3 register-link">¿Ya la recuerdas? <a class="nav-link" href="/iniciarsesion">Iniciar sesión</a></p>
+        	<p class="forgot-password-link">¿No tienes una cuenta? <a style="display: contents;" class="nav-link" href="/registrarse">Regístrate gratis</a></p>
+    </div>
+    
+    <hr>
+	
+    <nav th:replace="~{fragments/footer}" />
+
+</body>
+</html>

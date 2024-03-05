@@ -12,10 +12,13 @@
             <img style="object-fit: cover; height: 40vh; width:70%; margin-top: 2vh; border-radius: 60vh; align-self: center;" th:src="'data:image/jpeg;base64,' + ${foto}" class="card-img-top" alt="Usuario">
             <div class="card-body">
                 <h5 class="card-title"><b th:text="${usuario.username}"></b></h5>
+                <h4 class="card-title" th:if="${usuario.emailVisible}">
+				    <b th:text="${usuario.email}"></b>
+				</h4>
                 <p class="card-text"><b>Biografía:</b> <span th:text="${usuario.descripcion}"> </span> </p>
                 <a th:href="${'/hablar/'+ usuario.id}" class="btn custom-button">Hablar</a>
-                <a sec:authorize="!hasRole('ADMIN')" th:href="${'/denunciar/'+ usuario.id}" class="btn custom-button">Denunciar</a>
-                <a sec:authorize="hasRole('ADMIN')" class="btn btn-danger">Eliminar usuario</a>
+                <button sec:authorize="!hasRole('ADMIN')" type="button" class="btn custom-button" data-toggle="modal" data-target="#denunciaModal" th:data-usuario-id="${usuario.id}">Denunciar</button>
+                <a sec:authorize="hasRole('ADMIN')" class="btn btn-danger" th:onclick="'confirmarEliminar(' + ${usuario.id} + ')'">Eliminar usuario</a>
             </div>
         </div>
     </div>
@@ -33,7 +36,7 @@
                         <p class="card-text">Urgencia: <span th:text="${producto.urgencia}"> </span></p>
                         <a th:href="${'/producto/'+producto.id}" class="btn custom-button">Ver Más</a>
                         <a sec:authorize="!hasRole('ADMIN')" th:href="${'/solicitar/'+producto.id}" class="btn custom-button">Solicitar</a>
-                        <a sec:authorize="hasRole('ADMIN')" th:href="${'/eliminarProducto/'+producto.id}" class="btn btn-danger">Eliminar producto</a>
+                        <a sec:authorize="hasRole('ADMIN')" class="btn btn-danger" th:onclick="'confirmarEliminarProducto(' + ${producto.id} + ')'">Eliminar producto</a>
                     </div>
                 </div>
             </div>
@@ -43,6 +46,60 @@
      <hr>
 	
     <nav th:replace="~{fragments/footer}" />
+    
+    <!-- Modal -->
+    <div class="modal fade" id="denunciaModal" tabindex="-1" role="dialog" aria-labelledby="denunciaModalLabel" aria-hidden="true" style="margin-top: 10rem;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="denunciaModalLabel">Denunciar Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="denunciaForm" th:action="@{/denunciar}" method="post">
+                    <div class="modal-body">
+                        <input type="hidden" id="usuarioId" name="usuarioId" />
+                        <div class="form-group">
+                            <label for="contenidoDenuncia">Contenido de la Denuncia:</label>
+                            <textarea class="form-control" id="contenidoDenuncia" name="contenidoDenuncia" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Enviar Denuncia</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
+	<script th:inline="javascript">
+	    $('#denunciaModal').on('show.bs.modal', function (event) {
+	        var button = $(event.relatedTarget);
+	        var usuarioId = button.data('usuario-id');
+	        var modal = $(this);
+	        modal.find('#usuarioId').val(usuarioId);
+	    });
+	</script>
+
+    <script th:inline="javascript">
+	    function confirmarEliminar(userId) {
+	        var confirmacion = confirm('¿Estás seguro de que quieres eliminar este usuario?');
+	        if (confirmacion) {
+	            window.location.href = '/eliminarUsuario/' + userId;
+	        }
+	    }
+	</script>
+	
+	<script th:inline="javascript">
+	    function confirmarEliminarProducto(productoId) {
+	        var confirmacion = confirm('¿Estás seguro de que quieres eliminar este producto?');
+	        if (confirmacion) {
+	            window.location.href = '/eliminarProducto/' + productoId;
+	        }
+	    }
+	</script>
+	
 </body>
 </html>

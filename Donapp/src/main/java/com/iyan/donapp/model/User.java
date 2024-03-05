@@ -88,6 +88,12 @@ public class User {
     @OneToMany(mappedBy = "usuarioDenunciado", cascade = CascadeType.REMOVE)
     private Set<Denuncia> denunciasComoDenunciado;
 
+    @Column(name = "passwordResetToken")
+	private String passwordResetToken;
+
+    @Column(name = "emailVisible")
+	private boolean emailVisible;
+
 	public User(Long id, String username, String descripcion, String email, String password, Collection<Rol> roles) {
 		super();
 		this.id = id;
@@ -97,6 +103,7 @@ public class User {
 		this.roles = roles;
 		this.descripcion = descripcion;
 		this.setCreatedDate(LocalDateTime.now());
+		this.passwordResetToken = null;
 	}
 
 	public User(String username, String email, String password, Collection<Rol> roles) {
@@ -106,6 +113,7 @@ public class User {
 		this.password = password;
 		this.roles = roles;
 		this.setCreatedDate(LocalDateTime.now());
+		this.passwordResetToken = null;
 	}
 
 	public User() {
@@ -121,6 +129,7 @@ public class User {
 		this.activado = activado;
 		this.token = UUID.randomUUID().toString();
 		this.setCreatedDate(LocalDateTime.now());
+		this.passwordResetToken = null;
 	}
 
 	public Long getId() {
@@ -287,6 +296,22 @@ public class User {
 
 	public void setCreatedDate(LocalDateTime createdDate) {
 		this.createdDate = createdDate;
+	}
+
+	public void setPasswordResetToken(String token) {
+		this.passwordResetToken = token;
+	}
+
+	public boolean isEmailVisible() {
+		return emailVisible;
+	}
+
+	public String getPasswordResetToken() {
+		return passwordResetToken;
+	}
+
+	public void setEmailVisible(boolean emailVisible) {
+		this.emailVisible = emailVisible;
 	}
 
 }

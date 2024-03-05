@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iyan.donapp.model.User;
+import com.iyan.donapp.services.EmailService;
 import com.iyan.donapp.services.ProductoService;
 import com.iyan.donapp.services.UserService;
 
@@ -27,9 +28,12 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private ProductoService productosService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@GetMapping("/iniciarsesion")
 	public String iniciarsesion() {
@@ -55,24 +59,34 @@ public class UserController {
 		model.addAttribute("descripcion", obtained.getDescripcion());
 		model.addAttribute("foto", Base64.getEncoder().encodeToString(obtained.getFoto()));
 		model.addAttribute("notificaciones", obtained.getSolicitudesRecibidas().size());
+		model.addAttribute("emailVisible", obtained.isEmailVisible());
 		return "miPerfil";
+	}
+	
+	@GetMapping("/ocultarMostrarEmail")
+	public String ocultarMostrarEmail() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User obtained = userService.getUserByUsername(email);
+		userService.updateVisibilidadEmail(obtained);
+		return "redirect:/miPerfil";
 	}
 
 	@GetMapping("/buscarUsuarios")
 	public String buscarUsuarios(@RequestParam(name = "nombre", required = false) String nombre, Model model) {
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String email = auth.getName();
-	    User obtained = userService.getUserByUsername(email);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User obtained = userService.getUserByUsername(email);
 
-	    List<User> usuarios;
-	    if (nombre != null && !nombre.isEmpty()) {
-	        usuarios = userService.findByUsernameContainingIgnoreCaseAndIdNot(nombre, obtained.getId());
-	    } else {
-	        usuarios = userService.getAllUsersExceptActive(obtained.getUsername());
-	    }
+		List<User> usuarios;
+		if (nombre != null && !nombre.isEmpty()) {
+			usuarios = userService.findByUsernameContainingIgnoreCaseAndIdNot(nombre, obtained.getId());
+		} else {
+			usuarios = userService.getAllUsersExceptActive(obtained.getUsername());
+		}
 
-	    model.addAttribute("usuarios", usuarios);
-	    return "buscarUsuarios";
+		model.addAttribute("usuarios", usuarios);
+		return "buscarUsuarios";
 	}
 
 	@PostMapping("/subirFoto")
@@ -99,20 +113,22 @@ public class UserController {
 		userService.cambiarDescripcion(descripcion, username);
 		return "redirect:/miPerfil";
 	}
-	
-	 @GetMapping("/eliminarCuenta")
-	    public String eliminarCuentaYLogout(HttpServletRequest request, HttpServletResponse response, Model model) {
-	        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	        String username = auth.getName();
-	        userService.eliminarCuenta(username);
-	        new SecurityContextLogoutHandler().logout(request, response, auth);
-	        return "redirect:/#";
-	    }
-	 
-	 @GetMapping("/eliminarUsuario/{id}")
-	    public String eliminarCuenta(Model model, @PathVariable Long id) {
-	        userService.eliminarCuentaPorId(id);
-	        return "redirect:/buscarUsuarios?usuarioEliminadoExito";
-	    }
+
+	@GetMapping("/eliminarCuenta")
+	public String eliminarCuentaYLogout(HttpServletRequest request, HttpServletResponse response, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		User u = userService.getUserByUsername(username);
+		userService.eliminarCuenta(username);
+		emailService.sendMail(u.getEmail(), "Donapp - Cuenta eliminada", "Tu cuenta ha sido eliminada. Si no has sido tú probablemente te hayan baneado. Ponte en contacto con el soporte de Donapp para reclamaciones.");
+		new SecurityContextLogoutHandler().logout(request, response, auth);
+		return "redirect:/#";
+	}
+
+	@GetMapping("/eliminarUsuario/{id}")
+	public String eliminarCuenta(Model model, @PathVariable Long id) {
+		userService.eliminarCuentaPorId(id);
+		return "redirect:/buscarUsuarios?usuarioEliminadoExito";
+	}
 
 }

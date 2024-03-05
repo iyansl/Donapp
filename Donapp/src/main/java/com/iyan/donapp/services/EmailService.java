@@ -19,7 +19,7 @@ public class EmailService
 		MimeMessagePreparator messagePreparator = new MimeMessagePreparator() {  
 			public void prepare(MimeMessage mimeMessage) throws Exception {  
 				MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-				message.setFrom("donapp-00@outlook.com");
+				message.setFrom("web.donapp@gmail.com");
 				message.setTo(to);
 				message.setSubject(subject);
 				message.setText(text, true);

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -34,7 +35,8 @@ public class UserService {
 	}
 
 	public String saveUserToBeVerified(UserRegistroDto dto) {
-		User user = new User(dto.getUsername(), dto.getEmail(), passEncoder.encode(dto.getPassword()), dto.getRoles(), false);
+		User user = new User(dto.getUsername(), dto.getEmail(), passEncoder.encode(dto.getPassword()), dto.getRoles(),
+				false);
 		user.setDescripcion("¡Acabo de unirme a Donapp!");
 		if (user.getRoles() == null)
 			user.setRoles(Arrays.asList(new Rol("ROLE_USER")));
@@ -48,7 +50,7 @@ public class UserService {
 		User user = userRepository.findByToken(token);
 		return user;
 	}
-	
+
 	public User saveConfirmedUser(User user) {
 		user.setActivado(true);
 		return userRepository.save(user);
@@ -74,7 +76,6 @@ public class UserService {
 		user.setActivado(activado);
 		return userRepository.save(user);
 	}
-	
 
 	private byte[] obtenerDatosImagenPorDefecto(String ruta) {
 		try {
@@ -186,6 +187,28 @@ public class UserService {
 			}
 		}
 		return usersNotAdmin;
+	}
+
+	public void resetPassword(User user, String newPassword) {
+		user.setPassword(passEncoder.encode(newPassword));
+		user.setPasswordResetToken(null);
+		userRepository.save(user);
+	}
+
+	public User getUserByPasswordResetToken(String token) {
+		return userRepository.findByPasswordResetToken(token);
+	}
+
+	public String generatePasswordResetToken(User user) {
+		String token = UUID.randomUUID().toString();
+		user.setPasswordResetToken(token);
+		userRepository.save(user);
+		return token;
+	}
+
+	public void updateVisibilidadEmail(User user) {
+		user.setEmailVisible(!user.isEmailVisible());
+		userRepository.save(user);
 	}
 
 }

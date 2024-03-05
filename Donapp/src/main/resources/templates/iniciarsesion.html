@@ -12,6 +12,9 @@
     <div class="mensaje-div" th:if=${param.exito}>
     	Exito al registrarse
     </div>
+    <div class="mensaje-div" th:if=${param.exitoRestablecimiento}>
+    	Contraseña restablecida con éxito
+    </div>
     <div class="error-div" th:if=${param.error}>
     	Usuario o password incorrectas.
     </div>
@@ -33,6 +36,7 @@
                 <input type="submit" id="login-submit" value="Iniciar Sesión" class="btn custom-button btn-block"></input>
             </form>
             <p class="mt-3 register-link">¿Aún no te has registrado? <a class="nav-link" href="/registrarse">Regístrate aquí</a></p>
+        	<p class="forgot-password-link">¿Olvidaste tu contraseña? <a style="display: contents;" class="nav-link" href="/recuperarcontrasena">Recuperar contraseña</a></p>
     </div>
     
     <hr>

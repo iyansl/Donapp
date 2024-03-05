@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head th:replace="~{fragments/header}" />
+<body>
+
+	<nav th:replace="~{fragments/navbar}" />
+	
+	<img class="miImg2 d-block w-100" src="img/login.jpg" alt="Login">
+	<div class="error-div" th:if=${param.errorCoincidenciaPass}>
+    	Las contraseñas no coinciden
+    </div>
+	
+    <div class="container mt-4">
+		<h2>Restablecer contraseña</h2>
+        <form th:action="@{'/recuperarcontrasena/' + ${token}}" method="post">
+            <div class="form-group">
+                <label for="password">Nueva contraseña:</label>
+                <input name="password" type="password" class="form-control" id="password" required placeholder="Nueva contraseña" />
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirmar contraseña:</label>
+                <input name="confirmPassword" type="password" class="form-control" id="confirmPassword" required placeholder="Confirmar contraseña" />
+            </div>
+            <input type="submit" value="Restablecer contraseña" class="btn custom-button btn-block" />
+        </form>
+    </div>
+    
+    <hr>
+	
+    <nav th:replace="~{fragments/footer}" />
+
+</body>
+</html>

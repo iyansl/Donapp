@@ -10,6 +10,7 @@ public class UserRegistroDto {
 	private String username;
 	private String email;
 	private String password;
+	private String confirmPassword;
 	private Collection<Rol> roles;
 
 	public Long getId() {
@@ -82,6 +83,14 @@ public class UserRegistroDto {
 
 	public void setRoles(Collection<Rol> roles) {
 		this.roles = roles;
+	}
+
+	public Object getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 }
