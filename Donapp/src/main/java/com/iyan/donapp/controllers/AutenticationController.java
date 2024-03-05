@@ -71,7 +71,7 @@ public class AutenticationController {
             return "redirect:/recuperarcontrasena?error";
         } else {
             String token = userService.generatePasswordResetToken(user);
-            String resetLink = "http://localhost:8080/recuperarcontrasena/" + token;
+            String resetLink = "https://donapp-25d4421f1d6f.herokuapp.com/recuperarcontrasena/" + token;
             String emailBody = "<p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>" +
                                "<p><a href=\"" + resetLink + "\">Restablecer Contraseña</a></p>";
             emailService.sendMail(email, "Restablecer Contraseña", emailBody);
