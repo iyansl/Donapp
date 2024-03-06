@@ -10,10 +10,15 @@
                 <h4 class="custom-subtitle">Descubre toda la información que quieras sobre nosotros</h4>
                 <a href="/conocenos" class="btn custom-button">Conócenos</a>
             </div>
-            <div class="col-md-4 mt-5 mt-md-0">
+            <div sec:authorize="!isAuthenticated()" class="col-md-4 mt-5 mt-md-0">
                 <h2 class="custom-title">¿Aún no tienes cuenta?</h2>
                 <h4 class="custom-subtitle">Solo las personas registradas pueden acceder a nuestros servicios</h4>
                 <a href="/registrarse" class="btn custom-button">Regístrate</a>
+            </div>
+            <div sec:authorize="isAuthenticated()" class="col-md-4 mt-5 mt-md-0">
+                <h2 class="custom-title">¿Quieres cambiar de cuenta?</h2>
+                <h4 class="custom-subtitle">Desconéctate desde aquí</h4>
+                <a href="/desconectarse" class="btn custom-button">Desconectarse</a>
             </div>
         </div>
     </section>

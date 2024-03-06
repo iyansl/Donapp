@@ -15,10 +15,10 @@ import com.iyan.donapp.model.Producto;
 import com.iyan.donapp.model.Solicitud;
 import com.iyan.donapp.model.User;
 import com.iyan.donapp.model.dto.SolicitudDto;
-import com.iyan.donapp.services.EmailService;
 import com.iyan.donapp.services.ProductoService;
 import com.iyan.donapp.services.SolicitudService;
 import com.iyan.donapp.services.UserService;
+import com.iyan.donapp.services.email.EmailSender;
 
 @Controller
 public class SolicitudesController {
@@ -33,7 +33,7 @@ public class SolicitudesController {
 	private SolicitudService solicitudService;
 	
 	@Autowired
-	private EmailService emailService;
+	private EmailSender emailService;
 
 	@RequestMapping("/solicitar/{id}")
 	public String producto(@PathVariable Long id) {
@@ -42,10 +42,14 @@ public class SolicitudesController {
 		User obtained = userService.getUserByUsername(email);
 		Producto producto = productoService.getProductoById(id);
 		List<Solicitud> lista = solicitudService.getSolicitudesEnviadasByUserId(obtained.getId());
+		List<Producto> listaPublicados = productoService.findAllByUserId(obtained.getId());
 		for (Solicitud s : lista) {
-			if (s.getProducto().getId() == producto.getId() && s.getEstado() != "Cancelada")
+			if (s.getProducto().getId() == producto.getId())
 				return "redirect:/mercado?solicitudYaEnviada";
-
+		}
+		for (Producto p : listaPublicados) {
+			if (p.getId() == producto.getId())
+				return "redirect:/mercado?productoEsPublicado";
 		}
 		SolicitudDto dto = new SolicitudDto(obtained, producto.getUsuario(), producto);
 		solicitudService.saveSolicitud(dto);
@@ -56,7 +60,12 @@ public class SolicitudesController {
 
 	@RequestMapping("/aceptarSolicitud/{id}")
 	public String aceptarSolicitud(@PathVariable Long id) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User obtained = userService.getUserByUsername(email);
 		Solicitud solicitud = solicitudService.getSolicitudById(id);
+		if (solicitud.getReceptor().getId() == obtained.getId())
+			return "redirect:/solicitudes?solicitudErronea";
 		if ("Pendiente".equals(solicitud.getEstado())) {
 			solicitudService.aceptarSolicitud(solicitud, solicitud.getSolicitante());
 			emailService.sendMail(solicitud.getSolicitante().getEmail(), "Donapp - Solicitud aceptada", "¡Han aceptado tu solicitud de un producto (" + solicitud.getProducto().getTitulo() + ")! Ponte en contacto con el usuario que lo haya publicado para organizar la entrega o recogida.");
@@ -67,7 +76,12 @@ public class SolicitudesController {
 	
 	@RequestMapping("/cancelarSolicitud/{id}")
 	public String cancelarSolicitud(@PathVariable Long id) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User obtained = userService.getUserByUsername(email);
 		Solicitud solicitud = solicitudService.getSolicitudById(id);
+		if (solicitud.getReceptor().getId() == obtained.getId())
+			return "redirect:/solicitudes?solicitudErronea";
 		if ("Pendiente".equals(solicitud.getEstado())) {
 			solicitudService.cancelarSolicitud(solicitud, solicitud.getSolicitante());
 			emailService.sendMail(solicitud.getSolicitante().getEmail(), "Donapp - Solicitud cancelada", "Lo siento, han cancelado tu solicitud de un producto (" + solicitud.getProducto().getTitulo() + "). El usuario ha decidido no donártelo.");

@@ -18,6 +18,9 @@
 		    <div class="error-div" th:if=${param.errorUser}>
 		    	Usuario inválido.
 		    </div>
+		    <div class="error-div" th:if=${param.errorProducto}>
+		    	El producto al que intentas acceder no es tuyo
+		    </div>
 		    <form method="post" th:action="@{'/subirFotoProducto/' + ${producto.id}}" enctype="multipart/form-data" class="edit-form d-none">
 			    <label>
 			        <input type="file" name="foto" />

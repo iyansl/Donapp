@@ -23,12 +23,17 @@
             Usuario denunciado correctamente
         </div>
         <div class="error-div" th:if="${param.errorDenuncia}">
-            Usuario denunciado correctamente
+            Error al denunciar usuario
+        </div>
+         <div class="error-div" th:if="${param.errorMensaje}">
+            El mensaje debe tener al menos 4 caracteres
         </div>
     <div class="mensaje-div" th:if=${param.usuarioEliminadoExito}>
     	Se ha eliminado al usuario correctamente.
     </div>
-    
+    <div class="error-div" th:if="${param.usuarioIncorrecto}">
+            No puedes eliminar a este usuario
+        </div>
     <div class="container mt-4">
         <div class="row">
         	<div class="col-md-4 mb-4" th:if="${usuarios.empty}">

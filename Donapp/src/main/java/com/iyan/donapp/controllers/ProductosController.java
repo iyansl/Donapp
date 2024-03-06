@@ -20,6 +20,7 @@ import com.iyan.donapp.model.User;
 import com.iyan.donapp.model.dto.ProductoDto;
 import com.iyan.donapp.services.ProductoService;
 import com.iyan.donapp.services.UserService;
+import com.iyan.donapp.services.validation.ProductosValidation;
 
 @Controller
 public class ProductosController {
@@ -29,6 +30,9 @@ public class ProductosController {
 
 	@Autowired
 	private ProductoService productoService;
+	
+	@Autowired
+	private ProductosValidation validador;
 
 	@GetMapping("/mercado")
 	public String mercado(@RequestParam(name = "busqueda", required = false, defaultValue = "") String busqueda,
@@ -57,11 +61,10 @@ public class ProductosController {
 	@PostMapping("/publicar")
 	public String publicar(@ModelAttribute("producto") ProductoDto dto) {
 		System.out.println(dto.getFoto().getOriginalFilename());
-		if (dto.getFoto().getOriginalFilename().isBlank() || dto.getFoto().getOriginalFilename().isEmpty()
-				|| dto.getTitulo().isEmpty() || dto.getTitulo().isBlank() || dto.getSubtitulo().isEmpty()
-				|| dto.getSubtitulo().isBlank() || dto.getDescripcionEntrega().isEmpty()
-				|| dto.getDescripcionEntrega().isBlank()) {
+		if (!validador.validarDatosVaciosProducto(dto)) {
 			return "redirect:/publicar?faltanDatos";
+		} else if (!validador.validarDatosCortosProducto(dto)) {
+			return "redirect:/publicar?faltanDatosLargos";
 		}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
@@ -120,6 +123,8 @@ public class ProductosController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		User obtained = userService.getUserByUsername(email);
+		if (productoService.getProductoById(dto.getId()).getUsuario().getId() != obtained.getId())
+	        return "redirect:/producto/" + id + "?errorProducto";
 		if (productoService.updateProducto(dto, id, obtained) == null)
 			return "redirect:/producto/" + id + "?errorUser";
 		return "redirect:/producto/" + id + "?exito";
@@ -127,6 +132,11 @@ public class ProductosController {
 
 	@GetMapping("/eliminarProducto/{id}")
 	public String eliminarProducto(@PathVariable Long id) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User obtained = userService.getUserByUsername(email);
+		if (productoService.getProductoById(id).getUsuario().getId() != obtained.getId())
+	        return "redirect:/producto/" + id + "?errorProducto";
 		productoService.deleteProductoById(id);
 		return "redirect:/mercado?exitoEliminandoProducto";
 	}
@@ -136,6 +146,8 @@ public class ProductosController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		User obtained = userService.getUserByUsername(email);
+		if (productoService.getProductoById(id).getUsuario().getId() != obtained.getId())
+	        return "redirect:/producto/" + id + "?errorProducto";
 		if (foto.getSize() != 0) {
 			if (foto.getSize() > 3000000)
 				return "redirect:/producto/" + id + "?error";

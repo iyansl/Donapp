@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iyan.donapp.model.User;
-import com.iyan.donapp.services.EmailService;
 import com.iyan.donapp.services.ProductoService;
 import com.iyan.donapp.services.UserService;
+import com.iyan.donapp.services.email.EmailSender;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
-public class UserController {
+public class UsersController {
 
 	@Autowired
 	private UserService userService;
@@ -33,7 +33,7 @@ public class UserController {
 	private ProductoService productosService;
 	
 	@Autowired
-	private EmailService emailService;
+	private EmailSender emailService;
 
 	@GetMapping("/iniciarsesion")
 	public String iniciarsesion() {

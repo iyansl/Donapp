@@ -34,6 +34,4 @@ public class DenunciasService {
 	public Denuncia getById(Long id) {
 		return dr.findById(id).get();
 	}
-
-
 }

@@ -1,373 +1,403 @@
-
-    /* Estilos personalizados para los enlaces en el navbar */
-    .navbar-nav a:hover {
-        color: #333; /* Cambia el color al pasar el mouse a un tono más oscuro */
-    }
-    
-    .navbar a{
-    	font-weight: 600;
-    }
-    
-    body {
-   	 overflow-x: hidden;
+	.navbar-nav a:hover {
+	    color: #333;
 	}
-
-    .miNavbar{
-    	position: fixed;
-   		z-index: 10000;
-   		width: 100%;
-   		border: solid 1px rgba(0,0,0,.125); 
-    }
-
-    /* Estilos personalizados para el footer */
-    footer {
-        background-color: #333;
-        padding: 20px 0; /* Agrega espacio vertical al footer */
-        color: #fff;
-        text-align: center;
-    }
-
-    /* Estilo de los enlaces en el footer */
-    .footer-links a {
-        color: rgba(0,0,0,.5);
-        text-decoration: none;
-        margin: 0 10px;
-        transition: color 0.3s;
-    }
-
-    /* Estilo de los enlaces en el footer al pasar el mouse */
-    .footer-links a:hover {
-        color: #333;
-    }
-    
-    .copy{
-     color: rgba(0,0,0,.9);
-    }
- 
-     .miImg{
-            max-height: 60vh; /* Ajusta la altura según tus necesidades */
-            object-fit: cover; /* Evita que las imágenes se deformen */
-     }
-     
-     .miImg2{
-       height: 30vh; /* Ajusta la altura según tus necesidades */
-       object-fit: cover; /* Evita que las imágenes se deformen */
-     }
-     
-     .quienes-somos {
-    background-color: #f8f8f8;
-    padding: 50px 0;
-    text-align: center;
-}
-
-.quienes-somos h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.quienes-somos p {
-    font-size: 18px;
-    margin-bottom: 30px;
-}
-
-.que-hacemos {
-    background-color: #fff;
-    padding: 50px 0;
-    text-align: center;
-}
-
-.que-hacemos h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.que-hacemos p {
-    font-size: 18px;
-    margin-bottom: 30px;
-}
-
-.icon {
-    height: 20vh;
-    width: 20vh;
-    margin-top:2vh;
-}
-
-.card {
-    background-color: #f8f8f8; /* Establece el fondo beige para las tarjetas */
-}
-
-.custom-section {
-    background-color: #fff; /* Color de fondo */
-    padding: 40px; /* Espaciado interno */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-.custom-title {
-    color: #333; /* Color del título */
-    font-size: 28px; /* Tamaño de fuente del título */
-}
-
-.custom-subtitle {
-    color: #666; /* Color del subtítulo */
-    font-size: 18px; /* Tamaño de fuente del subtítulo */
-}
-
-.custom-button {
-    background-color: #f8f8f8; /* Color de fondo del botón */
-    color: #333; /* Color del texto del botón */
-    border: solid 1px rgba(0,0,0,.125); 
-    border-radius: 5px; /* Bordes redondeados */
-    padding: 10px 20px; /* Espaciado interno del botón */
-    font-size: 16px; /* Tamaño de fuente del botón */
-    transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
-}
-
-.custom-button-1{
-    background-color: #f8f8f8; /* Color de fondo del botón */
-    color: #333; /* Color del texto del botón */
-    border: solid 1px rgba(0,0,0,.125); 
-    border-radius: 5px; /* Bordes redondeados */
-    padding: 10px 20px; /* Espaciado interno del botón */
-    font-size: 16px; /* Tamaño de fuente del botón */
-    transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
-}
-
-.custom-button-1:hover {
-    background-color: #aaa; /* Cambio de color al pasar el mouse */
-    color: #f8f8f8;
-}
-
-.custom-button:hover {
-    background-color: #333; /* Cambio de color al pasar el mouse */
-    color: #f8f8f8;
-}
-
-.image-container {
-    position: relative;
-    width: 100%;
-    height: 10vh;
-    overflow: hidden;
-}
-
-.img-overlay {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.overlay-text {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Color oscuro de la capa */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.overlay-text p {
-    color: white; /* Color del texto */
-}
-
-.div-atras {
-            position: fixed;
-            top:10%;
-            z-index:1000;
-        }
-        
-        .btn-atras{
-        	height:3rem;
-        	width:3rem;
-        }
-
-/* Estilo para dispositivos móviles */
-@media (max-width: 767px) {
-    .font-mobile {
-        font-size: 16px; /* Tamaño de fuente para dispositivos móviles */
-    }
-    
-    .carousel-inner img {
-            height: 50vh;
-            object-fit: cover; 
-     }
-    
-    .miTarjetaProducto{
-    	width:100%;
-    }
-    
-    .nav-item{
-    	align-self: center;
-    }
-    
-    .nav-link{
-    	align-self: center;
-    }
-    
-    .floating-bubble {
-            position: fixed;
-            bottom: 4%;
-            right: 43%;
-            background-color: #A9DCB7;
-            color: #fff;
-            border-radius: 50%;
-            border: solid 1px rgba(0,0,0,.125); 
-            padding: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        .floating-bubble:hover {
-            background-color: #DBF0E1;
-        }
-        
-        .img-bubble{
-			height: 3rem;
+	
+	.navbar a {
+	    font-weight: 600;
+	}
+	
+	body {
+	    overflow-x: hidden;
+	}
+	
+	.miNavbar {
+	    position: fixed;
+	    z-index: 10000;
+	    width: 100%;
+	    border: solid 1px rgba(0,0,0,.125);
+	}
+	
+	footer {
+	    background-color: #333;
+	    padding: 20px 0;
+	    color: #fff;
+	    text-align: center;
+	}
+	
+	.footer-links a {
+	    color: rgba(0,0,0,.5);
+	    text-decoration: none;
+	    margin: 0 10px;
+	    transition: color 0.3s;
+	}
+	
+	.footer-links a:hover {
+	    color: #333;
+	}
+	
+	.copy {
+	    color: rgba(0,0,0,.9);
+	}
+	
+	.miImg {
+	    max-height: 60vh;
+	    object-fit: cover;
+	}
+	
+	.miImg2 {
+	    height: 30vh;
+	    object-fit: cover;
+	}
+	
+	.quienes-somos, .que-hacemos {
+	    padding: 50px 0;
+	    text-align: center;
+	}
+	
+	.quienes-somos h2, .que-hacemos h2 {
+	    font-size: 24px;
+	    margin-bottom: 20px;
+	}
+	
+	.quienes-somos p, .que-hacemos p {
+	    font-size: 18px;
+	    margin-bottom: 30px;
+	}
+	
+	.icon {
+	    height: 20vh;
+	    width: 20vh;
+	    margin-top: 2vh;
+	}
+	
+	.card {
+	    background-color: #f8f8f8;
+	}
+	
+	.custom-section {
+	    background-color: #fff;
+	    padding: 40px;
+	    border-radius: 10px;
+	    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	}
+	
+	.custom-title {
+	    color: #333;
+	    font-size: 28px;
+	}
+	
+	.custom-subtitle {
+	    color: #666;
+	    font-size: 18px;
+	}
+	
+	.custom-button, .custom-button-1 {
+	    background-color: #f8f8f8;
+	    color: #333;
+	    border: solid 1px rgba(0,0,0,.125);
+	    border-radius: 5px;
+	    padding: 10px 20px;
+	    font-size: 16px;
+	    transition: background-color 0.3s ease;
+	}
+	
+	.custom-button-1:hover {
+	    background-color: #aaa;
+	    color: #f8f8f8;
+	}
+	
+	.custom-button:hover {
+	    background-color: #333;
+	    color: #f8f8f8;
+	}
+	
+	.image-container {
+	    position: relative;
+	    width: 100%;
+	    height: 10vh;
+	    overflow: hidden;
+	}
+	
+	.img-overlay {
+	    width: 100%;
+	    height: 100%;
+	    object-fit: cover;
+	}
+	
+	.overlay-text {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    background-color: rgba(0, 0, 0, 0.5);
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	}
+	
+	.overlay-text p {
+	    color: white;
+	}
+	
+	.div-atras {
+	    position: fixed;
+	    top: 10%;
+	    z-index: 1000;
+	}
+	
+	.btn-atras {
+	    height: 3rem;
+	    width: 3rem;
+	}
+	
+	.font-mobile {
+	    font-size: 16px;
+	}
+	
+	.carousel-inner img {
+	    height: 50vh;
+	    object-fit: cover;
+	}
+	
+	.nav-item, .nav-link {
+	    align-self: center;
+	}
+	
+	.floating-bubble {
+	    position: fixed;
+	    bottom: 4%;
+	    right: 43%;
+	    background-color: #A9DCB7;
+	    color: #fff;
+	    border-radius: 50%;
+	    border: solid 1px rgba(0,0,0,.125);
+	    padding: 10px;
+	    cursor: pointer;
+	    transition: background-color 0.3s ease-in-out;
+	}
+	
+	.floating-bubble:hover {
+	    background-color: #DBF0E1;
+	}
+	
+	.img-bubble {
+	    height: 3rem;
+	}
+	
+	.h5-username {
+	    font-size: 100%;
+	}
+	
+	.login-container {
+	    max-width: 400px;
+	    margin: 0 auto;
+	    padding: 20px;
+	    background-color: #fff;
+	    border-radius: 8px;
+	    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+	
+	.login-title {
+	    text-align: center;
+	    font-size: 24px;
+	    margin-bottom: 20px;
+	}
+	
+	.form-group {
+	    margin-bottom: 20px;
+	}
+	
+	.register-link {
+	    text-align: center;
+	}
+	
+	.register-link a {
+	    color: #000;
+	    font-weight: 500;
+	}
+	
+	.register-link a:hover {
+	    color: #444;
+	}
+	
+	.chat-container {
+	    border: 1px solid #ccc;
+	    border-radius: 5px;
+	    padding: 10px;
+	    max-width: 500px;
+	    margin: 0 auto;
+	    overflow-y: auto;
+	    max-height: 400px;
+	}
+	
+	.message {
+	    margin-bottom: 10px;
+	    padding: 10px;
+	    border-radius: 10px;
+	}
+	
+	.user-message {
+	    background-color: #e2f7cb;
+	    margin-right: 10px;
+	    text-align: right;
+	}
+	
+	.other-message {
+	    background-color: #f2f2f2;
+	    margin-left: 10px;
+	}
+	
+	#chat-form {
+	    margin-top: 20px;
+	}
+	
+	.mensaje-div {
+	    text-align: -webkit-center;
+	    background-color: #CCE8D4;
+	    padding: 1rem;
+	    margin-left: 5%;
+	    margin-right: 5%;
+	}
+	
+	.error-div {
+	    text-align: -webkit-center;
+	    background-color: #E8D2CC;
+	    padding: 1rem;
+	    margin-left: 25%;
+	    margin-right: 25%;
+	}
+	
+	.inputFile_perfil input[type="file"] {
+	    display: none;
+	}
+	
+	.inputFile_perfil label {
+	    background-color: #668bc5;
+	    color: white;
+	    padding: 10px 15px;
+	    cursor: pointer;
+	}
+	
+	.inputFile_perfil label::before {
+	    content: "Buscar imagen";
+	}
+	
+	#carousel2Controls .image-container {
+	    position: relative;
+	    height: 50vh;
+	}
+	
+	#carousel2Controls .overlay {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    background-color: rgba(0, 0, 0, 0.7);
+	}
+	
+	#carousel2Controls .carousel-caption a {
+	    display: inline-block;
+	    font-size: 1rem;
+	    padding: 0.5rem 1rem;
+	    background-color: white;
+	    color: black;
+	    border: none;
+	    cursor: pointer;
+	    text-decoration: none;
+	    margin-top: 1rem;
+	}
+	
+	@media (max-width: 768px) {
+	    #carousel2Controls .carousel-caption {
+	        padding: 0 1rem;
+	        top: 35%;
+	    }
+	
+	    #carousel2Controls .carousel-caption h1 {
+	        font-size: 1.3rem;
+	        margin-bottom: 0.5rem;
+	    }
+	
+	    #carousel2Controls .carousel-caption p {
+	        display: none;
+	    }
+	    .miTarjetaProducto {
+		    width: 100%;
+	        padding-left: 0rem;
+			padding-right: 0rem;  
 		}
-		
-		.h5-username{
-			font-size: 100%;
+	}
+	
+	@media (max-height: 730px) {
+	    #carousel2Controls .carousel-caption p {
+	        display: none;
+	    }
+	}
+	
+	@media (min-width: 768px) {
+	    #carousel2Controls .carousel-caption {
+	        position: absolute;
+	        top: 50%;
+	        left: 50%;
+	        transform: translate(-50%, -50%);
+	        text-align: center;
+	        color: white;
+	        padding: 0 3rem;
+	    }
+	
+	    #carousel2Controls .carousel-caption h1 {
+	        font-size: 2rem;
+	        margin-bottom: 1rem;
+	    }
+	
+	    #carousel2Controls .carousel-caption p {
+	        font-size: 1rem;
+	        margin-bottom: 1rem;
+	    }
+	    .miTarjetaProducto {
+		    width: 100%;
+	        padding-left: 17rem;
+			padding-right: 17rem;  
 		}
-}
-
-/* Estilo para escritorio */
-@media (min-width: 768px) {
-    .font-mobile {
-        font-size: 24px; /* Tamaño de fuente para escritorio */
-    }
-    
-    .carousel-inner img {
-            height: 50vh;
-            object-fit: cover; 
-     }
-    
-    .miTarjetaProducto{
-    	width:30%;
-    }
-    
-    .floating-bubble {
-            position: fixed;
-            bottom: 4%;
-            right: 4%;
-            background-color: #A9DCB7;
-            color: #fff;
-            border-radius: 50%;
-            border: solid 1px rgba(0,0,0,.125); 
-            padding: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-		.img-bubble{
-			height: 4rem;
-		}	
-			
-        .floating-bubble:hover {
-            background-color: #DBF0E1;
-        }
-        
-        .h5-username{
-			font-size: 130%;
-		}
-}
-
-
-
-
-.login-container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-title {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .register-link {
-            text-align: center;
-        }
-        
-        .register-link a{
-        	color: #000;
-        	font-weight: 500;
-        }
-        .register-link a:hover{
-        	color: #444;
-        }
-        
-        
-        .chat-container {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            max-width: 500px;
-            margin: 0 auto;
-            overflow-y: auto;
-            max-height: 400px;
-        }
-
-        .message {
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 10px;
-        }
-
-        .user-message {
-            background-color: #e2f7cb;
-            margin-right: 10px;
-            text-align: right;
-        }
-
-        .other-message {
-            background-color: #f2f2f2;
-            margin-left: 10px;
-        }
-
-        #chat-form {
-            margin-top: 20px;
-        }
-        
-        .mensaje-div{
-        	text-align: -webkit-center;
-		    background-color: #CCE8D4;
-		    padding: 1rem;
-		    margin-left: 5%;
-		    margin-right: 5%;
-        }
-        
-        .error-div{
-        	text-align: -webkit-center;
-		    background-color: #E8D2CC;
-		    padding: 1rem;
-		    margin-left: 25%;
-		    margin-right: 25%;
-        }
-        
-        .inputFile_perfil input[type="file"] {
-        display: none; 
-    }
-
-    .inputFile_perfil label {
-        background-color: #668bc5; 
-        color: white;
-        padding: 10px 15px; 
-        cursor: pointer; 
-    }
-
-    .inputFile_perfil label::before {
-        content: "Buscar imagen"; 
-    }
-        
- 
+	}
+	
+	.download-section {
+	    background-color: #fff;
+	    text-align: center;
+	    padding: 2rem 0;
+	}
+	
+	.circle {
+	    display: inline-block;
+	    width: 16rem;
+	    border-radius: 50%;
+	    overflow: hidden;
+	}
+	
+	.circle img {
+	    width: 100%;
+	    height: auto;
+	    filter: brightness(0.98);
+	}
+	
+	.download-text {
+	    font-size: 1.3rem;
+	    margin-bottom: 2rem;
+	}
+	
+	.custom-button-apk {
+	    background-color: #f8f8f8;
+	    color: #333;
+	    border: solid 1px rgba(0,0,0,.125);
+	    border-radius: 5px;
+	    padding: 10px 20px;
+	    font-size: 1.3rem;
+	    transition: background-color 0.3s ease;
+	}
+	
+	.custom-button-apk:hover {
+	    background-color: #333;
+	    color: #f8f8f8;
+	}

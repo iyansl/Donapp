@@ -5,7 +5,7 @@
 
 	<nav th:replace="~{fragments/navbar}" />
 	
-	<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+	<div sec:authorize="!hasRole('ADMIN')" id="carouselControls" class="carousel slide" data-ride="carousel">
   	  <div class="carousel-inner">
     	<div class="carousel-item active">
       		<img class="d-block w-100" src="img/imagen1.jpg" alt="Green arrows">
@@ -17,15 +17,32 @@
      	 	<img class="d-block w-100" src="img/imagen3.jpg" alt="Books">
    		</div>
   	  </div>
-  	  <a style="margin-top: 3rem;" class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+  	  <a style="margin-top: 3rem;" class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
        <span class="sr-only">Previous</span>
       </a>
-      <a style="margin-top: 3rem;" class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <a style="margin-top: 3rem;" class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
        <span class="carousel-control-next-icon" aria-hidden="true"></span>
        <span class="sr-only">Next</span>
       </a>
 	</div>
+	
+	<div sec:authorize="hasRole('ADMIN')" id="carouselControls" class="carousel slide" data-ride="carousel">
+  	  <div class="carousel-inner">
+    	<div class="carousel-item active">
+      		<img class="d-block w-100" src="img/adminSlider.jpg" alt="Recuadro azul, administrador">
+    	</div>
+  	  </div>
+	</div>
+	
+	<div class="download-section">
+	    <div class="circle">
+	        <img src="img/logoandroid.jpg" alt="Imagen">
+	    </div>
+	    <div class="download-text">Descarga nuestra aplicación para Android</div>
+	    <a href="https://github.com/iyansl/apk-donapp/blob/main/donapp.apk" class="custom-button-apk">Descargar</a>
+	</div>
+	<hr sec:authorize="hasRole('ADMIN')">
 	
 	<section sec:authorize="hasRole('ADMIN')" class="quienes-somos">
      <div class="container">
@@ -83,7 +100,53 @@
      </div>
     </section>
     
-    <section sec:authorize="!hasRole('ADMIN')" class="ml-md-5 mr-md-5 mt-4" style="margin-bottom: 3rem">
+    <div sec:authorize="!hasRole('ADMIN')" id="carousel2Controls" class="carousel slide" data-ride="carousel">
+	    <div class="carousel-inner">
+	        <div class="carousel-item active">
+	            <div class="image-container">
+	                <img style="height: 50vh;" class="d-block w-100" src="img/economiacircular.jpg" alt="Economia circular europea 1">
+	                <div class="overlay"></div>
+	                <div class="carousel-caption">
+	                    <h1>Plan de acción europeo de economía circular</h1>
+	                    <p>La transición de la UE hacia una economía circular reducirá la presión sobre los recursos naturales y creará crecimiento sostenible y empleo. También es un requisito previo para alcanzar el objetivo de neutralidad climática de la UE para 2050 y detener la pérdida de biodiversidad.</p>
+	                    <a href="https://environment.ec.europa.eu/strategy/circular-economy-action-plan_en" class="custom-button">Ver más</a>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="carousel-item">
+	            <div class="image-container">
+	                <img style="height: 50vh;" class="d-block w-100" src="img/economiacircular1.jpg" alt="Economia circular europea 2">
+	                <div class="overlay"></div>
+	                <div class="carousel-caption">
+	                    <h1>Plan de acción español de economía circular</h1>
+	                    <p>España Circular 2030 sienta las bases para impulsar un nuevo modelo de producción y consumo en el que el valor de productos, materiales y recursos se mantengan en la economía durante el mayor tiempo posible</p>
+	                    <a href="https://www.miteco.gob.es/es/calidad-y-evaluacion-ambiental/temas/economia-circular/estrategia.html" class="custom-button">Ver más</a>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="carousel-item">
+	            <div class="image-container">
+	                <img style="height: 50vh;" class="d-block w-100" src="img/economiacircular2.jpg" alt="Economia circular europea 3">
+	                <div class="overlay"></div>
+	                <div class="carousel-caption">
+	                    <h1>¿Cual es tu plan de acción?</h1>
+	                    <p>Descubre cómo tus acciones pueden contribuir a la economía circular y a un futuro más sostenible para todos</p>
+	                    <a href="https://www.dssmith.com/es/sostenibilidad/liderazgo-en-economia-circular/aprende-mas-sobre-la-economia-circular/apoyar-la-economia-circular" class="custom-button">Ver más</a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <a style="margin-top: 3rem;" class="carousel-control-prev" href="#carousel2Controls" role="button" data-slide="prev">
+	        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	        <span class="sr-only">Previous</span>
+	    </a>
+	    <a style="margin-top: 3rem;" class="carousel-control-next" href="#carousel2Controls" role="button" data-slide="next">
+	        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	        <span class="sr-only">Next</span>
+	    </a>
+	</div>
+    
+    <section sec:authorize="!hasRole('ADMIN')" class="ml-md-5 mr-md-5" style="margin-top: 3rem">
         <h2 class="text-center">¿Qué puedes aportar?</h2>
         <div class="mt-5 px-5" style="align-content: center; place-items: center; display: grid;">
             <div class="col-md-4">
@@ -151,8 +214,6 @@
             </div>
         </div>
     </section>
-    
-    <hr>
     
     <div sec:authorize="hasRole('USER')" class="container mt-5 mb-5">
     <div class="row">

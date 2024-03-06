@@ -12,7 +12,9 @@
     <div class="error-div" th:if=${param.faltanDatos}>
     	Debes rellenar todos los campos para publicar un objeto
     </div>
-    
+    <div class="error-div" th:if=${param.faltanDatosLargos}>
+    	Los datos deben tener al menos 4 caracteres
+    </div>
 	<div class="container mt-4">
         <h2>¿Qué objeto quieres donar?</h2>
         <form th:action="@{/publicar}" method="post" th:object=${producto} enctype="multipart/form-data">

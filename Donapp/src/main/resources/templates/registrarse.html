@@ -18,6 +18,12 @@
     <div class="error-div" th:if=${param.errorCoincidenciaPass}>
     	Las contraseñas no coinciden
     </div>
+    <div class="error-div" th:if=${param.errorPassDebil}>
+    	La contraseña debe incluir al menos 8 caracteres, una mayúscula y un número
+    </div>
+    <div class="error-div" th:if=${param.errorEmailIncorrecto}>
+    	El email debe tener un formato válido
+    </div>
     <div class="error-div" th:if=${param.errorConfirmacion}>
     	Ha habido un error en la confirmacion del email
     </div>

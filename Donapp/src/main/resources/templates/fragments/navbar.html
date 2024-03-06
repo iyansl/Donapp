@@ -27,12 +27,10 @@
        		<li sec:authorize="hasRole('ADMIN')" class="nav-item">
             	<a class="nav-link mt-2 mt-md-0" href="/mercado">Administrar Productos</a>
        		</li>
-       		<li sec:authorize="isAuthenticated()" class="nav-item">
-            	<a class="nav-link mt-2 mt-md-0" href="/conversaciones">Mensajes</a>
-       		</li>
         </ul>
         <hr>
         <div class="navbar-nav ml-auto">
+       		<a sec:authorize="isAuthenticated()" href="/conversaciones" class="nav-link mt-1 mt-md-0">Mensajes</a>
             <a sec:authorize="hasRole('USER')" href="/miPerfil" class="nav-link mt-1 mt-md-0">Perfil</a>
             <a sec:authorize="!isAuthenticated()" href="/iniciarsesion" class="nav-link mr-0 mr-md-2">Iniciar sesión</a>
             <a sec:authorize="!isAuthenticated()" href="/registrarse" class="nav-link mt-1 mt-md-0">Registrarse</a>

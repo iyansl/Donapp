@@ -1,4 +1,4 @@
-package com.iyan.donapp.services;
+package com.iyan.donapp.services.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,7 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import jakarta.mail.internet.MimeMessage;
 
 @Configuration
-public class EmailService
+public class EmailSender
 {
 	@Autowired
 	private JavaMailSender mailSender;

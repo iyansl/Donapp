@@ -15,8 +15,14 @@
     <div class="error-div" th:if=${param.error}>
     	Email incorrecto
     </div>
+    <div class="error-div" th:if=${param.errorFormatoEmail}>
+    	El email no tiene un formato válido
+    </div>
     <div class="error-div" th:if=${param.errorCoincidenciaPass}>
     	Las contraseñas no coinciden, intente acceder de nuevo desde el correo
+    </div>
+    <div class="error-div" th:if=${param.errorPass}>
+    	La contraseña debe tener como mínimo 8 caracteres, una mayúscula y un número
     </div>
     <div class="error-div" th:if=${param.errorToken}>
     	Error al generar la recuperación de contraseña, inténtelo de nuevo
