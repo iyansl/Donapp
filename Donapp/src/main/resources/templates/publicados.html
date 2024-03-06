@@ -10,7 +10,12 @@
     <div class="container mt-4">
         <h2> Mis publicaciones </h2>
         <div class="row">
-        
+	        <div class="mensaje-div" th:if="${param.exitoEliminandoProducto}">
+	            Producto eliminado con éxito
+	        </div>
+	        <div class="mensaje-div" th:if=${param.exito}>
+		    	Exito al añadir el producto.
+		    </div>
         	<div class="col-md-4 mb-4" th:if="${productos.empty}">
         	  No hay productos que mostrar
         	</div>

@@ -6,9 +6,6 @@
 	<nav th:replace="~{fragments/navbar}" />
 	<img class="miImg d-block w-100" src="img/publicar.jpg" alt="Mercado">
 	
-	<div class="mensaje-div" th:if=${param.exito}>
-    	Exito al añadir el producto.
-    </div>
     <div class="error-div" th:if=${param.faltanDatos}>
     	Debes rellenar todos los campos para publicar un objeto
     </div>

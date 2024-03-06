@@ -70,7 +70,7 @@ public class ProductosController {
 		String email = auth.getName();
 		User obtained = userService.getUserByUsername(email);
 		productoService.saveProducto(dto, obtained);
-		return "redirect:/publicar?exito";
+		return "redirect:/publicados?exito";
 	}
 
 	@GetMapping("/publicados")
@@ -138,7 +138,7 @@ public class ProductosController {
 		if (productoService.getProductoById(id).getUsuario().getId() != obtained.getId())
 	        return "redirect:/producto/" + id + "?errorProducto";
 		productoService.deleteProductoById(id);
-		return "redirect:/mercado?exitoEliminandoProducto";
+		return "redirect:/publicados?exitoEliminandoProducto";
 	}
 
 	@PostMapping("/subirFotoProducto/{id}")
