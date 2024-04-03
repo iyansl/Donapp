@@ -47,6 +47,12 @@ public class UsersController {
 
 	@GetMapping("/usuario/{id}")
 	public String usuario(@PathVariable Long id, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		User obtained = userService.getUserByUsername(username);
+		if (id.equals(obtained.getId())) {
+			return "redirect:/miPerfil";
+		}
 		User u = userService.getUserById(id);
 		List<Valoracion> valoraciones = valoracionesService.findAllByUserId(id);
 	    
@@ -75,7 +81,7 @@ public class UsersController {
 		String username = auth.getName();
 		User valorador = userService.getUserByUsername(username);
 		User valorado = userService.getUserById(id);
-		if (valoracionUsuario.isBlank() || valoracionUsuario.isEmpty() || valoracionUsuario.length()<5)
+		if (valoracionUsuario.isBlank() || valoracionUsuario.isEmpty() || valoracionUsuario.length()<5 || valorador.getId().equals(valorado.getId()))
 			return "redirect:/usuario/"+id+"?valoracionErronea";
 		if (valoracionesService.usuarioYaValorado(valorador, valorado))
 			return "redirect:/usuario/"+id+"?valoracionYaRealizada";
