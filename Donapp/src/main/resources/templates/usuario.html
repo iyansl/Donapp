@@ -11,6 +11,11 @@
         <div class="card">
             <img style="object-fit: cover; height: 40vh; width:70%; margin-top: 2vh; border-radius: 60vh; align-self: center;" th:src="'data:image/jpeg;base64,' + ${foto}" class="card-img-top" alt="Usuario">
             <div class="card-body">
+            	<div class="valoraciones-info">
+	                <span th:utext="${'★'.repeat(mediaValoraciones)}"></span>
+	                <span th:utext="${'☆'.repeat(5 - mediaValoraciones)}"></span>
+	                <span>Valoraciones: <span th:text="${numValoraciones}"></span></span>
+	            </div>
                 <h5 class="card-title"><b th:text="${usuario.username}"></b></h5>
                 <h4 class="card-title" th:if="${usuario.emailVisible}">
 				    <b th:text="${usuario.email}"></b>
@@ -24,6 +29,63 @@
     </div>
     
     <hr>
+    
+    <div class="container mt-4">
+    	<div class="error-div" th:if="${param.valoracionErronea}">
+	            Escribe un mensaje de al menos 5 caracteres
+	    </div>
+	    <div class="error-div" th:if="${param.valoracionYaRealizada}">
+	            Ya has valorado a este usuario
+	    </div>
+    	<h2>Valorar usuario</h2>
+        <form th:action="@{'/valorarUsuario/' + ${usuario.id}}" method="post">
+		    <div class="form-group">
+		        <label for="valoracionUsuario">Mensaje:</label>
+		        <textarea class="form-control" id="valoracionUsuario" name="valoracionUsuario" rows="3"></textarea>
+		    </div>
+		    <div class="form-group">
+		        <label for="puntuacion">Puntuación:</label>
+		        <select class="form-control" id="puntuacion" name="puntuacion">
+		            <option value="1">1 estrella</option>
+		            <option value="2">2 estrellas</option>
+		            <option value="3">3 estrellas</option>
+		            <option value="4">4 estrellas</option>
+		            <option value="5">5 estrellas</option>
+		        </select>
+		    </div>
+		    <button type="submit" class="custom-button">Enviar valoración</button>
+		</form>
+        <hr>
+        <h2>Valoraciones del usuario</h2>
+        <div>
+            <ul class="list-group mt-4 mb-4">
+			    <li style="background-color: #819bc71f; margin-bottom:2rem; border:none;" class="list-group-item" th:each="valoracion : ${valoraciones}">
+			        <div>
+			            <div class="col-md-10">
+			            	<span><a th:href="${'/usuario/'+ valoracion.usuarioValorador.id}" th:text="${valoracion.usuarioValorador.username}"></a></span>
+			                <hr>
+			                <div style="overflow-wrap: break-word;" th:text="${valoracion.textoValoracion}"> </div>
+			                <div>
+			                    Valoración:
+			                    <span th:switch="${valoracion.puntuacion}">
+			                        <span th:case="'1'">★☆☆☆☆</span>
+			                        <span th:case="'2'">★★☆☆☆</span>
+			                        <span th:case="'3'">★★★☆☆</span>
+			                        <span th:case="'4'">★★★★☆</span>
+			                        <span th:case="'5'">★★★★★</span>
+			                    </span>
+			                </div>
+			            </div>
+			        </div>
+			        <hr>      
+			    </li>
+			</ul>
+
+
+        </div>
+     </div>
+      
+     <hr>
     
     <div class="container mt-4">
         <h2>Productos del usuario</h2>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head th:replace="~{fragments/header}" />
+<body>
+
+	<nav th:replace="~{fragments/navbar}" />
+	
+	<section style="background-color:#668bc5; height:20vh"></section>
+		 <div class="container mt-4">
+	    	<h2>Notificar usuarios</h2>
+	    	<div class="mensaje-div" th:if="${param.mensajeEnviado}">
+		            Notificación enviada correctamente
+		    </div>
+	        <form th:action="@{/enviarNotificacion}" method="post">
+			    <div class="form-group">
+			        <label for="asunto">Asunto:</label>
+			        <textarea class="form-control" id="asunto" name="asunto" rows="3"></textarea>
+			    </div>
+			    <div class="form-group">
+			        <label for="mensaje">Mensaje:</label>
+			        <textarea class="form-control" id="mensaje" name="mensaje" rows="3"></textarea>
+			    </div>
+			    <button type="submit" class="custom-button">Enviar notificación</button>
+			</form>
+		</div>
+</body>
+</html>

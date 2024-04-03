@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iyan.donapp.model.User;
+import com.iyan.donapp.model.Valoracion;
 import com.iyan.donapp.services.ProductoService;
 import com.iyan.donapp.services.UserService;
+import com.iyan.donapp.services.ValoracionesService;
 import com.iyan.donapp.services.email.EmailSender;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,6 +36,9 @@ public class UsersController {
 	
 	@Autowired
 	private EmailSender emailService;
+	
+	@Autowired
+	private ValoracionesService valoracionesService;
 
 	@GetMapping("/iniciarsesion")
 	public String iniciarsesion() {
@@ -43,17 +48,46 @@ public class UsersController {
 	@GetMapping("/usuario/{id}")
 	public String usuario(@PathVariable Long id, Model model) {
 		User u = userService.getUserById(id);
+		List<Valoracion> valoraciones = valoracionesService.findAllByUserId(id);
+	    
+		double media = 0.0;
+	    if (!valoraciones.isEmpty()) {
+	        int totalPuntuaciones = 0;
+	        for (Valoracion valoracion : valoraciones) {
+	            totalPuntuaciones += valoracion.getPuntuacion();
+	        }
+	        media = (double) totalPuntuaciones / valoraciones.size();
+	        media = Math.round(media);
+	    }
+	    
 		model.addAttribute("usuario", u);
 		model.addAttribute("productos", productosService.findAllByUserId(id));
+		model.addAttribute("valoraciones", valoraciones);
+		model.addAttribute("mediaValoraciones", media);
+		model.addAttribute("numValoraciones", valoraciones.size());
 		model.addAttribute("foto", Base64.getEncoder().encodeToString(u.getFoto()));
 		return "usuario";
+	}
+	
+	@PostMapping("/valorarUsuario/{id}")
+	public String valorarUsuario(@PathVariable Long id, @RequestParam("valoracionUsuario") String valoracionUsuario, @RequestParam("puntuacion") int puntuacion) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		User valorador = userService.getUserByUsername(username);
+		User valorado = userService.getUserById(id);
+		if (valoracionUsuario.isBlank() || valoracionUsuario.isEmpty() || valoracionUsuario.length()<5)
+			return "redirect:/usuario/"+id+"?valoracionErronea";
+		if (valoracionesService.usuarioYaValorado(valorador, valorado))
+			return "redirect:/usuario/"+id+"?valoracionYaRealizada";
+		valoracionesService.valorarUsuario(valorador, valorado, valoracionUsuario, puntuacion);
+		return "redirect:/usuario/"+id;
 	}
 
 	@GetMapping("/miPerfil")
 	public String miPerfil(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String email = auth.getName();
-		User obtained = userService.getUserByUsername(email);
+		String username = auth.getName();
+		User obtained = userService.getUserByUsername(username);
 		model.addAttribute("username", obtained.getUsername());
 		model.addAttribute("email", obtained.getEmail());
 		model.addAttribute("descripcion", obtained.getDescripcion());
@@ -130,5 +164,22 @@ public class UsersController {
 		userService.eliminarCuentaPorId(id);
 		return "redirect:/buscarUsuarios?usuarioEliminadoExito";
 	}
+	
+	@GetMapping("/notificacionGeneral")
+	public String notificacionGeneral() {
+		return "notificacionGeneral";
+	}
+	
+	@PostMapping("/enviarNotificacion")
+    public String enviarNotificacion(@RequestParam("asunto") String asunto,
+                                     @RequestParam("mensaje") String mensaje) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+        List<User> usuarios = userService.getAllUsersExceptActive(username);
+        for (User usuario : usuarios) {
+        	emailService.sendMail(usuario.getEmail(), asunto, mensaje);
+        }
+        return "redirect:/notificacionGeneral?mensajeEnviado"; 
+    }
 
 }

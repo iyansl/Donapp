@@ -35,12 +35,12 @@
   	  </div>
 	</div>
 	
-	<div class="download-section">
+	<div th:unless="${apkRequest}" class="download-section">
 	    <div class="circle">
 	        <img src="img/logoandroid.jpg" alt="Imagen">
 	    </div>
 	    <div class="download-text">Descarga nuestra aplicación para Android</div>
-	    <a href="https://github.com/iyansl/apk-donapp/blob/main/donapp.apk" class="custom-button-apk">Descargar</a>
+	    <a href="https://mega.nz/folder/83VWSJiC#4jhBDsikNrOy-vCZxBHdCQ" class="custom-button-apk">Descargar</a>
 	</div>
 	<hr sec:authorize="hasRole('ADMIN')">
 	

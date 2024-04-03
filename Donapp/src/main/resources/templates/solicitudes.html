@@ -30,8 +30,8 @@
 			    <div class="mensaje-div" th:if=${param.exitoDenegarSolicitud}>
 			    	Has denegado la solicitud con éxito
 			    </div>
-			    <div class="mensaje-div" th:if=${param.solicitudErronea}>
-			    	La solicitud a la que intentas acceder no es tuya
+			    <div class="error-div" th:if=${param.solicitudErronea}>
+			    	La solicitud a la que intentas acceder no es válida
 			    </div>
                 <div class="row mt-4">
                 	<div class="col-md-4 mb-4" th:if="${enviadas.empty}">
