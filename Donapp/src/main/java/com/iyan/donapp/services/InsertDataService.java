@@ -42,24 +42,24 @@ public class InsertDataService {
 		usersService.saveUser(admin, "/static/img/usuarios/admin.jpg", true);
 		
 
-		ProductoDto p = new ProductoDto("Camiseta negra", "Camiseta nueva sin usar, fue un regalo", "Alta", "Ropa", "A domicilio", "Entrega rápida",
-				"Nuevo");
+		ProductoDto p = new ProductoDto("Camiseta nueva negra", "Camiseta nueva sin usar, fue un regalo", "Alta", "Ropa", "A domicilio", "Entrega rápida",
+				"Nuevo", "Cáceres", "Al norte");
 		productoService.saveProducto(p, usersService.getUserByEmail(user2.getEmail()), "/static/img/productos/camiseta.jpg");
 
 		ProductoDto p1 = new ProductoDto("Osito de peluche", "Sin usar, era un regalo", "Baja", "Juguetes", "En un punto", "Entrega",
-				"Nuevo");
+				"Nuevo", "Lugo", "Capital, centro");
 		productoService.saveProducto(p1, usersService.getUserByEmail(user2.getEmail()), "/static/img/productos/osito.jpg");
 		
 		ProductoDto p2 = new ProductoDto("Nevera antigua", "Bastante uso pero funciona perfectamente", "Baja", "Electrodomésticos", "En un punto", "Entrega",
-				"Nuevo");
+				"Nuevo", "Asturias", "Oviedo centro");
 		productoService.saveProducto(p2, usersService.getUserByEmail(user2.getEmail()), "/static/img/productos/nevera.jpg");
 		
 		ProductoDto p3 = new ProductoDto("Sofá moderno", "Bastante uso pero nuevo", "Baja", "Muebles", "En un punto", "Entrega",
-				"Nuevo");
+				"Nuevo", "Asturias", "Pola de Lena");
 		productoService.saveProducto(p3, usersService.getUserByEmail(user2.getEmail()), "/static/img/productos/sofa.jpg");
 		
 		ProductoDto p4 = new ProductoDto("Batidora sin marca", "Muy usada por toda la familia, funciona perfecta", "Baja", "Electrodomésticos", "En un punto", "Entrega",
-				"Nuevo");
+				"Nuevo", "Asturias", "Por la zona de Llanera");
 		productoService.saveProducto(p4, usersService.getUserByEmail(user2.getEmail()), "/static/img/productos/batidora.jpg");
 
 		

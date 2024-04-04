@@ -54,6 +54,12 @@ public class Producto {
 	@Column(name = "descripcionEntrega")
 	private String descripcionEntrega;
 	
+	@Column(name = "provincia")
+	private String provincia;
+	
+	@Column(name = "ubicacion")
+	private String ubicacion;
+	
 	@OneToMany(mappedBy = "producto", cascade = CascadeType.REMOVE)
     private List<Solicitud> solicitudes;
 	
@@ -64,7 +70,7 @@ public class Producto {
 	@Transient
 	private String fotoEncoded;
 	
-	public Producto(byte[] foto, String titulo, String subtitulo, String urgencia, String tipo, String formaEntrega, String descripcionEntrega, String estado) {
+	public Producto(byte[] foto, String titulo, String subtitulo, String urgencia, String tipo, String formaEntrega, String descripcionEntrega, String estado, String provincia, String ubicacion) {
 		super();
 		this.foto = foto;
 		this.titulo = titulo;
@@ -74,6 +80,8 @@ public class Producto {
 		this.estado = estado;
 		this.formaEntrega = formaEntrega;
 		this.descripcionEntrega = descripcionEntrega;
+		this.provincia = provincia;
+		this.ubicacion = ubicacion;
 	}
 	
 	public Producto(String titulo, String subtitulo, String tipo) {
@@ -206,5 +214,23 @@ public class Producto {
 	public void setSolicitudes(List<Solicitud> solicitudes) {
 		this.solicitudes = solicitudes;
 	}
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+	public String getUbicacion() {
+		return ubicacion;
+	}
+
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
+	}
+	
+	
 	
 }

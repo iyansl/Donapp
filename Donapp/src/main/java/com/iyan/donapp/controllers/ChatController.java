@@ -41,7 +41,7 @@ public class ChatController {
 		model.addAttribute("conversacionesIniciadas", conversacionesIniciadas);
 		List<Conversacion> conversacionesSeguidas = conversacionesService.getConversacionesBy2Id(obtained.getId());
 		model.addAttribute("conversacionesSeguidas", conversacionesSeguidas);
-		return "conversaciones";
+		return "usuarios/conversaciones";
 	}
 
 	@GetMapping("/hablar/{id}")
@@ -75,7 +75,7 @@ public class ChatController {
 		model.addAttribute("mensajes", c.getMensajes());
 		model.addAttribute("activeUser", obtained.getId());
 		model.addAttribute("conversacion", c);
-		return "chat";
+		return "usuarios/chat";
 	}
 
 	@PostMapping("/enviarMensaje")

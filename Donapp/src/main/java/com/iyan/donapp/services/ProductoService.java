@@ -35,7 +35,7 @@ public class ProductoService {
 			e.printStackTrace();
 		}
 		Producto producto = new Producto(bytes, dto.getTitulo(), dto.getSubtitulo(), dto.getUrgencia(), dto.getTipo(),
-				dto.getFormaEntrega(), dto.getDescripcionEntrega(), dto.getEstado());
+				dto.getFormaEntrega(), dto.getDescripcionEntrega(), dto.getEstado(), dto.getProvincia(), dto.getUbicacion());
 		producto.setUsuario(user1);
 		return productoRepository.save(producto);
 	}
@@ -51,7 +51,7 @@ public class ProductoService {
 			e.printStackTrace();
 		}
 		Producto producto = new Producto(bytes, dto.getTitulo(), dto.getSubtitulo(), dto.getUrgencia(), dto.getTipo(),
-				dto.getFormaEntrega(), dto.getDescripcionEntrega(), dto.getEstado());
+				dto.getFormaEntrega(), dto.getDescripcionEntrega(), dto.getEstado(), dto.getProvincia(), dto.getUbicacion());
 		producto.setUsuario(user1);
 		return productoRepository.save(producto);
 	}
@@ -132,6 +132,12 @@ public class ProductoService {
 				if (dto.getUrgencia() != null && !dto.getUrgencia().isEmpty()) {
 					producto.setUrgencia(dto.getUrgencia());
 				}
+				if (dto.getProvincia() != null && !dto.getProvincia().isEmpty()) {
+					producto.setProvincia(dto.getProvincia());
+				}
+				if (dto.getUbicacion() != null && !dto.getUbicacion().isEmpty()) {
+					producto.setUbicacion(dto.getUbicacion());
+				}
 				productoRepository.save(producto);
 				return producto;
 			} else {
@@ -174,7 +180,7 @@ public class ProductoService {
 		return productos;
 	}
 
-	public List<Producto> buscarProductosConFiltros(String busqueda, String urgencia, String tipo, String recogida,Long usuarioId) {
+	public List<Producto> buscarProductosConFiltros(String busqueda, String provincia, String urgencia, String tipo, String recogida, Long usuarioId) {
 		if (busqueda == null) {
 			busqueda = "";
 		}
@@ -187,7 +193,10 @@ public class ProductoService {
 		if ("Todos".equals(recogida)) {
 			recogida = "";
 		}
-		List<Producto> productosFiltrados = productoRepository.buscarProductosConFiltros(busqueda, urgencia, tipo,
+		if ("Todos".equals(provincia)) {
+			provincia = "";
+		}
+		List<Producto> productosFiltrados = productoRepository.buscarProductosConFiltros(busqueda, provincia, urgencia, tipo,
 				recogida, usuarioId);
 
 		for (Producto p : productosFiltrados) {

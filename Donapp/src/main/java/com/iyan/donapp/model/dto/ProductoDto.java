@@ -12,6 +12,8 @@ public class ProductoDto {
 	private String estado;
 	private String formaEntrega;
 	private String descripcionEntrega;
+	private String provincia;
+    private String ubicacion;
 	private MultipartFile foto;
 
 	public Long getId() {
@@ -22,7 +24,7 @@ public class ProductoDto {
 		this.id = id;
 	}
 
-	public ProductoDto(MultipartFile foto, String titulo, String subtitulo, String urgencia, String tipo, String formaEntrega, String descripcionEntrega, String estado) {
+	public ProductoDto(MultipartFile foto, String titulo, String subtitulo, String urgencia, String tipo, String formaEntrega, String descripcionEntrega, String estado, String provincia, String ubicacion) {
 		this.setFoto(foto);
 		this.titulo = titulo;
 		this.subtitulo = subtitulo;
@@ -31,9 +33,11 @@ public class ProductoDto {
 		this.formaEntrega = formaEntrega;
 		this.descripcionEntrega = descripcionEntrega;
 		this.estado = estado;
+		this.provincia = provincia;
+		this.ubicacion = ubicacion;
 	}
 	
-	public ProductoDto(String titulo, String subtitulo, String urgencia, String tipo, String formaEntrega, String descripcionEntrega, String estado) {
+	public ProductoDto(String titulo, String subtitulo, String urgencia, String tipo, String formaEntrega, String descripcionEntrega, String estado, String provincia, String ubicacion) {
 		this.titulo = titulo;
 		this.subtitulo = subtitulo;
 		this.tipo = tipo;
@@ -41,6 +45,8 @@ public class ProductoDto {
 		this.formaEntrega = formaEntrega;
 		this.descripcionEntrega = descripcionEntrega;
 		this.estado = estado;
+		this.provincia = provincia;
+		this.ubicacion = ubicacion;
 	}
 	
 	public ProductoDto() {
@@ -109,6 +115,22 @@ public class ProductoDto {
 
 	public void setFoto(MultipartFile foto) {
 		this.foto = foto;
+	}
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+	public String getUbicacion() {
+		return ubicacion;
+	}
+
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
 	}
 	
 	

@@ -24,12 +24,14 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
 
 	@Query("SELECT p FROM Producto p " +
 	           "WHERE LOWER(p.titulo) LIKE LOWER(CONCAT('%', :titulo, '%')) " +
+	           "AND (p.provincia = :provincia OR :provincia = '') " +
 	           "AND (p.urgencia = :urgencia OR :urgencia = '') " +
 	           "AND (p.tipo = :tipo OR :tipo = '') " +
 	           "AND (p.formaEntrega = :formaEntrega OR :formaEntrega = '') " +
 	           "AND p.usuario.id != :usuarioId")
 	    List<Producto> buscarProductosConFiltros(
 	            @Param("titulo") String titulo,
+	            @Param("provincia") String provincia,
 	            @Param("urgencia") String urgencia,
 	            @Param("tipo") String tipo,
 	            @Param("formaEntrega") String formaEntrega,

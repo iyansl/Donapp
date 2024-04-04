@@ -40,11 +40,6 @@ public class UsersController {
 	@Autowired
 	private ValoracionesService valoracionesService;
 
-	@GetMapping("/iniciarsesion")
-	public String iniciarsesion() {
-		return "iniciarsesion";
-	}
-
 	@GetMapping("/usuario/{id}")
 	public String usuario(@PathVariable Long id, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -72,7 +67,7 @@ public class UsersController {
 		model.addAttribute("mediaValoraciones", media);
 		model.addAttribute("numValoraciones", valoraciones.size());
 		model.addAttribute("foto", Base64.getEncoder().encodeToString(u.getFoto()));
-		return "usuario";
+		return "usuarios/usuario";
 	}
 	
 	@PostMapping("/valorarUsuario/{id}")
@@ -100,7 +95,7 @@ public class UsersController {
 		model.addAttribute("foto", Base64.getEncoder().encodeToString(obtained.getFoto()));
 		model.addAttribute("notificaciones", obtained.getSolicitudesRecibidas().size());
 		model.addAttribute("emailVisible", obtained.isEmailVisible());
-		return "miPerfil";
+		return "usuarios/miPerfil";
 	}
 	
 	@GetMapping("/ocultarMostrarEmail")
@@ -126,7 +121,7 @@ public class UsersController {
 		}
 
 		model.addAttribute("usuarios", usuarios);
-		return "buscarUsuarios";
+		return "usuarios/buscarUsuarios";
 	}
 
 	@PostMapping("/subirFoto")
@@ -173,7 +168,7 @@ public class UsersController {
 	
 	@GetMapping("/notificacionGeneral")
 	public String notificacionGeneral() {
-		return "notificacionGeneral";
+		return "admin/notificacionGeneral";
 	}
 	
 	@PostMapping("/enviarNotificacion")

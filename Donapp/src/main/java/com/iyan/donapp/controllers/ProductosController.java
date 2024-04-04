@@ -1,5 +1,6 @@
 package com.iyan.donapp.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.iyan.donapp.model.User;
 import com.iyan.donapp.model.dto.ProductoDto;
 import com.iyan.donapp.services.ProductoService;
 import com.iyan.donapp.services.UserService;
+import com.iyan.donapp.services.provinces.ProvincesApi;
 import com.iyan.donapp.services.validation.ProductosValidation;
 
 @Controller
@@ -33,9 +35,13 @@ public class ProductosController {
 	
 	@Autowired
 	private ProductosValidation validador;
+	
+	@Autowired
+	private ProvincesApi provincesApi;
 
 	@GetMapping("/mercado")
 	public String mercado(@RequestParam(name = "busqueda", required = false, defaultValue = "") String busqueda,
+			@RequestParam(name = "provincia", required = false, defaultValue = "Todos") String provincia,
 			@RequestParam(name = "urgencia", required = false, defaultValue = "Todos") String urgencia,
 			@RequestParam(name = "tipo", required = false, defaultValue = "Todos") String tipo,
 			@RequestParam(name = "recogida", required = false, defaultValue = "Todos") String recogida, Model model) {
@@ -46,21 +52,24 @@ public class ProductosController {
 		if (busqueda.isEmpty() && "Todas".equals(urgencia) && "Todos".equals(tipo) && "Todos".equals(recogida)) {
 			productos = productoService.getAllProductosExceptActiveUser(obtained.getId());
 		} else {
-			productos = productoService.buscarProductosConFiltros(busqueda, urgencia, tipo, recogida, obtained.getId());
+			productos = productoService.buscarProductosConFiltros(busqueda, provincia, urgencia, tipo, recogida, obtained.getId());
 		}
-
+		List<String> provincias = new ArrayList<String>();
+		provincias.add("Todos");
+		provincias.addAll(provincesApi.getAll());
+        model.addAttribute("provincias", provincias);
 		model.addAttribute("productos", productos);
-		return "mercado";
+		return "productos/mercado";
 	}
 
 	@GetMapping("/publicar")
-	public String publicar() {
-		return "publicar";
+	public String publicar(Model model) {
+        model.addAttribute("provincias", provincesApi.getAll());
+        return "productos/publicar";
 	}
 
 	@PostMapping("/publicar")
 	public String publicar(@ModelAttribute("producto") ProductoDto dto) {
-		System.out.println(dto.getFoto().getOriginalFilename());
 		if (!validador.validarDatosVaciosProducto(dto)) {
 			return "redirect:/publicar?faltanDatos";
 		} else if (!validador.validarDatosCortosProducto(dto)) {
@@ -79,7 +88,7 @@ public class ProductosController {
 		String email = auth.getName();
 		User obtained = userService.getUserByUsername(email);
 		model.addAttribute("productos", productoService.findAllByUserId(obtained.getId()));
-		return "publicados";
+		return "productos/publicados";
 	}
 
 	@GetMapping("/adquiridos")
@@ -88,7 +97,7 @@ public class ProductosController {
 		String email = auth.getName();
 		User obtained = userService.getUserByUsername(email);
 		model.addAttribute("adquiridos", productoService.findAllObtainedByUserId(obtained.getId()));
-		return "adquiridos";
+		return "productos/adquiridos";
 	}
 
 	@GetMapping("/donados")
@@ -97,7 +106,7 @@ public class ProductosController {
 		String email = auth.getName();
 		User obtained = userService.getUserByUsername(email);
 		model.addAttribute("donados", productoService.findAllDonatedByUserId(obtained.getId()));
-		return "donados";
+		return "productos/donados";
 	}
 
 	@RequestMapping("/producto/{id}")
@@ -107,6 +116,7 @@ public class ProductosController {
 		User obtained = userService.getUserByUsername(email);
 		Producto producto = productoService.getProductoById(id);
 		model.addAttribute("producto", producto);
+		model.addAttribute("provincias", provincesApi.getAll());
 		if (producto.getUsuario() == obtained) {
 			model.addAttribute("editar", true);
 		} else if (producto.getInteresado() == obtained) {
@@ -115,7 +125,7 @@ public class ProductosController {
 		} else {
 			model.addAttribute("solicitar", true);
 		}
-		return "producto";
+		return "productos/producto";
 	}
 
 	@PostMapping("/editarProducto/{id}")

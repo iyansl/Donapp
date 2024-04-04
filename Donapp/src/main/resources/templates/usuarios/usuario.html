@@ -95,6 +95,7 @@
                     <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto 1" style="object-fit: cover; height: 30vh;">
                     <div class="card-body">
                         <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
+                        <p class="card-text"><i th:text="${producto.provincia}"></i></p>
                         <p class="card-text">Urgencia: <span th:text="${producto.urgencia}"> </span></p>
                         <a th:href="${'/producto/'+producto.id}" class="btn custom-button">Ver Más</a>
                         <a sec:authorize="!hasRole('ADMIN')" th:href="${'/solicitar/'+producto.id}" class="btn custom-button">Solicitar</a>

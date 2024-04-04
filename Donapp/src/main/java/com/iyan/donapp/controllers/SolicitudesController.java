@@ -98,7 +98,7 @@ public class SolicitudesController {
 		User obtained = userService.getUserByUsername(email);
 		model.addAttribute("enviadas", solicitudService.getSolicitudesEnviadasByUserId(obtained.getId()));
 		model.addAttribute("recibidas", solicitudService.getSolicitudesRecibidasByUserId(obtained.getId()));
-		return "solicitudes";
+		return "usuarios/solicitudes";
 	}
 
 }

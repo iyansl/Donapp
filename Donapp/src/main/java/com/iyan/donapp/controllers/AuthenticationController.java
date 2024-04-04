@@ -31,10 +31,15 @@ public class AuthenticationController {
 	public UserRegistroDto nuevoUserRegistroDto() {
 		return new UserRegistroDto();
 	}
+	
+	@GetMapping("/iniciarsesion")
+	public String iniciarsesion() {
+		return "autenticacion/iniciarsesion";
+	}
 
 	@GetMapping("/registrarse")
 	public String mostrarRegistro() {
-		return "registrarse";
+		return "autenticacion/registrarse";
 	}
 
 	@PostMapping("/registrarse")
@@ -95,7 +100,7 @@ public class AuthenticationController {
 
 	@GetMapping("/recuperarcontrasena")
 	public String mostrarFormularioRecuperacion() {
-		return "recuperarcontrasena";
+		return "autenticacion/recuperarcontrasena";
 	}
 
 	@GetMapping("/recuperarcontrasena/{token}")
@@ -105,7 +110,7 @@ public class AuthenticationController {
 			return "redirect:/recuperarcontrasena?errorTokenUsado";
 		} else {
 			model.addAttribute("token", token);
-			return "formulario-recuperacion";
+			return "autenticacion/formulario-recuperacion";
 		}
 	}
 

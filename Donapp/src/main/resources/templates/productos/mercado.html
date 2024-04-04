@@ -10,10 +10,18 @@
     <div class="mt-4 ml-4 mr-4">
       <form action="/mercado" method="get">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="busqueda">Buscar:</label>
                     <input type="text" class="form-control" id="busqueda" name="busqueda" placeholder="Escribe aquí">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="busqueda">Provincia:</label>
+                    <select class="form-control" id="provincia" name="provincia">
+	                        <option th:each="provincia : ${provincias}" th:value="${provincia}" th:text="${provincia}"></option>
+	                    </select>
                 </div>
             </div>
             <div class="col-md-2">
@@ -81,6 +89,7 @@
                     <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto" style="object-fit: cover; height: 30vh;">
                     <div class="card-body">
                         <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
+                        <p class="card-text"><i th:text="${producto.provincia}"></i></p>
                         <p class="card-text">Publicado por: <a th:href="${'/usuario/'+ producto.usuario.id}"><span th:text="${producto.usuario.username}"> </span></a></p>
                         <p class="card-text">Urgencia: <span th:text="${producto.urgencia}"> </span></p>
                         <a th:href="${'/producto/'+producto.id}" class="btn custom-button">Ver Más</a>
@@ -94,6 +103,7 @@
                     <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto" style="object-fit: cover; height: 30vh;">
                     <div class="card-body">
                         <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
+                        <p class="card-text"><i th:text="${producto.provincia}"></i></p>
                         <p class="card-text">Publicado por: <a th:href="${'/usuario/'+ producto.usuario.id}"><span th:text="${producto.usuario.username}"> </span></a></p>
                         <p class="card-text">Urgencia: <span th:text="${producto.urgencia}"> </span></p>
                         <a th:href="${'/producto/'+producto.id}" class="btn custom-button">Ver Más</a>

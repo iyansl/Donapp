@@ -40,7 +40,6 @@
                         <option value="Accesorios">Accesorios</option>
                         <option value="Juguetes">Juguetes</option>
                         <option value="Objetos de utilidad">Objetos de utilidad</option>
-                        <!-- Agrega más opciones según sea necesario -->
                     </select>
                 </div>
                 <div class="form-group col-md-4">
@@ -74,7 +73,18 @@
                 <label for="descripcionEntrega">Descripción de la forma de entrega:</label>
                 <textarea class="form-control" id="descripcionEntrega" name="descripcionEntrega" rows="3"></textarea>
             </div>
-            
+            <div class="form-row">
+	            <div class="form-group col-md-6">
+	                    <label for="provincia">Provincia:</label>
+	                    <select class="form-control" id="provincia" name="provincia">
+	                        <option th:each="provincia : ${provincias}" th:value="${provincia}" th:text="${provincia}"></option>
+	                    </select>
+	            </div>
+	            <div class="form-group col-md-6">
+	                <label for="ubicacion">¿Quieres concretar más tu ubicación?</label>
+	                <textarea class="form-control" id="ubicacion" name="ubicacion" rows="1"></textarea>
+	            </div>
+            </div>
             <button type="submit" class="btn custom-button">Publicar</button>
         </form>
     </div>

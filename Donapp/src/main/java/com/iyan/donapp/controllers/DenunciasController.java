@@ -31,7 +31,7 @@ public class DenunciasController {
 	@GetMapping("/denuncias")
 	public String mostrarConversaciones(Model model) {
 		model.addAttribute("denuncias", denunciasService.getAllDenuncias());
-		return "denuncias";
+		return "admin/denuncias";
 	}
 	
 	@PostMapping("/denunciar")

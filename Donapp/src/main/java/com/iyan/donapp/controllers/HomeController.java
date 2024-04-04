@@ -8,17 +8,17 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String inicio() {
-		return "inicio";
+		return "home/inicio";
 	}
 
 	@GetMapping("/ayuda")
 	public String ayuda() {
-		return "ayuda";
+		return "home/ayuda";
 	}
 
 	@GetMapping("/conocenos")
 	public String conocenos() {
-		return "conocenos";
+		return "home/conocenos";
 	}
 
 }

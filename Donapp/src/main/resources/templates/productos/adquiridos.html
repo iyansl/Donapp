@@ -8,17 +8,18 @@
 	<img class="miImg2 d-block w-100" src="img/adquiridos.jpg" alt="Productos">
 	
     <div class="container mt-4">
-    <h2> Productos donados </h2>
+    <h2> Mis adquisiciones </h2>
         <div class="row">
-        <div class="col-md-4 mb-4" th:if="${donados.empty}">
+        	<div class="col-md-4 mb-4" th:if="${adquiridos.empty}">
               No hay productos que mostrar
             </div>
-            <div class="col-md-4 mb-4" th:each="producto : ${donados}">
+            <div class="col-md-4 mb-4" th:each="producto : ${adquiridos}">
             	<div class="card">
                     <img th:src="'data:image/jpeg;base64,' + ${producto.fotoEncoded}" class="card-img-top" alt="Producto 1" style="object-fit: cover; height: 30vh;">
                     <div class="card-body">
                         <h5 class="card-title"><span th:text="${producto.titulo}"> </span></h5>
-                        <p class="card-text">Donado a: <a th:href="${'/usuario/'+ producto.interesado.id}"><span th:text="${producto.interesado.username}"> </span></a></p>
+                        <p class="card-text"><i th:text="${producto.provincia}"></i></p>
+                        <p class="card-text">Publicado por: <a th:href="${'/usuario/'+ producto.usuario.id}"><span th:text="${producto.usuario.username}"> </span></a></p>
                         <a th:href="${'/producto/'+producto.id}" class="btn custom-button">Ver Más</a>
                     </div>
                 </div>
@@ -26,9 +27,7 @@
             </div>
         </div>
     </div>
-    
     <hr>
-	
     <nav th:replace="~{fragments/footer}" />
 
 </body>
