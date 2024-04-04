@@ -25,7 +25,7 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(
-				(requests) -> requests.requestMatchers("/", "/recuperarcontrasena","/recuperarcontrasena/*", "/iniciarsesion", "/registrarse", "/registrarse/*", "/ayuda", "/conocenos", "/estilos/**", "/img/**").permitAll()
+				(requests) -> requests.requestMatchers("/", "/recuperarcontrasena","/recuperarcontrasena/*", "/iniciarsesion", "/registrarse", "/registrarse/*", "/ayuda", "/conocenos", "/contacto", "/politicaPrivacidad", "/terminosCondiciones", "/estilos/**", "/img/**").permitAll()
 				.requestMatchers("/adminUsers", "/notificacionGeneral", "/denuncias", "/cerrarDenuncia/*", "/enviarNotificacion","eliminarUsuario/*").hasRole("ADMIN")
 				.anyRequest().authenticated())
 				.formLogin((form) -> form.loginPage("/iniciarsesion").defaultSuccessUrl("/").permitAll())

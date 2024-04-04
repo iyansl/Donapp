@@ -20,5 +20,20 @@ public class HomeController {
 	public String conocenos() {
 		return "home/conocenos";
 	}
+	
+	@GetMapping("/politicaPrivacidad")
+	public String politicaPrivacidad() {
+		return "home/politicaPrivacidad";
+	}
+	
+	@GetMapping("/terminosCondiciones")
+	public String terminosCondiciones() {
+		return "home/terminosCondiciones";
+	}
+	
+	@GetMapping("/contacto")
+	public String contacto() {
+		return "home/contacto";
+	}
 
 }
