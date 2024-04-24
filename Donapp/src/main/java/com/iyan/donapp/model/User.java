@@ -87,6 +87,12 @@ public class User {
 
     @OneToMany(mappedBy = "usuarioDenunciado", cascade = CascadeType.REMOVE)
     private Set<Denuncia> denunciasComoDenunciado;
+    
+    @OneToMany(mappedBy = "usuarioValorador", cascade = CascadeType.REMOVE)
+    private Set<Valoracion> valoracionesComoValorador;
+
+    @OneToMany(mappedBy = "usuarioValorado", cascade = CascadeType.REMOVE)
+    private Set<Valoracion> valoracionesComoValorado;
 
     @Column(name = "passwordResetToken")
 	private String passwordResetToken;
@@ -104,6 +110,7 @@ public class User {
 		this.descripcion = descripcion;
 		this.setCreatedDate(LocalDateTime.now());
 		this.passwordResetToken = null;
+		this.emailVisible = false;
 	}
 
 	public User(String username, String email, String password, Collection<Rol> roles) {
@@ -114,6 +121,7 @@ public class User {
 		this.roles = roles;
 		this.setCreatedDate(LocalDateTime.now());
 		this.passwordResetToken = null;
+		this.emailVisible = false;
 	}
 
 	public User() {
@@ -130,6 +138,7 @@ public class User {
 		this.token = UUID.randomUUID().toString();
 		this.setCreatedDate(LocalDateTime.now());
 		this.passwordResetToken = null;
+		this.emailVisible = false;
 	}
 
 	public Long getId() {
@@ -313,5 +322,23 @@ public class User {
 	public void setEmailVisible(boolean emailVisible) {
 		this.emailVisible = emailVisible;
 	}
+
+	public Set<Valoracion> getValoracionesComoValorador() {
+		return valoracionesComoValorador;
+	}
+
+	public void setValoracionesComoValorador(Set<Valoracion> valoracionesComoValorador) {
+		this.valoracionesComoValorador = valoracionesComoValorador;
+	}
+
+	public Set<Valoracion> getValoracionesComoValorado() {
+		return valoracionesComoValorado;
+	}
+
+	public void setValoracionesComoValorado(Set<Valoracion> valoracionesComoValorado) {
+		this.valoracionesComoValorado = valoracionesComoValorado;
+	}
+	
+	
 
 }

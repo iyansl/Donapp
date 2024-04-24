@@ -2,6 +2,7 @@ package com.iyan.donapp.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.iyan.donapp.model.Solicitud;
@@ -11,14 +12,9 @@ import com.iyan.donapp.repositories.SolicitudRepository;
 
 @Service
 public class SolicitudService {
-
+	@Autowired
 	private SolicitudRepository solicitudRepository;
 
-	public SolicitudService(SolicitudRepository solicitudRepository) {
-		super();
-		this.solicitudRepository = solicitudRepository;
-	}
-	
 	public Solicitud saveSolicitud(SolicitudDto dto) {
 		Solicitud sol = new Solicitud(dto.getSolicitante(), dto.getSolicitado(), dto.getProducto());
 		return solicitudRepository.save(sol);
@@ -26,7 +22,7 @@ public class SolicitudService {
 
 	public List<Solicitud> getSolicitudesEnviadasByUserId(Long id) {
 		List<Solicitud> lista = solicitudRepository.getSolicitudesEnviadasByUserId(id);
-		for (Solicitud s: lista) {
+		for (Solicitud s : lista) {
 			s.updateFotosEncoded();
 		}
 		return lista;
@@ -34,7 +30,7 @@ public class SolicitudService {
 
 	public List<Solicitud> getSolicitudesRecibidasByUserId(Long id) {
 		List<Solicitud> lista = solicitudRepository.getSolicitudesRecibidasByUserId(id);
-		for (Solicitud s: lista) {
+		for (Solicitud s : lista) {
 			s.updateFotosEncoded();
 		}
 		return lista;
