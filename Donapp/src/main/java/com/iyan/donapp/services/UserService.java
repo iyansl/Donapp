@@ -76,6 +76,17 @@ public class UserService {
 		user.setActivado(activado);
 		return userRepository.save(user);
 	}
+	
+	public User saveAdmin(UserRegistroDto dto, String ruta, boolean activado) {
+		User user = new User(dto.getUsername(), dto.getEmail(), passEncoder.encode(dto.getPassword()), dto.getRoles());
+		user.setDescripcion("¡Acabo de unirme a Donapp!");
+		if (user.getRoles() == null)
+			user.setRoles(Arrays.asList(new Rol("ROLE_ADMIN")));
+		byte[] img = obtenerDatosImagenPorDefecto(ruta);
+		user.setFoto(img);
+		user.setActivado(activado);
+		return userRepository.save(user);
+	}
 
 	private byte[] obtenerDatosImagenPorDefecto(String ruta) {
 		try {

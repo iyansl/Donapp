@@ -34,7 +34,7 @@ public class AuthenticationValidation {
 	}
 	
 	public boolean validarPasswordRegistro(UserRegistroDto dto) {
-	    String regex = "^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+		String regex = "^(?=.*[A-Z])(?=.*\\d)[\\w\\W]{8,}$";
 	    return dto.getPassword().matches(regex);
 	}
 

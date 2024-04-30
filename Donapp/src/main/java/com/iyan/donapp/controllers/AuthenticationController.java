@@ -64,6 +64,31 @@ public class AuthenticationController {
 			return "redirect:/iniciarsesion?confirmacionNecesaria";
 		}
 	}
+	
+	@GetMapping("/registraradmin")
+	public String registraradmin() {
+		return "autenticacion/registraradmin";
+	}
+
+	@PostMapping("/registraradmin")
+	public String registraradmin(@ModelAttribute("user") UserRegistroDto dto) {
+		if (!validador.validarEmailRegistro(dto)) {
+			return "redirect:/registraradmin?incorrecto";
+		} else if (!validador.validarUsernameRegistro(dto)) {
+			return "redirect:/registraradmin?incorrecto";
+		} else if (!validador.validarPasswordsCoinciden(dto)) {
+			return "redirect:/registraradmin?incorrecto";
+		} else if (!validador.validarPasswordRegistro(dto)) {
+			return "redirect:/registraradmin?incorrecto";
+		} else if (!validador.validarEmailFormatRegistro(dto)) {
+			return "redirect:/registraradmin?incorrecto";
+		} else {
+			userService.saveAdmin(dto, "/static/img/usuarios/admin.jpg", true);
+			String emailBody = "<p>¡Bienvenido a Donapp, administrador!</p>";
+			emailService.sendMail(dto.getEmail(), "Confirmación de Registro", emailBody);
+			return "redirect:/registraradmin?correcto";
+		}
+	}
 
 	@GetMapping("/registrarse/{token}")
 	public String confirmarRegistro(@PathVariable String token) {

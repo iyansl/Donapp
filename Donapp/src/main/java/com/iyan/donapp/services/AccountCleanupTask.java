@@ -15,8 +15,8 @@ public class AccountCleanupTask {
     @Autowired
     private UserRepository userRepository;
 
-    //@Scheduled(fixedRate = 24 * 60 * 60 * 1000)
-    @Scheduled(fixedRate = 5 * 60 * 1000)
+    @Scheduled(fixedRate = 12 * 60 * 60 * 1000)
+    //@Scheduled(fixedRate = 5 * 60 * 1000)
     public void cleanupUnverifiedAccounts() {
     	System.out.println("Ejecutando scheduledjob");
         LocalDateTime dateTime = LocalDateTime.now().minusMinutes(1);

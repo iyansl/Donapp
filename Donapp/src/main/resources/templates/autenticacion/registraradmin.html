@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head th:replace="~{fragments/header}" />
+<body>
+
+	<nav th:replace="~{fragments/navbar}" />
+	
+	<img class="miImg2 d-block w-100" src="img/login.jpg" alt="Login">
+	
+    <div class="container mt-4">
+    <h2 class="mb-4"> Registrar administrador </h2>
+    <div class="mensaje-div" th:if=${param.correcto}>
+    	Enhorabuena, el administrador ha sido registrado con éxito.
+    </div>
+    <div class="error-div" th:if=${param.incorrecto}>
+    	Se ha producido un error al registrar al administrador. Pruebe con otros datos.
+    </div>
+    	<form th:action="@{/registraradmin}" method="post" th:object="${user}">
+		    <div class="form-group">
+		        <label for="username">Nombre de usuario: <span style="color: darkred;"> (Es un identificador único. No podrá ser cambiado posteriormente.) </span></label>
+		        <input th:field="*{username}" required type="text" class="form-control" id="username" placeholder="Nombre de administrador"/>
+		    </div>
+		    <div class="form-group">
+		        <label for="email">Email:</label>
+		        <input type="email" th:field="*{email}" required class="form-control" id="email" placeholder="Email del administrador"/>
+		    </div>
+		    <div class="form-group">
+		        <label for="password">Contraseña:</label>
+		        <input type="password" th:field="*{password}" required class="form-control" id="password" placeholder="Contraseña del administrador"/>
+		    </div>
+		    <div class="form-group">
+		        <label for="confirmPassword">Confirmar Contraseña:</label>
+		        <input type="password" th:field="*{confirmPassword}" required class="form-control" id="confirmPassword" placeholder="Confirma la contraseña"/>
+		    </div>
+		    <button type="submit" class="btn custom-button btn-block">Registrar administrador</button>
+		</form>
+    </div>
+    
+    <hr>
+	
+    <nav th:replace="~{fragments/footer}" />
+
+</body>
+</html>
