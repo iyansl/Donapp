@@ -77,6 +77,9 @@
         <div sec:authorize="!hasRole('ADMIN')" class="error-div" th:if="${param.productoEsPublicado}">
             El producto que intentas solicitar es tuyo
         </div>
+        <div class="mensaje-div" th:if="${param.exitoEliminandoProducto}">
+	            Producto eliminado con éxito
+	        </div>
     <div class="container mt-4">
         <div class="row">
             

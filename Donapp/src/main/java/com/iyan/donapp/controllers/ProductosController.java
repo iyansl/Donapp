@@ -145,10 +145,12 @@ public class ProductosController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		User obtained = userService.getUserByUsername(email);
-		if (productoService.getProductoById(id).getUsuario().getId() != obtained.getId())
+		boolean esAdmin = obtained.getRoles().stream()
+                .anyMatch(rol -> rol.getNombre().equals("ROLE_ADMIN"));
+		if (productoService.getProductoById(id).getUsuario().getId() != obtained.getId() && !esAdmin)
 	        return "redirect:/producto/" + id + "?errorProducto";
 		productoService.deleteProductoById(id);
-		return "redirect:/publicados?exitoEliminandoProducto";
+		return "redirect:/mercado?exitoEliminandoProducto";
 	}
 
 	@PostMapping("/subirFotoProducto/{id}")

@@ -162,6 +162,13 @@ public class UsersController {
 
 	@GetMapping("/eliminarUsuario/{id}")
 	public String eliminarCuenta(Model model, @PathVariable Long id) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User obtained = userService.getUserByUsername(email);
+		boolean esAdmin = obtained.getRoles().stream()
+                .anyMatch(rol -> rol.getNombre().equals("ROLE_ADMIN"));
+		if (!esAdmin)
+			return "redirect:/buscarUsuarios?usuarioIncorrecto";
 		userService.eliminarCuentaPorId(id);
 		return "redirect:/buscarUsuarios?usuarioEliminadoExito";
 	}

@@ -56,7 +56,7 @@ public class AuthenticationValidation {
 	}
 
 	public boolean validarPasswordRegistro(String password) {
-		String regex = "^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+		String regex = "^(?=.*[A-Z])(?=.*\\d)[\\w\\W]{8,}$";
 	    return password.matches(regex);
 	}
 }
